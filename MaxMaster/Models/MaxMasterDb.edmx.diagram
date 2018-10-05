@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b6817a0b95074f349491998bbe86c01b" Name="Diagram1" ZoomLevel="77">
+        <EntityTypeShape EntityType="MaxMasterDbModel.Activity" Width="1.5" PointX="15.75" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.ActivitiesLog" Width="1.5" PointX="18" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.ActivityAttachment" Width="1.5" PointX="20.25" PointY="32.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.ApprovedInvoice" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.ApprovedInvoiceService" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.AspNetRole" Width="1.5" PointX="1.5" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.AspNetUserClaim" Width="1.5" PointX="5.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.AspNetUserLogin" Width="1.5" PointX="7.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.AspNetUser" Width="1.5" PointX="0.75" PointY="29.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.BillAttachment" Width="1.5" PointX="8.25" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.Bill" Width="1.5" PointX="6" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.Category" Width="1.5" PointX="13.5" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.City" Width="1.5" PointX="5.25" PointY="57.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.ClientEmployee" Width="1.5" PointX="18.75" PointY="54.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.ClientErrorLog" Width="1.5" PointX="8.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.ClientLocation" Width="1.5" PointX="7.5" PointY="45.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.ClientReceivable" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.ClientReceivableService" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.Client" Width="1.5" PointX="5.25" PointY="45.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.ClientVertical" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.Country" Width="1.5" PointX="0.75" PointY="36.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.DefaultAllocation" Width="1.5" PointX="15.75" PointY="56.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.DeliveryChallan" Width="1.5" PointX="8.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.Department" Width="1.5" PointX="11.25" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.Designation" Width="1.5" PointX="5.25" PointY="61" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.DoctorGroupEmployee" Width="1.5" PointX="10.5" PointY="44.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.DoctorGroup" Width="1.5" PointX="8.25" PointY="51" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.Doctor" Width="1.5" PointX="10.5" PointY="47.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.DoctorVoiceGrade" Width="1.5" PointX="9.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.Document" Width="1.5" PointX="5.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.EmployeeAttendanceLog" Width="1.5" PointX="10.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.EmployeePaymentRecord" Width="1.5" PointX="10.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.EmployeePayscale" Width="1.5" PointX="9.75" PointY="61.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.Employee" Width="1.5" PointX="7.5" PointY="54.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.EmployeeSpecialty" Width="1.5" PointX="15" PointY="54.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.ExceptionLog" Width="1.5" PointX="11.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.GST" Width="1.5" PointX="7.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.Invoice" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.InvoiceService" Width="1.5" PointX="6" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.ItemPrice" Width="1.5" PointX="5.25" PointY="33.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.Item" Width="1.5" PointX="12.75" PointY="43.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.ItemsBillMapping" Width="1.5" PointX="8.25" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.ItemsMaster" Width="1.5" PointX="3" PointY="33.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.Opportunity" Width="1.5" PointX="15.75" PointY="45.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.OpportunitiesLog" Width="1.5" PointX="18" PointY="46.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.OpportunityAttachment" Width="1.5" PointX="20.25" PointY="47.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.OpportunityCategory" Width="1.5" PointX="18.75" PointY="51.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.OpportunityCategoryMapping" Width="1.5" PointX="21" PointY="44.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.OpportunityContactMapping" Width="1.5" PointX="21" PointY="50.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.OpportunitySubCategory" Width="1.5" PointX="21" PointY="53.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.Organisation" Width="1.5" PointX="8.25" PointY="65.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.OrgansationLocation" Width="1.5" PointX="10.5" PointY="57.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.POAttachment" Width="1.5" PointX="7.5" PointY="41.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.POItemsMapping" Width="1.5" PointX="10.5" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.PuchaseOrder" Width="1.5" PointX="5.25" PointY="40.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.SalesOrder" Width="1.5" PointX="3" PointY="42.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.SOAttachment" Width="1.5" PointX="5.25" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.SOItemsMapping" Width="1.5" PointX="5.25" PointY="37" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.Specialty" Width="1.5" PointX="12.75" PointY="54.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.State" Width="1.5" PointX="3" PointY="57.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.StockManager" Width="1.5" PointX="12.75" PointY="57.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.StockOut" Width="1.5" PointX="20.25" PointY="39.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.StockRequest" Width="1.5" PointX="18" PointY="41" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.StockRequestMapping" Width="1.5" PointX="20.25" PointY="36.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.SubCategory" Width="1.5" PointX="13.5" PointY="34.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.sysdiagram" Width="1.5" PointX="0.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.TD" Width="1.5" PointX="3.75" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.TDSSection" Width="1.5" PointX="2.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.TimeZone" Width="1.5" PointX="5.25" PointY="54.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MaxMasterDbModel.VoiceGradePricing" Width="1.5" PointX="12.75" PointY="5.375" IsExpanded="true" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Activities_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Activities_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Activities_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Activities_SubCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_StockRequest_Activities" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Tasks_SubTasks" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_TaskTrack_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ActivityAttachments_ActivitiesLog" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ApprovedInvoiceService_ApprovedInvoices" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ApprovedInvoiceService_ClientReceivables" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ApprovedInvoiceService_ClientVerticals" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Employees_AspNetRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ClientEmployees_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Clients_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Doctors_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Employees_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ItemsMaster_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_StockManager_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_BillAttachments_Bills" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Bills_TDS" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ItemsBillMappings_Bills" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Categories_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Categories_SubCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Cities_States" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ClientLocations_Cities" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_dbo_Doctors_dbo_Cities_City_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Employees_Cities" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_OrgansationLocations_Cities" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ClientEmployees_ClientEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ClientEmployees_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_OpportunityContactMappings_ClientEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ClientLocations_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ClientLocations_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ClientLocations_States" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ClientLocations_TimeZones" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Opportunities_ClientLocations" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ClientReceivables_ClientReceivables" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ClientReceivableServices_ClientReceivableServices" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_InvoiceService_ClientReceivables" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Clients_Organisations" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_DefaultAllocations_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Doctors_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_dbo_Doctors_dbo_Countries_Country_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ItemsMaster_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_States_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_dbo_DefaultAllocations_dbo_Doctors_Doctor_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_DefaultAllocations_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Employees_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Employees_Designations" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_DoctorGroupEmployees_DoctorGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_DoctorGroups_DoctorGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Doctors_DoctorGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_dbo_Doctors_dbo_States_State_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_EmployeePayscales_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Employees_Organisations" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_StockManager_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Employee_Specialties_Specialties" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_InvoiceService_Invoices" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ItemPrices_ItemsMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Items_ClientLocations" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Items_ItemsMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_ItemsBillMappings_ItemsMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_POItemsMapping_ItemsMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_PuchaseOrders_ItemsMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_SOItemsMapping_ItemsMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_StockRequestMappings_ItemsMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_Opportunities_Organisations" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_OpportunitiesLog_Opportunities" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_OpportunityCategoryMappings_Opportunities" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_OpportunityContactMappings_Opportunities" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_StockRequest_Opportunities" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_OpportunityAttachments_OpportunitiesLog" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_OpportunityCategoryMappings_OpportunityCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_OpportunitySubCategories_OpportunityCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_OrgansationLocations_Organisations" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_POAttachments_PuchaseOrders" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_POItemsMapping_PuchaseOrders" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_SOAttachments_SalesOrders" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_SOItemsMapping_SalesOrders" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_StockOut_SalesOrders" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_StockOut_StockRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.FK_StockRequestMappings_MaterialRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.ClientVerticalMappings" ManuallyRouted="false" />
+        <AssociationConnector Association="MaxMasterDbModel.DoctorSpecialties" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

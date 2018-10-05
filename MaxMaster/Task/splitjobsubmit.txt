@@ -1,0 +1,13 @@
+
+$(this.state.uiItemRefs[0]).find('.form-control'
+
+$(this.state.uiItemRefs[0]).find('.form-control')
+
+$(this.state.uiItemRefs[0]).find('.form-control')[0]
+
+
+$(this.state.uiItemRefs[0]).find('.form-control')[0]
+<input type=?"text" class=?"form-control" name=?"noofpages" value=?"1">
+
+
+$(this.state.uiItemRefs[0]).find('.form-control')[0].value

@@ -1,0 +1,741 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MaxMaster.BundleConfig" Collapsed="true">
+    <Position X="28.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\BundleConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.FilterConfig" Collapsed="true">
+    <Position X="32.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\FilterConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.ApplicationUserManager" Collapsed="true">
+    <Position X="34" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\IdentityConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.RouteConfig" Collapsed="true">
+    <Position X="25.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\RouteConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Startup" Collapsed="true">
+    <Position X="30.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAEAgIAAAAAAAAA=</HashCode>
+      <FileName>App_Start\Startup.Auth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.WebApiConfig" Collapsed="true">
+    <Position X="30.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\WebApiConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.WebApiApplication" Collapsed="true">
+    <Position X="28.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ApiDescriptionExtensions" Collapsed="true">
+    <Position X="27" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ApiDescriptionExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.HelpPageConfig" Collapsed="true">
+    <Position X="23.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\App_Start\HelpPageConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.HelpPageAreaRegistration" Collapsed="true">
+    <Position X="37.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\HelpPageAreaRegistration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.HelpPageConfigurationExtensions" Collapsed="true">
+    <Position X="25.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAABAICACACEAACGSCAAAADABAAAEMAAAAAIEA=</HashCode>
+      <FileName>Areas\HelpPage\HelpPageConfigurationExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.HelpPageSampleGenerator" Collapsed="true">
+    <Position X="27" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAYAARQAQAAEAJgAAAQAAgAAEAgFAAAAABCAAAI=</HashCode>
+      <FileName>Areas\HelpPage\SampleGeneration\HelpPageSampleGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.HelpPageSampleKey" Collapsed="true">
+    <Position X="28.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAABAAAgAgAAAAAAAAAAAAICQAAAEAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\SampleGeneration\HelpPageSampleKey.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ImageSample" Collapsed="true">
+    <Position X="32.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAAAAAIAAAAIAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\SampleGeneration\ImageSample.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.InvalidSample" Collapsed="true">
+    <Position X="34" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\SampleGeneration\InvalidSample.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ObjectGenerator" Collapsed="true">
+    <Position X="30.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABDAoAAAAAACAEAICAAAYAAACAAAAAAgCAgAAAAIA=</HashCode>
+      <FileName>Areas\HelpPage\SampleGeneration\ObjectGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.TextSample" Collapsed="true">
+    <Position X="34" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAAAAAIAAAAAACAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\SampleGeneration\TextSample.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.XmlDocumentationProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="32.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIEAAAAIBAEAQAAABIAAAAAAAAAAAAAAAAAAAAAAAkg=</HashCode>
+      <FileName>Areas\HelpPage\XmlDocumentationProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.Controllers.HelpController" Collapsed="true">
+    <Position X="34" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAABAAAAAAAAAAAAAAAAAAAAAAAgAEAAAAgAAA=</HashCode>
+      <FileName>Areas\HelpPage\Controllers\HelpController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ModelDescriptions.CollectionModelDescription" Collapsed="true">
+    <Position X="18.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\CollectionModelDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ModelDescriptions.ComplexTypeModelDescription" Collapsed="true">
+    <Position X="21" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\ComplexTypeModelDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ModelDescriptions.DictionaryModelDescription" Collapsed="true">
+    <Position X="16.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\DictionaryModelDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ModelDescriptions.EnumTypeModelDescription" Collapsed="true">
+    <Position X="14.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\EnumTypeModelDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ModelDescriptions.EnumValueDescription" Collapsed="true">
+    <Position X="25.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\EnumValueDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ModelDescriptions.KeyValuePairModelDescription" Collapsed="true">
+    <Position X="16.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\KeyValuePairModelDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ModelDescriptions.ModelDescription" Collapsed="true">
+    <Position X="16.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\ModelDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator" Collapsed="true">
+    <Position X="25.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAGQBAAJAABAAACBAgAAAAASBAAAAAAAAAEAACAQAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\ModelDescriptionGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ModelDescriptions.ModelNameAttribute" Collapsed="true">
+    <Position X="27" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\ModelNameAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ModelDescriptions.ModelNameHelper" Collapsed="true">
+    <Position X="28.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\ModelNameHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ModelDescriptions.ParameterAnnotation" Collapsed="true">
+    <Position X="32.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\ParameterAnnotation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ModelDescriptions.ParameterDescription" Collapsed="true">
+    <Position X="34" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAQAQAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\ParameterDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.ModelDescriptions.SimpleTypeModelDescription" Collapsed="true">
+    <Position X="12" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\SimpleTypeModelDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Areas.HelpPage.Models.HelpPageApiModel" Collapsed="true">
+    <Position X="35.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAGBAAAAAAAAAAAAAgAAAAAAAUBAAAAAQAQAg=</HashCode>
+      <FileName>Areas\HelpPage\Models\HelpPageApiModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Controllers.AccountController" Collapsed="true">
+    <Position X="23.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAFACAACAAgQAAEAARAgIAABABEBAAAAAAgAAAAQA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Controllers.ClientController">
+    <Position X="47.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAEAACAAAAABAAAgAAAAAAAAAAAAQAAAACAAQAAEQ=</HashCode>
+      <FileName>Controllers\ClientController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Controllers.EmployeeController">
+    <Position X="51.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAEAAAAAAAABAAAAAAEAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Controllers\EmployeeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Controllers.Error" Collapsed="true">
+    <Position X="27" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\Error.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Controllers.HomeController" Collapsed="true">
+    <Position X="30.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Controllers.InvoiceController">
+    <Position X="43.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAgBAAAAAAAAAAAAAAAAAAAAGAAAAA=</HashCode>
+      <FileName>Controllers\InvoiceController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Controllers.MasterDataController" Collapsed="true">
+    <Position X="30.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAgAAAAAAEAAAIDAAAAI=</HashCode>
+      <FileName>Controllers\MasterDataController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Controllers.PaymentsController" Collapsed="true">
+    <Position X="35.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAIAAAAAAAACAAAAA=</HashCode>
+      <FileName>Controllers\PaymentsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Controllers.ValuesController" Collapsed="true">
+    <Position X="25.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAACAEAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Controllers\ValuesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.AddExternalLoginBindingModel" Collapsed="true">
+    <Position X="25.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountBindingModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ChangePasswordBindingModel" Collapsed="true">
+    <Position X="32.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAEAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Models\AccountBindingModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.RegisterBindingModel" Collapsed="true">
+    <Position X="37.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAIAA=</HashCode>
+      <FileName>Models\AccountBindingModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.RegisterExternalBindingModel" Collapsed="true">
+    <Position X="32.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountBindingModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.RemoveLoginBindingModel" Collapsed="true">
+    <Position X="23.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountBindingModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.SetPasswordBindingModel" Collapsed="true">
+    <Position X="27" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Models\AccountBindingModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ExternalLoginViewModel" Collapsed="true">
+    <Position X="30.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAACAAABAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ManageInfoViewModel" Collapsed="true">
+    <Position X="28.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAQAAAAAAAAAAAAAQAQAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.UserInfoViewModel" Collapsed="true">
+    <Position X="37.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAEAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.UserLoginInfoViewModel" Collapsed="true">
+    <Position X="23.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ApplicationUser" Collapsed="true">
+    <Position X="32.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ApplicationDbContext" Collapsed="true">
+    <Position X="28.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.MaxMasterDbEntities" Collapsed="true">
+    <Position X="23.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>NFCIAEIQIGIAgAQBACEAIQAAGAEAQkACUgAABCAAAik=</HashCode>
+      <FileName>Models\MaxMasterDb.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ApprovedInvoice">
+    <Position X="41.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AqACEAAEAAAkAAABAAICAACQCAAMIAAASAAAAAAAAAQ=</HashCode>
+      <FileName>Models\ApprovedInvoice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ApprovedInvoiceService">
+    <Position X="41.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACICAAAAEAABAAgAAAAAAAAAAAABQgAAAiAAAAACQ=</HashCode>
+      <FileName>Models\ApprovedInvoiceService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.AspNetRole" Collapsed="true">
+    <Position X="36" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAQAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AspNetRole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.AspNetUser" Collapsed="true">
+    <Position X="23.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAAACAAoEAAAAAAQAABAAAAQAAIAQQAABAAAQE=</HashCode>
+      <FileName>Models\AspNetUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.AspNetUserClaim" Collapsed="true">
+    <Position X="25.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACAAAAAAAAAAAAQAAAAAgAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Models\AspNetUserClaim.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.AspNetUserLogin" Collapsed="true">
+    <Position X="27" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAgAAAAAEAAAABAAAAAAAAA=</HashCode>
+      <FileName>Models\AspNetUserLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.City" Collapsed="true">
+    <Position X="34" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAACQACAAAAAAAAgAABCAAAAA=</HashCode>
+      <FileName>Models\City.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.Client" Collapsed="true">
+    <Position X="35.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEECEgIAgGAAAEABQAAQIAUACAAgAIAgBgAAASEAAiE=</HashCode>
+      <FileName>Models\Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ClientEmployee" Collapsed="true">
+    <Position X="23.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEEAAgCAAAEAAAAAQAAEAEAAkAAAgAAAAAAAAAAw=</HashCode>
+      <FileName>Models\ClientEmployee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ClientErrorLog" Collapsed="true">
+    <Position X="25.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAQA=</HashCode>
+      <FileName>Models\ClientErrorLog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ClientLocation" Collapsed="true">
+    <Position X="27" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QACCAAAAAAIAAAAIAAAAAGAAAAJEAAAAAAAgBCAQAAQ=</HashCode>
+      <FileName>Models\ClientLocation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ClientMasterReport_Result" Collapsed="true">
+    <Position X="28.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AGACAAAAQAAABAAQAAAQAgAACAAAAJAABAAAAEEAAAQ=</HashCode>
+      <FileName>Models\ClientMasterReport_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ClientPayments_Result" Collapsed="true">
+    <Position X="30.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACICAAAAAAABAAgAIAAAAQAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Models\ClientPayments_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ClientReceivable" Collapsed="true">
+    <Position X="32.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAQIAAAEgAAABACgAAAAACAAEARAAAgAAAAAAAAU=</HashCode>
+      <FileName>Models\ClientReceivable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ClientReceivableService" Collapsed="true">
+    <Position X="34" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAAAgAAAEAAAAAAAAAAAAABAgAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ClientReceivableService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ClientVertical" Collapsed="true">
+    <Position X="37.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAABACAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ClientVertical.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.Country" Collapsed="true">
+    <Position X="35.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQACAAAAAEAAgAABCAAAAA=</HashCode>
+      <FileName>Models\Country.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.DefaultAllocation" Collapsed="true">
+    <Position X="23.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACCAAAAABAAAAAQAAIAAACCAAECAQAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\DefaultAllocation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.Department" Collapsed="true">
+    <Position X="25.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Department.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.Designation" Collapsed="true">
+    <Position X="27" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Designation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.Doctor" Collapsed="true">
+    <Position X="28.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QCACEEAAACAAAGAIAAAQICEEACJkCEBgAAAARCAwAAw=</HashCode>
+      <FileName>Models\Doctor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.DoctorGroup" Collapsed="true">
+    <Position X="30.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQACACAAEAAAgAAAAAAAAA=</HashCode>
+      <FileName>Models\DoctorGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.DoctorVoiceGrade" Collapsed="true">
+    <Position X="32.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DoctorVoiceGrade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.Document" Collapsed="true">
+    <Position X="34" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAiAAQAAAAAAAAAAAAAIAAACACEAAAAAAAAAAAAiAA=</HashCode>
+      <FileName>Models\Document.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.Employee">
+    <Position X="49.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QACKUEAAyGAAEMSYAAEQMCEQGIpgAkAiAAAiBiIQAAg=</HashCode>
+      <FileName>Models\Employee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.EmployeePaymentRecord">
+    <Position X="53" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACiIAAIAACAFAEAgAAQgBAAKAAFAAABAgCABADBBEI=</HashCode>
+      <FileName>Models\EmployeePaymentRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.EmployeePayscale" Collapsed="true">
+    <Position X="23.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACAAAACAAAAAAIAAAAAAAAAAEAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Models\EmployeePayscale.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.ExceptionLog" Collapsed="true">
+    <Position X="28.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAgAAAAAgAAAAAAAAAAAAAAAAIAAAAQA=</HashCode>
+      <FileName>Models\ExceptionLog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.Invoice">
+    <Position X="47.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AqACEAIEAAAEAAAAAAICAACQCAAMIAAASAAAAAAAAAA=</HashCode>
+      <FileName>Models\Invoice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.InvoiceService" Collapsed="true">
+    <Position X="23.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACICAAAAEAABAAgAAAAAAAAAAAABQgAAACAAAAAQQ=</HashCode>
+      <FileName>Models\InvoiceService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.Leaf" Collapsed="true">
+    <Position X="25.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAACQAAAAAAAAAAAAAAAAAAACAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Leaf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.LeaveRecord" Collapsed="true">
+    <Position X="27" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACkAAAAAQAAAEAAAAAAAAACAAEAAggAAAABAABIgA=</HashCode>
+      <FileName>Models\LeaveRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.Max_DoctorLineCount_Result">
+    <Position X="47.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAQAAAAGAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Models\Max_DoctorLineCount_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.MaxClient_Report_Result">
+    <Position X="51" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAoAAAAAAAAAAAAAAAQAAQAAAAEABAARAAgAAEQAAE=</HashCode>
+      <FileName>Models\MaxClient_Report_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.MaxClientDueDetails_Result" Collapsed="true">
+    <Position X="35.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\MaxClientDueDetails_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.MaxClientService_Details_Result" Collapsed="true">
+    <Position X="37.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAAIAAAAQAAAAAAIAAAQACQAAABEAJAARAAgACEQAAE=</HashCode>
+      <FileName>Models\MaxClientService_Details_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.MaxEmpReport_Result">
+    <Position X="43.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAIAAAAQAgABAAIgAAAACAAAAACQJAAQAAAAAIAAAA=</HashCode>
+      <FileName>Models\MaxEmpReport_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.Specialty" Collapsed="true">
+    <Position X="28.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQACAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Models\Specialty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.State" Collapsed="true">
+    <Position X="32.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAACAAAAAAAAAAAAAAAAAAQACAIAAAAAAgAAACAAAAA=</HashCode>
+      <FileName>Models\State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.TimeZone" Collapsed="true">
+    <Position X="34" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAIAAAAAAAAAACAAgAA=</HashCode>
+      <FileName>Models\TimeZone.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Models.VoiceGradePricing" Collapsed="true">
+    <Position X="27" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACAAAAAQAAAAAAAAAABAAgAAAACAAgAAAAAEAAAAA=</HashCode>
+      <FileName>Models\VoiceGradePricing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Providers.ApplicationOAuthProvider" Collapsed="true">
+    <Position X="30.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAACAAAAAAAAAAAAAEAAEIAAAAAAAAAAAgA=</HashCode>
+      <FileName>Providers\ApplicationOAuthProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.Results.ChallengeResult" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Results\ChallengeResult.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MaxMaster.ViewModels.ClientsViewModel" Collapsed="true">
+    <Position X="35.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AGAAAAEEQAAABAAAgAAUAgACCAAAAJCABAAAAEEAAAA=</HashCode>
+      <FileName>ViewModels\ViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.ViewModels.TotalCountOfCharacters">
+    <Position X="35.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAIAAAAAAAkAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.ViewModels.InvoiceModel">
+    <Position X="45.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YQBIBCEBQAAQABAAAgEQAESCAAAEAJCCAAAAAAAgAAA=</HashCode>
+      <FileName>ViewModels\ViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.ViewModels.ClientAddressModel">
+    <Position X="43.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAIAAAACAAAAAIEAAAgAAAgRAAAAAA=</HashCode>
+      <FileName>ViewModels\ViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaxMaster.ViewModels.GeneratedInvoiceModel">
+    <Position X="45.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YQBIBCEAAAAQABAAAgEQAESCAAAEAJCCAAAAAAAgAAA=</HashCode>
+      <FileName>ViewModels\ViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="MaxMaster.Areas.HelpPage.ModelDescriptions.IModelDocumentationProvider" Collapsed="true">
+    <Position X="23.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\IModelDocumentationProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="MaxMaster.Areas.HelpPage.SampleDirection" Collapsed="true">
+    <Position X="23.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\SampleGeneration\SampleDirection.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
