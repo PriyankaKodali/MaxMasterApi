@@ -30,6 +30,7 @@ namespace MaxMaster.Models
         public virtual DbSet<Activity> Activities { get; set; }
         public virtual DbSet<ActivitiesLog> ActivitiesLogs { get; set; }
         public virtual DbSet<ActivityAttachment> ActivityAttachments { get; set; }
+        public virtual DbSet<ActivityNotification> ActivityNotifications { get; set; }
         public virtual DbSet<ApprovedInvoice> ApprovedInvoices { get; set; }
         public virtual DbSet<ApprovedInvoiceService> ApprovedInvoiceServices { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
@@ -64,12 +65,15 @@ namespace MaxMaster.Models
         public virtual DbSet<EmployeeSpecialty> EmployeeSpecialties { get; set; }
         public virtual DbSet<ExceptionLog> ExceptionLogs { get; set; }
         public virtual DbSet<GST> GSTs { get; set; }
+        public virtual DbSet<Holiday> Holidays { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<InvoiceService> InvoiceServices { get; set; }
         public virtual DbSet<ItemPrice> ItemPrices { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<ItemsBillMapping> ItemsBillMappings { get; set; }
         public virtual DbSet<ItemsMaster> ItemsMasters { get; set; }
+        public virtual DbSet<LeaveRecord> LeaveRecords { get; set; }
+        public virtual DbSet<Leaf> Leaves { get; set; }
         public virtual DbSet<Opportunity> Opportunities { get; set; }
         public virtual DbSet<OpportunitiesLog> OpportunitiesLogs { get; set; }
         public virtual DbSet<OpportunityAttachment> OpportunityAttachments { get; set; }
@@ -80,13 +84,16 @@ namespace MaxMaster.Models
         public virtual DbSet<Organisation> Organisations { get; set; }
         public virtual DbSet<OrgansationLocation> OrgansationLocations { get; set; }
         public virtual DbSet<POAttachment> POAttachments { get; set; }
+        public virtual DbSet<PointsLog> PointsLogs { get; set; }
         public virtual DbSet<POItemsMapping> POItemsMappings { get; set; }
         public virtual DbSet<PuchaseOrder> PuchaseOrders { get; set; }
         public virtual DbSet<SalesOrder> SalesOrders { get; set; }
+        public virtual DbSet<Shift> Shifts { get; set; }
         public virtual DbSet<SOAttachment> SOAttachments { get; set; }
         public virtual DbSet<SOItemsMapping> SOItemsMappings { get; set; }
         public virtual DbSet<Specialty> Specialties { get; set; }
         public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<StockManager> StockManagers { get; set; }
         public virtual DbSet<StockOut> StockOuts { get; set; }
         public virtual DbSet<StockRequest> StockRequests { get; set; }
@@ -97,6 +104,28 @@ namespace MaxMaster.Models
         public virtual DbSet<TDSSection> TDSSections { get; set; }
         public virtual DbSet<TimeZone> TimeZones { get; set; }
         public virtual DbSet<VoiceGradePricing> VoiceGradePricings { get; set; }
+    
+        public virtual int AddActivityNotifications(string activityId, string employeeId)
+        {
+            var activityIdParameter = activityId != null ?
+                new ObjectParameter("ActivityId", activityId) :
+                new ObjectParameter("ActivityId", typeof(string));
+    
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddActivityNotifications", activityIdParameter, employeeIdParameter);
+        }
+    
+        public virtual ObjectResult<CategoriesSummary_Result> CategoriesSummary(string empId)
+        {
+            var empIdParameter = empId != null ?
+                new ObjectParameter("EmpId", empId) :
+                new ObjectParameter("EmpId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CategoriesSummary_Result>("CategoriesSummary", empIdParameter);
+        }
     
         public virtual ObjectResult<ClientMasterReport_Result> ClientMasterReport(Nullable<int> clientId, Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, Nullable<int> pageNumber, Nullable<int> recordsPerPage, string sortCol, string sortDir)
         {
@@ -138,6 +167,15 @@ namespace MaxMaster.Models
                 new ObjectParameter("Client_Id", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClientPayments_Result>("ClientPayments", client_IdParameter);
+        }
+    
+        public virtual ObjectResult<ClientTasksSummary_Result> ClientTasksSummary(string empId)
+        {
+            var empIdParameter = empId != null ?
+                new ObjectParameter("EmpId", empId) :
+                new ObjectParameter("EmpId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClientTasksSummary_Result>("ClientTasksSummary", empIdParameter);
         }
     
         public virtual ObjectResult<DoctorDetailsGet_Result> DoctorDetailsGet(string idigitalAuthorId, string name, string client, string email, string phoneNumber, string jobLevel, string voiceGrade, Nullable<int> pageNumber, Nullable<int> recordsPerPage, string sortCol, string sortDir)
@@ -189,7 +227,7 @@ namespace MaxMaster.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DoctorDetailsGet_Result>("DoctorDetailsGet", idigitalAuthorIdParameter, nameParameter, clientParameter, emailParameter, phoneNumberParameter, jobLevelParameter, voiceGradeParameter, pageNumberParameter, recordsPerPageParameter, sortColParameter, sortDirParameter);
         }
     
-        public virtual ObjectResult<EmployeeActivitiesLogReport_Result> EmployeeActivitiesLogReport(string empId, Nullable<System.DateTime> fromDate, string toDate, string clientId, string status, Nullable<int> priority, string taskId)
+        public virtual ObjectResult<EmployeeActivitiesLogReport_Result> EmployeeActivitiesLogReport(string empId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string clientId, string status, Nullable<int> priority, string taskId)
         {
             var empIdParameter = empId != null ?
                 new ObjectParameter("EmpId", empId) :
@@ -199,9 +237,9 @@ namespace MaxMaster.Models
                 new ObjectParameter("FromDate", fromDate) :
                 new ObjectParameter("FromDate", typeof(System.DateTime));
     
-            var toDateParameter = toDate != null ?
+            var toDateParameter = toDate.HasValue ?
                 new ObjectParameter("ToDate", toDate) :
-                new ObjectParameter("ToDate", typeof(string));
+                new ObjectParameter("ToDate", typeof(System.DateTime));
     
             var clientIdParameter = clientId != null ?
                 new ObjectParameter("ClientId", clientId) :
@@ -220,6 +258,61 @@ namespace MaxMaster.Models
                 new ObjectParameter("TaskId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeActivitiesLogReport_Result>("EmployeeActivitiesLogReport", empIdParameter, fromDateParameter, toDateParameter, clientIdParameter, statusParameter, priorityParameter, taskIdParameter);
+        }
+    
+        public virtual ObjectResult<EmployeeAttendanceReport_Result> EmployeeAttendanceReport(string empId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var empIdParameter = empId != null ?
+                new ObjectParameter("EmpId", empId) :
+                new ObjectParameter("EmpId", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeAttendanceReport_Result>("EmployeeAttendanceReport", empIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<EmployeeDayReport_Result> EmployeeDayReport(string empId, string clientId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string status, Nullable<int> priority, string taskId)
+        {
+            var empIdParameter = empId != null ?
+                new ObjectParameter("EmpId", empId) :
+                new ObjectParameter("EmpId", typeof(string));
+    
+            var clientIdParameter = clientId != null ?
+                new ObjectParameter("ClientId", clientId) :
+                new ObjectParameter("ClientId", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(string));
+    
+            var priorityParameter = priority.HasValue ?
+                new ObjectParameter("Priority", priority) :
+                new ObjectParameter("Priority", typeof(int));
+    
+            var taskIdParameter = taskId != null ?
+                new ObjectParameter("TaskId", taskId) :
+                new ObjectParameter("TaskId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeDayReport_Result>("EmployeeDayReport", empIdParameter, clientIdParameter, fromDateParameter, toDateParameter, statusParameter, priorityParameter, taskIdParameter);
+        }
+    
+        public virtual ObjectResult<EmployeeTasksSummary_Result> EmployeeTasksSummary()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeTasksSummary_Result>("EmployeeTasksSummary");
         }
     
         public virtual ObjectResult<GetBilledItems_Result> GetBilledItems(Nullable<int> billId)
@@ -258,6 +351,11 @@ namespace MaxMaster.Models
                 new ObjectParameter("RecordsPerPage", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetBills_Result>("GetBills", supplierParameter, billNumberParameter, billDateParameter, dueDateParameter, pageNumberParameter, recordsPerPageParameter);
+        }
+    
+        public virtual ObjectResult<GetCategories_Result> GetCategories()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCategories_Result>("GetCategories");
         }
     
         public virtual ObjectResult<GetClientEmployees_Result> GetClientEmployees(Nullable<int> clientId, string firstName, string lastName, string email, string primaryPhone, string department, Nullable<int> orgId, Nullable<int> pageNumber, Nullable<int> recordsPerPage)
@@ -466,6 +564,19 @@ namespace MaxMaster.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEmployeeDocuments_Result>("GetEmployeeDocuments", empIdParameter, categoryParameter, documentDateParameter, uploadDateParameter, notesParameter, keyWordsParameter, pageNumberParameter, recordsPerPageParameter, sortColParameter, sortDirParameter);
         }
     
+        public virtual ObjectResult<GetEmployeeLocations_Result> GetEmployeeLocations(string employeeId, Nullable<System.DateTime> date)
+        {
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(string));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEmployeeLocations_Result>("GetEmployeeLocations", employeeIdParameter, dateParameter);
+        }
+    
         public virtual ObjectResult<GetEmployees_Result> GetEmployees(string empNumber, string empName, string email, string primaryPhone, string department, string designation, string manager, Nullable<int> orgId, Nullable<int> pageNumber, Nullable<int> recordsPerPage, string sortCol, string sortDir)
         {
             var empNumberParameter = empNumber != null ?
@@ -519,36 +630,53 @@ namespace MaxMaster.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEmployees_Result>("GetEmployees", empNumberParameter, empNameParameter, emailParameter, primaryPhoneParameter, departmentParameter, designationParameter, managerParameter, orgIdParameter, pageNumberParameter, recordsPerPageParameter, sortColParameter, sortDirParameter);
         }
     
-        public virtual ObjectResult<GetEmployeesActivitiesReport_Result> GetEmployeesActivitiesReport(string empId, Nullable<System.DateTime> fromdate, string todate, string client, Nullable<int> priority, string status)
+        public virtual ObjectResult<GetEmployeesActivitiesReport_Result> GetEmployeesActivitiesReport(string employeeId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string clientId, string status, Nullable<int> priority, string taskId, Nullable<int> category)
         {
-            var empIdParameter = empId != null ?
-                new ObjectParameter("EmpId", empId) :
-                new ObjectParameter("EmpId", typeof(string));
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(string));
     
-            var fromdateParameter = fromdate.HasValue ?
-                new ObjectParameter("Fromdate", fromdate) :
-                new ObjectParameter("Fromdate", typeof(System.DateTime));
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
     
-            var todateParameter = todate != null ?
-                new ObjectParameter("Todate", todate) :
-                new ObjectParameter("Todate", typeof(string));
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
     
-            var clientParameter = client != null ?
-                new ObjectParameter("Client", client) :
-                new ObjectParameter("Client", typeof(string));
-    
-            var priorityParameter = priority.HasValue ?
-                new ObjectParameter("Priority", priority) :
-                new ObjectParameter("Priority", typeof(int));
+            var clientIdParameter = clientId != null ?
+                new ObjectParameter("ClientId", clientId) :
+                new ObjectParameter("ClientId", typeof(string));
     
             var statusParameter = status != null ?
                 new ObjectParameter("Status", status) :
                 new ObjectParameter("Status", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEmployeesActivitiesReport_Result>("GetEmployeesActivitiesReport", empIdParameter, fromdateParameter, todateParameter, clientParameter, priorityParameter, statusParameter);
+            var priorityParameter = priority.HasValue ?
+                new ObjectParameter("Priority", priority) :
+                new ObjectParameter("Priority", typeof(int));
+    
+            var taskIdParameter = taskId != null ?
+                new ObjectParameter("TaskId", taskId) :
+                new ObjectParameter("TaskId", typeof(string));
+    
+            var categoryParameter = category.HasValue ?
+                new ObjectParameter("Category", category) :
+                new ObjectParameter("Category", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEmployeesActivitiesReport_Result>("GetEmployeesActivitiesReport", employeeIdParameter, fromDateParameter, toDateParameter, clientIdParameter, statusParameter, priorityParameter, taskIdParameter, categoryParameter);
         }
     
-        public virtual ObjectResult<GetEmployeesTasksCount_Result> GetEmployeesTasksCount(string empId, Nullable<System.DateTime> fromDate, string toDate, string clientId)
+        public virtual ObjectResult<GetEmployeesLatestLocation_Result> GetEmployeesLatestLocation(Nullable<System.DateTime> date)
+        {
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEmployeesLatestLocation_Result>("GetEmployeesLatestLocation", dateParameter);
+        }
+    
+        public virtual ObjectResult<GetEmployeesTasksCount_Result> GetEmployeesTasksCount(string empId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string clientId)
         {
             var empIdParameter = empId != null ?
                 new ObjectParameter("EmpId", empId) :
@@ -558,15 +686,24 @@ namespace MaxMaster.Models
                 new ObjectParameter("FromDate", fromDate) :
                 new ObjectParameter("FromDate", typeof(System.DateTime));
     
-            var toDateParameter = toDate != null ?
+            var toDateParameter = toDate.HasValue ?
                 new ObjectParameter("ToDate", toDate) :
-                new ObjectParameter("ToDate", typeof(string));
+                new ObjectParameter("ToDate", typeof(System.DateTime));
     
             var clientIdParameter = clientId != null ?
                 new ObjectParameter("ClientId", clientId) :
                 new ObjectParameter("ClientId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEmployeesTasksCount_Result>("GetEmployeesTasksCount", empIdParameter, fromDateParameter, toDateParameter, clientIdParameter);
+        }
+    
+        public virtual ObjectResult<GetEmployeesToBeLogin_Result> GetEmployeesToBeLogin(Nullable<System.DateTime> date)
+        {
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEmployeesToBeLogin_Result>("GetEmployeesToBeLogin", dateParameter);
         }
     
         public virtual ObjectResult<GetItemModels_Result> GetItemModels(string itemName, string modelNumber, string brand, Nullable<int> quantity, string quantitySymbol, Nullable<int> threshold, string thresholdSymbol, Nullable<int> pageNumber, Nullable<int> recordsPerPage)
@@ -639,6 +776,56 @@ namespace MaxMaster.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetItems_Result>("GetItems", modelIdParameter, serialNumParameter, batchNumParameter, macAddressParameter, pageNumberParameter, recordsPerPageParameter);
         }
     
+        public virtual ObjectResult<GetLeadDetail_Result> GetLeadDetail(Nullable<int> opportunity)
+        {
+            var opportunityParameter = opportunity.HasValue ?
+                new ObjectParameter("Opportunity", opportunity) :
+                new ObjectParameter("Opportunity", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLeadDetail_Result>("GetLeadDetail", opportunityParameter);
+        }
+    
+        public virtual ObjectResult<GetLeads_Result> GetLeads(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string opportunity, string clientId, string assignedTo, string status, Nullable<int> orgId, Nullable<int> pageNumber, Nullable<int> recordsPerPage)
+        {
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var opportunityParameter = opportunity != null ?
+                new ObjectParameter("Opportunity", opportunity) :
+                new ObjectParameter("Opportunity", typeof(string));
+    
+            var clientIdParameter = clientId != null ?
+                new ObjectParameter("ClientId", clientId) :
+                new ObjectParameter("ClientId", typeof(string));
+    
+            var assignedToParameter = assignedTo != null ?
+                new ObjectParameter("AssignedTo", assignedTo) :
+                new ObjectParameter("AssignedTo", typeof(string));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(string));
+    
+            var orgIdParameter = orgId.HasValue ?
+                new ObjectParameter("OrgId", orgId) :
+                new ObjectParameter("OrgId", typeof(int));
+    
+            var pageNumberParameter = pageNumber.HasValue ?
+                new ObjectParameter("PageNumber", pageNumber) :
+                new ObjectParameter("PageNumber", typeof(int));
+    
+            var recordsPerPageParameter = recordsPerPage.HasValue ?
+                new ObjectParameter("RecordsPerPage", recordsPerPage) :
+                new ObjectParameter("RecordsPerPage", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLeads_Result>("GetLeads", fromDateParameter, toDateParameter, opportunityParameter, clientIdParameter, assignedToParameter, statusParameter, orgIdParameter, pageNumberParameter, recordsPerPageParameter);
+        }
+    
         public virtual ObjectResult<GetMyTasks_Result> GetMyTasks(string empId, string clientId, Nullable<int> departmentId, string taskType, string priority, string taskStatus, Nullable<int> pageNumber, Nullable<int> recordsPerPage, string sortCol, string sortDir)
         {
             var empIdParameter = empId != null ?
@@ -682,6 +869,51 @@ namespace MaxMaster.Models
                 new ObjectParameter("SortDir", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMyTasks_Result>("GetMyTasks", empIdParameter, clientIdParameter, departmentIdParameter, taskTypeParameter, priorityParameter, taskStatusParameter, pageNumberParameter, recordsPerPageParameter, sortColParameter, sortDirParameter);
+        }
+    
+        public virtual ObjectResult<GetMyTasksWeb_Result> GetMyTasksWeb(string empId, string clientId, Nullable<int> departmentId, string taskType, string priority, string taskStatus, Nullable<int> pageNumber, Nullable<int> recordsPerPage, string sortCol, string sortDir)
+        {
+            var empIdParameter = empId != null ?
+                new ObjectParameter("EmpId", empId) :
+                new ObjectParameter("EmpId", typeof(string));
+    
+            var clientIdParameter = clientId != null ?
+                new ObjectParameter("ClientId", clientId) :
+                new ObjectParameter("ClientId", typeof(string));
+    
+            var departmentIdParameter = departmentId.HasValue ?
+                new ObjectParameter("DepartmentId", departmentId) :
+                new ObjectParameter("DepartmentId", typeof(int));
+    
+            var taskTypeParameter = taskType != null ?
+                new ObjectParameter("TaskType", taskType) :
+                new ObjectParameter("TaskType", typeof(string));
+    
+            var priorityParameter = priority != null ?
+                new ObjectParameter("Priority", priority) :
+                new ObjectParameter("Priority", typeof(string));
+    
+            var taskStatusParameter = taskStatus != null ?
+                new ObjectParameter("TaskStatus", taskStatus) :
+                new ObjectParameter("TaskStatus", typeof(string));
+    
+            var pageNumberParameter = pageNumber.HasValue ?
+                new ObjectParameter("PageNumber", pageNumber) :
+                new ObjectParameter("PageNumber", typeof(int));
+    
+            var recordsPerPageParameter = recordsPerPage.HasValue ?
+                new ObjectParameter("RecordsPerPage", recordsPerPage) :
+                new ObjectParameter("RecordsPerPage", typeof(int));
+    
+            var sortColParameter = sortCol != null ?
+                new ObjectParameter("SortCol", sortCol) :
+                new ObjectParameter("SortCol", typeof(string));
+    
+            var sortDirParameter = sortDir != null ?
+                new ObjectParameter("SortDir", sortDir) :
+                new ObjectParameter("SortDir", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMyTasksWeb_Result>("GetMyTasksWeb", empIdParameter, clientIdParameter, departmentIdParameter, taskTypeParameter, priorityParameter, taskStatusParameter, pageNumberParameter, recordsPerPageParameter, sortColParameter, sortDirParameter);
         }
     
         public virtual ObjectResult<GetOpportunitiesList_Result> GetOpportunitiesList(string opportunity, string clientId, string assignedTo, string status, Nullable<int> orgId, Nullable<int> pageNumber, Nullable<int> recordsPerPage)
@@ -857,6 +1089,19 @@ namespace MaxMaster.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTaskBasicInfo_Result>("GetTaskBasicInfo", taskIdParameter);
         }
     
+        public virtual ObjectResult<GetTaskDetail_Result> GetTaskDetail(string taskId, string empId)
+        {
+            var taskIdParameter = taskId != null ?
+                new ObjectParameter("TaskId", taskId) :
+                new ObjectParameter("TaskId", typeof(string));
+    
+            var empIdParameter = empId != null ?
+                new ObjectParameter("EmpId", empId) :
+                new ObjectParameter("EmpId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTaskDetail_Result>("GetTaskDetail", taskIdParameter, empIdParameter);
+        }
+    
         public virtual ObjectResult<GetTaskLog_Result> GetTaskLog(string taskId)
         {
             var taskIdParameter = taskId != null ?
@@ -963,6 +1208,134 @@ namespace MaxMaster.Models
                 new ObjectParameter("TicketId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTicketLog_Result>("GetTicketLog", ticketIdParameter);
+        }
+    
+        public virtual ObjectResult<GetToDoLeads_Result> GetToDoLeads(string empId, string clientId, Nullable<int> departmentId, string taskType, string taskStatus, Nullable<int> pageNumber, Nullable<int> recordsPerPage, string sortCol, string sortDir)
+        {
+            var empIdParameter = empId != null ?
+                new ObjectParameter("EmpId", empId) :
+                new ObjectParameter("EmpId", typeof(string));
+    
+            var clientIdParameter = clientId != null ?
+                new ObjectParameter("ClientId", clientId) :
+                new ObjectParameter("ClientId", typeof(string));
+    
+            var departmentIdParameter = departmentId.HasValue ?
+                new ObjectParameter("DepartmentId", departmentId) :
+                new ObjectParameter("DepartmentId", typeof(int));
+    
+            var taskTypeParameter = taskType != null ?
+                new ObjectParameter("TaskType", taskType) :
+                new ObjectParameter("TaskType", typeof(string));
+    
+            var taskStatusParameter = taskStatus != null ?
+                new ObjectParameter("TaskStatus", taskStatus) :
+                new ObjectParameter("TaskStatus", typeof(string));
+    
+            var pageNumberParameter = pageNumber.HasValue ?
+                new ObjectParameter("PageNumber", pageNumber) :
+                new ObjectParameter("PageNumber", typeof(int));
+    
+            var recordsPerPageParameter = recordsPerPage.HasValue ?
+                new ObjectParameter("RecordsPerPage", recordsPerPage) :
+                new ObjectParameter("RecordsPerPage", typeof(int));
+    
+            var sortColParameter = sortCol != null ?
+                new ObjectParameter("SortCol", sortCol) :
+                new ObjectParameter("SortCol", typeof(string));
+    
+            var sortDirParameter = sortDir != null ?
+                new ObjectParameter("SortDir", sortDir) :
+                new ObjectParameter("SortDir", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetToDoLeads_Result>("GetToDoLeads", empIdParameter, clientIdParameter, departmentIdParameter, taskTypeParameter, taskStatusParameter, pageNumberParameter, recordsPerPageParameter, sortColParameter, sortDirParameter);
+        }
+    
+        public virtual ObjectResult<GetToDoPendingTasks_Result> GetToDoPendingTasks(string empId, string clientId, Nullable<int> departmentId, string taskType, string priority, string taskStatus, Nullable<int> pageNumber, Nullable<int> recordsPerPage, string sortCol, string sortDir)
+        {
+            var empIdParameter = empId != null ?
+                new ObjectParameter("EmpId", empId) :
+                new ObjectParameter("EmpId", typeof(string));
+    
+            var clientIdParameter = clientId != null ?
+                new ObjectParameter("ClientId", clientId) :
+                new ObjectParameter("ClientId", typeof(string));
+    
+            var departmentIdParameter = departmentId.HasValue ?
+                new ObjectParameter("DepartmentId", departmentId) :
+                new ObjectParameter("DepartmentId", typeof(int));
+    
+            var taskTypeParameter = taskType != null ?
+                new ObjectParameter("TaskType", taskType) :
+                new ObjectParameter("TaskType", typeof(string));
+    
+            var priorityParameter = priority != null ?
+                new ObjectParameter("Priority", priority) :
+                new ObjectParameter("Priority", typeof(string));
+    
+            var taskStatusParameter = taskStatus != null ?
+                new ObjectParameter("TaskStatus", taskStatus) :
+                new ObjectParameter("TaskStatus", typeof(string));
+    
+            var pageNumberParameter = pageNumber.HasValue ?
+                new ObjectParameter("PageNumber", pageNumber) :
+                new ObjectParameter("PageNumber", typeof(int));
+    
+            var recordsPerPageParameter = recordsPerPage.HasValue ?
+                new ObjectParameter("RecordsPerPage", recordsPerPage) :
+                new ObjectParameter("RecordsPerPage", typeof(int));
+    
+            var sortColParameter = sortCol != null ?
+                new ObjectParameter("SortCol", sortCol) :
+                new ObjectParameter("SortCol", typeof(string));
+    
+            var sortDirParameter = sortDir != null ?
+                new ObjectParameter("SortDir", sortDir) :
+                new ObjectParameter("SortDir", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetToDoPendingTasks_Result>("GetToDoPendingTasks", empIdParameter, clientIdParameter, departmentIdParameter, taskTypeParameter, priorityParameter, taskStatusParameter, pageNumberParameter, recordsPerPageParameter, sortColParameter, sortDirParameter);
+        }
+    
+        public virtual ObjectResult<LeadsSummary_Result> LeadsSummary()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LeadsSummary_Result>("LeadsSummary");
+        }
+    
+        public virtual ObjectResult<LogReport_Result> LogReport(string empId, string clientId, Nullable<System.DateTime> logFromDate, Nullable<System.DateTime> logToDate, string status, Nullable<int> priority, string taskId, Nullable<int> category)
+        {
+            var empIdParameter = empId != null ?
+                new ObjectParameter("EmpId", empId) :
+                new ObjectParameter("EmpId", typeof(string));
+    
+            var clientIdParameter = clientId != null ?
+                new ObjectParameter("ClientId", clientId) :
+                new ObjectParameter("ClientId", typeof(string));
+    
+            var logFromDateParameter = logFromDate.HasValue ?
+                new ObjectParameter("LogFromDate", logFromDate) :
+                new ObjectParameter("LogFromDate", typeof(System.DateTime));
+    
+            var logToDateParameter = logToDate.HasValue ?
+                new ObjectParameter("LogToDate", logToDate) :
+                new ObjectParameter("LogToDate", typeof(System.DateTime));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(string));
+    
+            var priorityParameter = priority.HasValue ?
+                new ObjectParameter("Priority", priority) :
+                new ObjectParameter("Priority", typeof(int));
+    
+            var taskIdParameter = taskId != null ?
+                new ObjectParameter("TaskId", taskId) :
+                new ObjectParameter("TaskId", typeof(string));
+    
+            var categoryParameter = category.HasValue ?
+                new ObjectParameter("Category", category) :
+                new ObjectParameter("Category", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LogReport_Result>("LogReport", empIdParameter, clientIdParameter, logFromDateParameter, logToDateParameter, statusParameter, priorityParameter, taskIdParameter, categoryParameter);
         }
     
         public virtual ObjectResult<MaxClientDueDetails_Result> MaxClientDueDetails(string client_Id, string invoiceId)
@@ -1126,6 +1499,15 @@ namespace MaxMaster.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
+        public virtual ObjectResult<StatusSummary_Result> StatusSummary(string empId)
+        {
+            var empIdParameter = empId != null ?
+                new ObjectParameter("EmpId", empId) :
+                new ObjectParameter("EmpId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StatusSummary_Result>("StatusSummary", empIdParameter);
+        }
+    
         public virtual ObjectResult<TaskStatsGet_Result> TaskStatsGet(string empId)
         {
             var empIdParameter = empId != null ?
@@ -1133,6 +1515,11 @@ namespace MaxMaster.Models
                 new ObjectParameter("EmpId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TaskStatsGet_Result>("TaskStatsGet", empIdParameter);
+        }
+    
+        public virtual ObjectResult<TopPerformances_Result> TopPerformances()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TopPerformances_Result>("TopPerformances");
         }
     }
 }

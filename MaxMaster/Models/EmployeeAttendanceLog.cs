@@ -15,12 +15,13 @@ namespace MaxMaster.Models
     public partial class EmployeeAttendanceLog
     {
         public int Id { get; set; }
-        public int Emp_Id { get; set; }
+        public string Emp_Id { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public Nullable<bool> IsClockIn { get; set; }
         public Nullable<bool> IsClockOut { get; set; }
         public Nullable<System.DateTime> Time { get; set; }
         public Nullable<System.DateTime> InsertedTime { get; set; }
+        public string Address { get; set; }
     }
 }

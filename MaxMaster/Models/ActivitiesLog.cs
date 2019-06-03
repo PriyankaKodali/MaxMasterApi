@@ -22,8 +22,8 @@ namespace MaxMaster.Models
     
         public int Id { get; set; }
         public string TaskId { get; set; }
-        public Nullable<System.DateTime> TaskDate { get; set; }
-        public string AssingedTo { get; set; }
+        public System.DateTime TaskDate { get; set; }
+        public string AssignedTo { get; set; }
         public string AssignedBy { get; set; }
         public Nullable<int> BudgetedHours { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
@@ -31,6 +31,8 @@ namespace MaxMaster.Models
         public Nullable<int> HoursWorked { get; set; }
         public string Status { get; set; }
         public string Description { get; set; }
+        public Nullable<int> QuantityWorked { get; set; }
+        public Nullable<int> Points { get; set; }
     
         public virtual Activity Activity { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

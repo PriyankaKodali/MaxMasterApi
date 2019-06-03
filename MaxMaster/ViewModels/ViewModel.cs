@@ -30,9 +30,9 @@ namespace MaxMaster.ViewModels
 
     public class ClientModel
     {
-
         public int Id { get; set; }
         public string Name { get; set; }
+        public string AspNetUserId { get; set; }
         public string ShortName { get; set; }
         public string Email { get; set; }
         public string PrimaryNum { get; set; }
@@ -117,12 +117,6 @@ namespace MaxMaster.ViewModels
         public string label { get; set; }
     }
 
-    public class DoctorSpecialitiesModel
-    {
-        public int value { get; set; }
-        public string label { get; set; }
-    }
-
     public class EmployeeModel
     {
         public int EmpId { get; set; }
@@ -160,6 +154,9 @@ namespace MaxMaster.ViewModels
         public int OrgId { get; set; }
         public string OrgName { get; set; }
         public int ProvisionalPeriod { get; set; }
+        public int? ShiftId { get; set; }
+        public string ShiftTimings { get; set; }
+        public string PhotoUrl { get; set; }
 
     }
 
@@ -228,7 +225,11 @@ namespace MaxMaster.ViewModels
         public DateTime? StartDate { get; set; }
         public string TaskType { get; set; }
         public string Location { get; set; }
-
+        public string Category { get; set; }
+        public string  SubCategory { get; set; }
+        public int? Quantity { get; set; }
+        public string Client { get; set; }
+        public string Project { get; set; }
     }
 
     public class ActivityLog
@@ -241,14 +242,16 @@ namespace MaxMaster.ViewModels
         public int? HoursWorked { get; set; }
         public int? TotalHoursWorked { get; set; }
         public string Status { get; set; }
-
+        public int? QuantityWorked { get; set; }
+        public int? TotalQuantityWorked { get; set; }
         public DateTime? TaskDate { get; set; }
-
         public int? BudgetedHours { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string[] Attachments { get; set; }
         public DateTime? TaskCreatedDate { get; set; }
+        public string AssignedById  { get; set; }
+        public string AssignedToId { get; set; }
 
     }
 
@@ -263,6 +266,7 @@ namespace MaxMaster.ViewModels
         public int? PriorityHighJobs { get; set; }
         public int? PriorityMediumJobs { get; set; }
         public int? PriorityLowJobs { get; set; }
+      
     }
 
     public class ActivitiesSummaryReport
@@ -279,6 +283,10 @@ namespace MaxMaster.ViewModels
         public int HighThroughMe { get; set; }
         public int MediumThroughMe { get; set; }
         public int LowThroughMe { get; set; }
+        public int TotalToDoPending { get; set; }
+        public int HighToDoPending { get; set; }
+        public int MediumToDoPending { get; set; }
+        public int LowToDoPending { get; set; }
 
     }
 
@@ -537,4 +545,48 @@ namespace MaxMaster.ViewModels
         public List<ItemDetails> Items { get; set; }
     }
 
+    public class Assignee
+    {
+        public string AssigneeId{ get; set; }
+        public string AssigneeName { get; set; }
+        public int? Quantity { get; set; }
+    }
+
+    public class TaskLog
+    {
+        public int TaskLogId { get; set; }
+        public string TaskLogAssignedById { get; set; }
+        public string TaskLogAssignedBy { get; set; }
+        public DateTime TaskLogDate { get; set; }
+        public string TaskLogAssignedToId { get; set; }
+        public string TaskLogAssignedTo { get; set; }
+        public string  TaskLogDescription { get; set; }
+        public int? HoursWorked { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public int? BudgetedHours { get; set; }
+        public int? QuantityWorked { get; set; }
+        public string TaskLogStatus { get; set; }
+        public List<LogAttachment> Attachments { get; set; }
+    }
+
+    public class LogAttachment
+    {
+        public int? AtchmentId { get; set; }
+        public string Attachment { get; set; }
+    }
+
+    public class SubCat
+    {
+        public string Name { get; set; }
+        public int Points { get; set; }
+    }
+
+    public class NewSubCategory
+    {
+        public int? SubCategoryId { get; set; }
+        public string Name { get; set; }
+        public int Points { get; set; }
+        public int? PointsLogId { get; set; }
+    }
 }

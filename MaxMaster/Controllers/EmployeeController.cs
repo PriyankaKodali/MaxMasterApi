@@ -40,14 +40,14 @@ namespace MaxMaster.Controllers
             try
             {
                 /* get data from form */
-                var form = HttpContext.Current.Request.Form;
+                var form = HttpContext.Current.Request.Form;  
                 var email = form.Get("Email");
                 var firstName = form.Get("FirstName");
                 var role = form.Get("RoleId");
                 var doj = form.Get("DOJ");
                 var provisionalPeriod = form.Get("ProvisionalPeriod");
                 var managerId = form.Get("Manager");
-
+              
                 /* Register to AspNet Users */
 
                 UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
@@ -58,13 +58,10 @@ namespace MaxMaster.Controllers
                     return Content(HttpStatusCode.InternalServerError, "User with email " + email + " already exists");
                 }
 
-
                 using (MaxMasterDbEntities db = new MaxMasterDbEntities())
                 {
-
                     var roleName = db.AspNetRoles.Where(x => x.Id == role).FirstOrDefault().Name;
-
-
+                    
                     Employee emp = new Employee();
                     emp.FirstName = firstName;
                     emp.MiddleName = form.Get("MiddleName");
@@ -87,8 +84,8 @@ namespace MaxMaster.Controllers
                     emp.Department_Id = Convert.ToInt32(form.Get("DepartmentId"));
                     emp.Designation_Id = Convert.ToInt32(form.Get("DesignationId"));
                     emp.OrgId = Convert.ToInt32(form.Get("OrgId"));
-
-
+                    emp.Shift_Id = Convert.ToInt32(form.Get("Shift"));
+                     
                     if (provisionalPeriod != "")
                     {
                         emp.ProvisionalPeriod = Convert.ToByte(provisionalPeriod);
@@ -111,9 +108,8 @@ namespace MaxMaster.Controllers
                     }
 
                     emp.UpdatedBy = User.Identity.GetUserId();
-                    emp.LastUpdated = DateTime.Now;
-
-                    emp.Active = true;
+                    emp.LastUpdated = DateTime.Now; 
+                    emp.Active = true; 
 
                     var prefix = db.Organisations.Where(x => x.Id == emp.OrgId).FirstOrDefault().EmpPrefix;
 
@@ -123,15 +119,17 @@ namespace MaxMaster.Controllers
 
                         if (Count > 0)
                         {
-                            var LastEmployeeNumber = db.Employees.Where(x => x.EmploymentType == "Consultant" && x.OrgId == emp.OrgId).OrderByDescending(x => x.EmployeeNumber).FirstOrDefault().EmployeeNumber;
+                            var LastEmployeeNumber = db.Employees.Where(x => x.EmploymentType == "Consultant" && x.OrgId == emp.OrgId).OrderByDescending(x => x.LastUpdated).FirstOrDefault().EmployeeNumber;
                             if (LastEmployeeNumber != null)
                             {
-                                int count = Convert.ToInt32(LastEmployeeNumber.Split('V')[1]);
+                                 int count = Convert.ToInt32(LastEmployeeNumber.Split('V')[1]); 
                                 GenerateNewNumber:
                                 var employeeNumber = prefix + "V" + (count + 1).ToString("00");
-                                if (db.Employees.Any(x => x.EmployeeNumber == employeeNumber))
+                                var empExists = db.Employees.Where(x => x.EmployeeNumber == employeeNumber).FirstOrDefault();
+                                var userexists = await _userManager.FindByNameAsync(employeeNumber);
+                                if (empExists != null || userexists!=null)
                                 {
-                                    count++;
+                                      count++;
                                     goto GenerateNewNumber;
                                 }
                                 emp.EmployeeNumber = employeeNumber;
@@ -171,47 +169,38 @@ namespace MaxMaster.Controllers
 
                     }
 
+                    var file = HttpContext.Current.Request.Files.Count > 0 ? HttpContext.Current.Request.Files[0] : null;
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileDirectory = HttpContext.Current.Server.MapPath("~/Employee_Images"); 
+                        if (!Directory.Exists(fileDirectory))
+                        {
+                            Directory.CreateDirectory(fileDirectory);
+                        }
+
+                        var physicalPath = Path.Combine(ConfigurationManager.AppSettings["ApiUrl"], emp.EmployeeNumber + Path.GetExtension(file.FileName));
+                        file.SaveAs(physicalPath);
+                        var path = Path.Combine(ConfigurationManager.AppSettings["ApiUrl"], "Employee_Images", emp.EmployeeNumber + Path.GetExtension(file.FileName));
+                        emp.PhotoURL = path;
+                    } 
                     string organisation = db.Organisations.Where(x => x.Id == emp.OrgId).FirstOrDefault().OrgName;
-
                     bool UserCreated = new UserController().CreateUser(emp.EmployeeNumber, email, roleName, organisation);
-
                     var user = userManager.FindByEmail(email);
 
                     if (user != null)
                     {
                         emp.AspNetUserId = user.Id;
                     }
+                    db.Employees.Add(emp);
 
-                    if (UserCreated)
-                    {
-                        var password = RandomString(8);
-                        string Username = emp.EmployeeNumber;
-                        string to = emp.Email;
+                    EmployeePayscale empPayScale = new EmployeePayscale();
+                     empPayScale.Gross = 0;
+                     empPayScale.Emp_Id = emp.Id;
 
-                        string subject = "Welcome to " + organisation;
+                     db.EmployeePayscales.Add(empPayScale);
+                     db.SaveChanges();
 
-                        string body = "Hi,Welcome to " + organisation + ". Following are the credentials for your account" + Environment.NewLine + "Username : " + Username + Environment.NewLine + "Password : " + password + Environment.NewLine;
-
-                        string from = "phanim@maxtranssystems.com";
-
-                        new EmailController().SendEmail(from, "Max", to, subject, body);
-
-                        db.Employees.Add(emp);
-
-                        EmployeePayscale empPayScale = new EmployeePayscale();
-                        empPayScale.Gross = 0;
-                        empPayScale.Emp_Id = emp.Id;
-
-                        db.EmployeePayscales.Add(empPayScale);
-
-                        db.SaveChanges();
-
-                        return Ok();
-                    }
-                    else
-                    {
-                        return Content(HttpStatusCode.InternalServerError, "An error occoured, please try again!");
-                    }
+                      return Ok();
                 }
             }
 
@@ -231,10 +220,8 @@ namespace MaxMaster.Controllers
             {
                 using (MaxMasterDbEntities db = new MaxMasterDbEntities())
                 {
-                    /* Get the employee details of the EmpId */
                     Employee emp = await db.Employees.FindAsync(EmpId);
-
-                    /* Assign employee values to employee model */
+                    
                     var employee = new EmployeeModel();
 
                     employee.FirstName = emp.FirstName;
@@ -259,7 +246,13 @@ namespace MaxMaster.Controllers
                         employee.Country = emp.City.State.Country_Id;
                         employee.CountryName = emp.City.State.Country.Name;
                     }
-
+                    
+                    if (emp.Shift_Id != null)
+                    {
+                        employee.ShiftId = emp.Shift_Id;
+                        employee.ShiftTimings = (emp.Shift.InTime).ToString(@"hh\:mm") + "-" + (emp.Shift.OutTime).ToString(@"hh\:mm");
+                    }
+                    
                     employee.DOB = emp.DOB.ToString("yyyy-MM-dd");
                     employee.DOJ = emp.DOJ.ToString("yyyy-MM-dd");
                     employee.ZIP = emp.ZIP;
@@ -272,8 +265,8 @@ namespace MaxMaster.Controllers
                     employee.RoleName = emp.AspNetRole.Name;
                     employee.OrgId = emp.OrgId;
                     employee.OrgName = emp.Organisation.OrgName;
-
-
+                    employee.PhotoUrl = emp.PhotoURL;
+                    
                     var manager = emp.Manager_Id;
                     if (manager != null)
                     {
@@ -368,6 +361,7 @@ namespace MaxMaster.Controllers
                     emp.Department_Id = Convert.ToInt32(form.Get("DepartmentId"));
                     emp.Designation_Id = Convert.ToInt32(form.Get("DesignationId"));
                     emp.OrgId = Convert.ToInt32(form.Get("OrgId"));
+                    emp.Shift_Id = Convert.ToInt32(form.Get("Shift"));
 
                     if (!string.IsNullOrEmpty(managerId))
                     {
@@ -379,10 +373,7 @@ namespace MaxMaster.Controllers
                     if (!string.IsNullOrEmpty(doj))
                     {
                         emp.DOJ = DateTime.Parse(form.Get("DOJ"));
-                    }
-
-
-
+                    } 
                     if (!string.IsNullOrEmpty(dor))
                     {
                         emp.DOR = DateTime.Parse(form.Get("DOR"));
@@ -392,14 +383,31 @@ namespace MaxMaster.Controllers
                     emp.UpdatedBy = User.Identity.GetUserId();
                     emp.LastUpdated = DateTime.Now;
 
-                    if (provisionalPeriod != "")
-                    {
+                    if (provisionalPeriod != "")  {
                         emp.ProvisionalPeriod = Convert.ToByte(provisionalPeriod);
                     }
-                    else
-                    {
+                    else {
                         emp.ProvisionalPeriod = 0;
                     }
+
+                    var file = HttpContext.Current.Request.Files.Count > 0 ? HttpContext.Current.Request.Files[0] : null;
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileDirectory = HttpContext.Current.Server.MapPath("~/Employee_Images");
+                        if (!Directory.Exists(fileDirectory))
+                        {
+                            Directory.CreateDirectory(fileDirectory);
+                        }
+
+                        var filename = emp.EmployeeNumber + file.FileName;
+                        var physicalPath = Path.Combine(fileDirectory,filename);
+
+                        file.SaveAs(physicalPath);
+
+                        var path = Path.Combine(ConfigurationManager.AppSettings["ApiUrl"], "Employee_Images", filename);
+                        emp.PhotoURL = path;
+                    }
+
 
                     db.Entry(emp).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();

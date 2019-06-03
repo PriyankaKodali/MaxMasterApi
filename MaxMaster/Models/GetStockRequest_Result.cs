@@ -19,16 +19,18 @@ namespace MaxMaster.Models
         public System.DateTime ExpectedStockDate { get; set; }
         public string Notes { get; set; }
         public string TaskId { get; set; }
+        public string Employee { get; set; }
         public Nullable<int> opportunityId { get; set; }
         public string Status { get; set; }
         public Nullable<int> StockReqMappingId { get; set; }
         public string OpportunityName { get; set; }
-        public string ProjectLocation { get; set; }
         public Nullable<int> Location_Id { get; set; }
         public Nullable<int> Quanitity { get; set; }
         public Nullable<int> ModelId { get; set; }
         public string Model { get; set; }
         public string Description { get; set; }
         public Nullable<int> NoOfItemsAvailable { get; set; }
+        public System.DateTime RequestDate { get; set; }
+        public string ProjectLocation { get; set; }
     }
 }

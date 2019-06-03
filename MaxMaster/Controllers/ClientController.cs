@@ -74,11 +74,13 @@ namespace MaxMaster.Controllers
                         //client.AspNetUserId = user1.Id;
                         return Content(HttpStatusCode.InternalServerError, "User with email " + email + " already exists");
                     }
-                    else
-                    {
-                        string organisation = db.Organisations.Where(x => x.Id == client.OrgId).FirstOrDefault().OrgName;
-                        var userCreated = new UserController().CreateUser(email, email, "Client", organisation);
-                    }
+                    //else
+                    //{
+                    //    string organisation = db.Organisations.Where(x => x.Id == client.OrgId).FirstOrDefault().OrgName;
+                  
+                    //}
+                    //bool sendmail = new UserController().CreateUser(email, email, "Client", client.OrgId.ToString());
+
 
                     client.Name = form.Get("Name");
                     client.ShortName = form.Get("ShortName");
@@ -130,6 +132,9 @@ namespace MaxMaster.Controllers
                         client.Currency = form.Get("Currency");
                     }
 
+                    string org = db.Organisations.Where(x => x.Id == client.OrgId).FirstOrDefault().OrgName;
+                    bool UserCreated = new UserController().CreateUser(email, email, "Client", org);
+
                     var user = userManager.FindByEmail(email);
                     if (user != null)
                     {
@@ -152,8 +157,7 @@ namespace MaxMaster.Controllers
 
                         client.ClientLocations.Add(clientloc);
                     }
-
-
+                     
                     for (int i = 0; i < verticals.Count; i++)
                     {
                         var vertical = await db.ClientVerticals.FindAsync(verticals[i].value);
@@ -163,8 +167,6 @@ namespace MaxMaster.Controllers
                         }
                         client.ClientVerticals.Add(vertical);
                     }
-
-
 
                     db.Clients.Add(client);
                     db.SaveChanges();
@@ -189,22 +191,13 @@ namespace MaxMaster.Controllers
             {
                 using (MaxMasterDbEntities db = new MaxMasterDbEntities())
                 {
-
-                    /* Get the inputs from form */
                     var form = HttpContext.Current.Request.Form;
-
                     var email = form.Get("Email");
 
-                    int OrgId = Convert.ToInt32(form.Get("OrgId"));
-
-                    /* Register to AspNet Users */
-
                     UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-
-                    /* create an object of clientEmployees table */
+                    
                     ClientEmployee clientEmp = new ClientEmployee();
-
-                    /* assign values from form to table */
+                    
                     clientEmp.FirstName = form.Get("FirstName");
                     clientEmp.MiddleName = form.Get("MiddleName");
                     clientEmp.LastName = form.Get("LastName");
@@ -253,37 +246,32 @@ namespace MaxMaster.Controllers
                             }
                         }
                     }
+                     
+                    // to send email to client employee
+                    //string organisation = db.Organisations.Where(x => x.Id == OrgId).FirstOrDefault().OrgName;
+
+                    //var user = userManager.FindByEmail(email);
+                    //if (user != null)
+                    //{
+                    //    return Content(HttpStatusCode.InternalServerError, "User with email " + email + " already exists");
+                    //}
+
+                    //var userCreated = new UserController().CreateUser(email, email, "ClientEmployee", organisation);
 
 
-                    string organisation = db.Organisations.Where(x => x.Id == OrgId).FirstOrDefault().OrgName;
+                    //var userId = userManager.FindByEmail(email);
+                    //if (user != null)
+                    //{
+                    //    clientEmp.AspNetUserId = user.Id;
+                    //}
 
-                    var user = userManager.FindByEmail(email);
-                    if (user != null)
-                    {
-                        return Content(HttpStatusCode.InternalServerError, "User with email " + email + " already exists");
-                    }
-
-                    var userCreated = new UserController().CreateUser(email, email, "ClientEmployee", organisation);
-
-
-                    var userId = userManager.FindByEmail(email);
-                    if (user != null)
-                    {
-                        clientEmp.AspNetUserId = user.Id;
-                    }
-
-
-                    /* Add record to the clientEmployee table */
                     db.ClientEmployees.Add(clientEmp);
                     db.SaveChanges();
                 }
-
-                /* If all the entites with validation is successful then return status code as ok  */
                 return Ok();
             }
             catch (Exception ex)
             {
-                /* store the error log in database */
                 new Error().logAPIError(System.Reflection.MethodBase.GetCurrentMethod().Name, ex.ToString(), ex.StackTrace);
                 return Content(HttpStatusCode.InternalServerError, "An error occoured, please try again!");
             }
@@ -491,7 +479,7 @@ namespace MaxMaster.Controllers
 
                     var client = db.Clients.Where(x => x.Id == ClientId).FirstOrDefault();
                     var clientLocations = db.ClientLocations.Where(x => x.Client_Id == ClientId).ToList();
-                    var clientVerticals = client.ClientVerticals.Select(x => new { value = x.Id, label = x.Name }).ToList();
+                    var clientVerticals = client.ClientVerticals.Select(x => new { value = x.Id, label = x.Name, Id=x.Id }).ToList();
 
                     ClientModel clientModel = new ClientModel();
 
@@ -518,6 +506,7 @@ namespace MaxMaster.Controllers
                     clientModel.AccountName = client.AccountName;
                     clientModel.AccountNumber = client.AccountNumber;
                     clientModel.IFSCCode = client.IFSCCode;
+                    clientModel.AspNetUserId = client.AspNetUserId;
 
                     clientModel.ClientLocations = new List<ClientLocationModel>();
 
@@ -811,7 +800,7 @@ namespace MaxMaster.Controllers
                                               label = opp.OpportunityName + " ( " +
                                                           (db.ClientLocations.Where(x => x.Id == opp.Location_Id).
                                                           Select(x => x.AddressLine1 + ", " + x.City.Name + " ," +
-                                                          x.State.Name + " ," + x.Country.Name + " ," + x.ZIP).FirstOrDefault()
+                                                          x.City.State.Name + " ," + x.City.State.Country.Name + " ," + x.ZIP).FirstOrDefault()
                                                ) + " )"
                                           })).ToList();
 
@@ -845,6 +834,124 @@ namespace MaxMaster.Controllers
             }
         }
         #endregion
+
+        //public IHttpActionResult GetClientWithAspNetUserId(string clientId)
+        //{
+        //    try
+        //    {
+        //        using (MaxMasterDbEntities db = new MaxMasterDbEntities())
+        //        {
+        //            var client = db.Clients.Where(x => x.AspNetUserId == clientId).Select(x => new { value = x.AspNetUserId, label = x.ShortName }).FirstOrDefault();
+        //            return Content(HttpStatusCode.OK, new { client });
+        //        }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        return Content(HttpStatusCode.InternalServerError, "An error occured, please try again later");
+        //    }
+        //}
+
+        public async Task<IHttpActionResult> AddClientWithPwd()
+        {
+            try
+            {
+                UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                using (MaxMasterDbEntities db = new MaxMasterDbEntities())
+                {
+                    var form = HttpContext.Current.Request.Form;
+                    var clientLocations = JsonConvert.DeserializeObject<List<ClientLocationModel>>(form.Get("ClientLocations"));
+                    var email = form.Get("Email");
+                    var password = form.Get("password");
+                    var userName = form.Get("userName");
+
+                    var user1 =  userManager.FindByEmail(email);
+                    if (user1 != null)
+                    {
+                        return Content(HttpStatusCode.InternalServerError, "User with email " + email + " already exists");
+                    }
+
+                    var exsistingUser = await _userManager.FindByNameAsync(userName);
+                    if (exsistingUser != null)
+                    {
+                        return Content(HttpStatusCode.InternalServerError, "User with user name " + userName + " already exists");
+                    }
+                     
+                    Client client = new Client();
+
+                    client.OrgId = Convert.ToInt32(form.Get("Organisation"));
+                    client.Name = form.Get("Name");
+                    client.ShortName = form.Get("ShortName");
+                    client.Email = email;
+                    client.PrimaryPhone = form.Get("PrimaryPhone");
+
+                    for (int i = 0; i < clientLocations.Count; i++)
+                    {
+                        ClientLocation clientloc = new ClientLocation();
+                        clientloc.AddressLine1 = clientLocations[i].AddressLine1;
+                        clientloc.AddressLine2 = clientLocations[i].AddressLine2;
+                        clientloc.Landmark = clientLocations[i].Landmark;
+                        clientloc.Country_Id = clientLocations[i].Country;
+                        clientloc.State_Id = clientLocations[i].State;
+                        clientloc.City_Id = clientLocations[i].City;
+                        clientloc.ZIP = clientLocations[i].zip;
+                        clientloc.TimeZone_Id = clientLocations[i].TimeZone;
+                        clientloc.IsInvoiceAddress = clientLocations[i].IsInvoice;
+                        clientloc.Client_Id = client.Id;
+
+                        client.ClientLocations.Add(clientloc);
+                    }
+                   
+                    ApplicationUser user = new ApplicationUser() { UserName = userName, Email = email };
+ 
+                    _userManager.UserValidator = new UserValidator<ApplicationUser>(_userManager)
+                    {
+                        AllowOnlyAlphanumericUserNames = false,
+                        RequireUniqueEmail = true
+                    };
+                    IdentityResult result = _userManager.Create(user, password);
+
+                    if (!result.Succeeded)
+                    {
+                        return Content(HttpStatusCode.InternalServerError, "An error occured, please try again later");
+                    }
+
+                    var roleStore = new RoleStore<IdentityRole>(appDb);
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+                    _userManager.AddToRole(user.Id, "Client");
+
+                    string to = email;
+                    string subject = "Welcome to Max Trans Systems" ;
+                    string body = "Hi,Welcome to Max Trans Systems. Following are the credentials for your account" +
+                        Environment.NewLine + "Username : " + userName + Environment.NewLine +
+                        "Password : " + password + Environment.NewLine;
+
+                    string from = "maxtranssystems2018@gmail.com";
+
+                   var sendMail= new EmailController().SendEmail(from, "Max", email, subject, body);
+
+                    client.AspNetUserId = user.Id;
+                    client.Active = true;
+                    client.LastUpdated = DateTime.Now;
+                    client.UpdatedBy = User.Identity.GetUserId();
+                    client.ClientType = "Direct Client";
+ 
+                    db.Clients.Add(client);
+                    db.SaveChanges();
+
+                }
+
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+                new Error().logAPIError(System.Reflection.MethodBase.GetCurrentMethod().Name, ex.ToString(), ex.StackTrace);
+                return Content(HttpStatusCode.InternalServerError, "An error occoured, please try again!");
+            }
+        }
+
+
 
     }
 }

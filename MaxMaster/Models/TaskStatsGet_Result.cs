@@ -19,6 +19,9 @@ namespace MaxMaster.Models
         public Nullable<int> HighMy { get; set; }
         public Nullable<int> MediumMy { get; set; }
         public Nullable<int> LowMy { get; set; }
+        public Nullable<int> HighMyPending { get; set; }
+        public Nullable<int> MediumMyPending { get; set; }
+        public Nullable<int> LowMyPending { get; set; }
         public Nullable<int> HighThroughMe { get; set; }
         public Nullable<int> MediumThroughMe { get; set; }
         public Nullable<int> LowThroughMe { get; set; }

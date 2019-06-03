@@ -396,15 +396,15 @@ namespace MaxMaster.Controllers
 
                         if (orgId != null)
                         {
-                            var orgEmployeesList = empList.Where(x => x.AspNetUserId != creatorId && x.OrgId == orgId && x.Active == true && x.Role_Id != "4").Select(x => new { value = x.AspNetUserId, label = x.FirstName + " " + x.LastName }).OrderBy(x => x.label).ToList();
-
+                            // var orgEmployeesList = empList.Where(x => x.AspNetUserId != creatorId && x.OrgId == orgId && x.Active == true && x.Role_Id != "4").Select(x => new { value = x.AspNetUserId, label = x.FirstName + " " + x.LastName }).OrderBy(x => x.label).ToList();
+                            var orgEmployeesList = db.Employees.Where(x => x.AspNetUserId != creatorId && x.OrgId == orgId && x.Active == true && x.Role_Id != "4").Select(x => new { value = x.AspNetUserId, label = x.FirstName + " " + x.LastName }).OrderBy(x => x.label).ToList();
                             var employees = orgEmployeesList.Union(superAdiminsList).ToList();
 
                             return Content(HttpStatusCode.OK, new { employees });
                         }
                         else
                         {
-                            var employees = db.Employees.Where(x => x.AspNetUserId != user && x.Active == true && x.Role_Id != "4").Select(x => new { value = x.AspNetUserId, label = x.FirstName + " " + x.LastName + "(" + x.Organisation.OrgName + ")" }).OrderBy(x => x.label).ToList();
+                            var employees = db.Employees.Where(x => x.AspNetUserId != user && x.AspNetUserId != creatorId && x.Active == true && x.Role_Id != "4").Select(x => new { value = x.AspNetUserId, label = x.FirstName + " " + x.LastName + "(" + x.Organisation.OrgName + ")" }).OrderBy(x => x.label).ToList();
                             return Content(HttpStatusCode.OK, new { employees });
                         }
                     }
@@ -528,7 +528,7 @@ namespace MaxMaster.Controllers
 
                     else
                     {
-                        var clients = db.Clients.Where(x => x.OrgId == orgId && x.Active == true).Select(x => new { value = x.AspNetUserId, label = x.ShortName }).OrderBy(x => x.label).ToList();
+                        var clients = db.Clients.Where(x => x.OrgId == orgId && x.Active == true).Select(x => new { value = x.AspNetUserId, label = x.ShortName, Id = x.Id }).OrderBy(x => x.label).ToList();
                         return Content(HttpStatusCode.OK, new { clients });
                     }
 
@@ -605,7 +605,9 @@ namespace MaxMaster.Controllers
             {
                 using (MaxMasterDbEntities db = new MaxMasterDbEntities())
                 {
-                    var items = db.ItemsMasters.Select(x => new { value = x.Id, label = x.ItemName + "[" + x.ModelNumber + "]", description = x.Description, upc = x.UPC, model = x.ModelNumber, serialNoExists = x.SrlNoExists, units = x.Units }).OrderBy(x => x.label).ToList();
+                    var items = db.ItemsMasters.Select(x => new { value = x.Id, label = x.ItemName + "[" + x.ModelNumber + "]", description = x.Description, upc = x.UPC, model = x.ModelNumber, serialNoExists = x.SrlNoExists, units = x.Units, showModel=true,
+                        Availability= (db.Items.Where(y=>y.ItemModelId == x.Id && y.IsAvailable== true ).Count())
+                    }).OrderBy(x => x.label).ToList();
                     return Content(HttpStatusCode.OK, new { items });
                 }
             }
@@ -675,33 +677,25 @@ namespace MaxMaster.Controllers
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         [HttpGet]
-        public IHttpActionResult GetEmployees()
+        // used in mrs
+        public IHttpActionResult GetEmployees(int? orgId)
         {
             try
             {
                 using (MaxMasterDbEntities db = new MaxMasterDbEntities())
                 {
-                    var employees = db.Employees.Select(x => new { value = x.Id, label = x.FirstName + " " + x.LastName }).OrderBy(x => x.label).ToList();
-                    return Content(HttpStatusCode.OK, new { employees });
+                    if (orgId != null)
+                    {
+                        var employees = db.Employees.Where(x => x.Active == true && x.OrgId == orgId && x.Role_Id != "4").Select(x => new { value = x.Id, label = x.FirstName + " " + x.LastName }).OrderBy(x => x.label).ToList();
+                        return Content(HttpStatusCode.OK, new { employees });
+                    }
+                    else
+                    {
+                        // var orgName = db.Organisations.Where(x => x.Id == orgId).Select(x => x.OrgName).FirstOrDefault();
+                        var employees = db.Employees.Where(x => x.Active == true && x.Role_Id != "4").Select(x => new { value = x.Id, label = x.FirstName + " " + x.LastName + "( " + x.Organisation.OrgName + " )" }).OrderBy(x => x.label).ToList();
+                        return Content(HttpStatusCode.OK, new { employees });
+                    }
                 }
             }
             catch (Exception ex)
@@ -745,6 +739,42 @@ namespace MaxMaster.Controllers
                 new Error().logAPIError(System.Reflection.MethodBase.GetCurrentMethod().Name, ex.ToString(), ex.StackTrace);
                 return Content(HttpStatusCode.InternalServerError, "An error occured, Please try again later");
             }
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetShifts()
+        {
+            try
+            {
+                using(MaxMasterDbEntities db = new MaxMasterDbEntities())
+                {
+                    var shifts = db.Shifts.Select(x => new {x.Id,  x.InTime , x.OutTime }).ToList();
+                  return Content(HttpStatusCode.OK, new { shifts });
+                }
+            }
+            catch (Exception ex)
+            {
+                new Error().logAPIError(System.Reflection.MethodBase.GetCurrentMethod().Name, ex.ToString(), ex.StackTrace);
+                return Content(HttpStatusCode.InternalServerError, "An error occured, please try again later");
+            }
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetHolidays()
+        {
+            try
+            {
+                using(MaxMasterDbEntities db = new MaxMasterDbEntities())
+                {
+                    var holidays = db.Holidays.ToList();
+                    return Content(HttpStatusCode.OK, new { holidays });
+                } 
+            }
+            catch (Exception ex)
+            {
+                new Error().logAPIError(System.Reflection.MethodBase.GetCurrentMethod().Name, ex.ToString(), ex.StackTrace);
+                return Content(HttpStatusCode.InternalServerError, "An error occured, please try again later");
+            } 
         }
     }
 }

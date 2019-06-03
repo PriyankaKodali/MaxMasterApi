@@ -38,6 +38,9 @@ namespace MaxMaster.Models
         public Nullable<System.DateTime> EDOS { get; set; }
         public Nullable<int> Location_Id { get; set; }
         public Nullable<System.DateTime> ActualCompletedDate { get; set; }
+        public string LastUpdatedBy { get; set; }
+        public Nullable<System.DateTime> LastUpdated { get; set; }
+        public Nullable<System.DateTime> FollowUpOn { get; set; }
     
         public virtual ClientLocation ClientLocation { get; set; }
         public virtual Organisation Organisation { get; set; }

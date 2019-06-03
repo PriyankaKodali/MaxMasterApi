@@ -97,7 +97,7 @@ namespace MaxMaster.Controllers
                     activityLog.Description = act.Description;
                     activityLog.TaskDate = MasterDataController.GetIndianTime(DateTime.UtcNow);
                     activityLog.AssignedBy = act.CreatedBy;
-                    activityLog.AssingedTo = act.TaskOwner;
+                    activityLog.AssignedTo = act.TaskOwner;
 
                     act.ActivitiesLogs.Add(activityLog);
 
@@ -125,7 +125,6 @@ namespace MaxMaster.Controllers
             {
                 using (MaxMasterDbEntities db = new MaxMasterDbEntities())
                 {
-
                     var form = HttpContext.Current.Request.Form;
                     var ItemsRequired = JsonConvert.DeserializeObject<List<BilledItemsModel>>(form.Get("items"));
                     var status = form.Get("status");
@@ -142,7 +141,11 @@ namespace MaxMaster.Controllers
                     stockRequest.LastUpdated = DateTime.Now;
                     stockRequest.UpdatedBy = User.Identity.GetUserId();
 
-                    if (status == "Approved")
+                    /* Find task with the taskid  */
+                    Activity activity = db.Activities.Find(task);
+                    ActivitiesLog activityLog = new ActivitiesLog();
+
+                    if (status.ToUpper() == "UNDER REVIEW")
                     {
                         foreach (var item in previouslyRequestedItems)
                         {
@@ -159,17 +162,32 @@ namespace MaxMaster.Controllers
 
                             stockRequest.StockRequestMappings.Add(srm);
                         }
+
+                        activity.CreatedBy = User.Identity.GetUserId();
+                        db.Entry(activity).State = System.Data.Entity.EntityState.Modified;
                     }
 
-                    /* Find task with the taskid  */
-                    Activity activity = db.Activities.Find(task);
-                    ActivitiesLog activityLog = new ActivitiesLog();
-
-                    if (status == "Approved")
+                    else  if (status == "Approved")
                     {
                         /* Get Stock Manager and assign activity to manager from super admin */
                         var stockManager = db.StockManagers.Where(x => x.IsActive == true).FirstOrDefault();
 
+                        foreach (var item in previouslyRequestedItems)
+                        {
+                            db.StockRequestMappings.Remove(item);
+                            db.SaveChanges();
+                        }
+
+                        /* Add requested items to stock */
+                        for (int i = 0; i < ItemsRequired.Count(); i++)
+                        {
+                            StockRequestMapping srm = new StockRequestMapping();
+                            srm.ItemId = ItemsRequired[i].ModelId;
+                            srm.Quanitity = ItemsRequired[i].Quantity;
+
+                            stockRequest.StockRequestMappings.Add(srm);
+                        }
+                        
                         for (int j = 0; j < ItemsRequired.Count(); j++)
                         {
                             int quantity = ItemsRequired[j].Quantity;
@@ -194,14 +212,14 @@ namespace MaxMaster.Controllers
 
                         if (stockManager != null)
                         {
-                            activity.Status = "pending";
+                            activity.Status = "Pending";
                             activity.TaskOwner = stockManager.AspNetUserId;
 
                             activityLog.TaskDate = DateTime.Now;
                             activityLog.AssignedBy = User.Identity.GetUserId();
-                            activityLog.AssingedTo = stockManager.AspNetUserId;
+                            activityLog.AssignedTo = stockManager.AspNetUserId;
                             activityLog.Description = "Items for the project is approved. Dispatch stock as early as possible";
-                            activityLog.Status = "pending";
+                            activityLog.Status = "Pending";
 
                             activity.ActivitiesLogs.Add(activityLog);
                             db.Entry(activity).State = System.Data.Entity.EntityState.Modified;
@@ -215,7 +233,7 @@ namespace MaxMaster.Controllers
 
                         activityLog.TaskDate = DateTime.Now;
                         activityLog.AssignedBy = User.Identity.GetUserId();
-                        activityLog.AssingedTo = activity.CreatedBy;
+                        activityLog.AssignedTo = activity.CreatedBy;
                         activityLog.Status = "Resolved";
                         activityLog.Description = "Your request for stock is declined";
 
@@ -248,7 +266,7 @@ namespace MaxMaster.Controllers
 
                                 activityLog.TaskDate = DateTime.Now;
                                 activityLog.AssignedBy = User.Identity.GetUserId();
-                                activityLog.AssingedTo = activity.CreatedBy;
+                                activityLog.AssignedTo = activity.CreatedBy;
                                 activityLog.Status = "Resolved";
                                 activityLog.Description = "Your items were dispatched successfully ";
                                 activityLog.HoursWorked = Convert.ToInt32(form.Get("hoursWorked"));
@@ -349,41 +367,50 @@ namespace MaxMaster.Controllers
 
                     /* Stored procedure to get the items requested */
 
-                    var stockRequest = db.GetStockRequest(stockReqId).FirstOrDefault();
+                    var stockRequest = db.GetStockRequest(stockReqId).ToList();
 
-                    var stockRequestItems = db.GetStockRequest(stockReqId).GroupBy(x => x.ModelId).Select(x => x.First()).Select(x => new
-                    {
-                        ModelId = x.ModelId,
-                        ItemName = x.Model,
-                        Quantity = x.Quanitity,
-                        Description = x.Description,
-                        StockReqMappingId = x.StockReqMappingId,
-                        x.NoOfItemsAvailable
-                    }).ToList();
 
-                    if (emp != null)
+                    var stockRequestData = stockRequest.GroupBy(x => x.Id).Select(x => x.First()).Select(x => new
                     {
-                        if (emp.Role_Id == "8")
+                        x.Id,
+                        ClientId = x.Client,
+                        ClientName = x.ShortName,
+                        x.RequestDate,
+                        x.ExpectedStockDate,
+                        x.Notes,
+                        x.TaskId,
+                        x.Employee,
+                        ProjectId = x.opportunityId,
+                        ProjectName = x.OpportunityName,
+                        x.Status,
+                        x.StockReqMappingId,
+                        x.Location_Id,
+                        x.ProjectLocation,
+                        Items = stockRequest.GroupBy(y => y.ModelId).Select(y => y.First()).Select(y => new
                         {
-                            stockRequest.ShortName = stockRequest.ShortName + " ( " + emp.Organisation.OrgName + " )";
-                        }
-                        else
-                        {
-                            stockRequest.ShortName = stockRequest.ShortName;
-                        }
-                    }
+                            y.ModelId,
+                            ItemName = y.Model,
+                            Quantity = y.Quanitity,
+                            y.Description,
+                            y.StockReqMappingId,
+                            y.NoOfItemsAvailable
+                        }).ToList()
+                    }).FirstOrDefault();
 
+                    //var stockRequestItems = db.GetStockRequest(stockReqId).GroupBy(x => x.ModelId).Select(x => x.First()).Select(x => new
+                    //{
+                    //    ModelId = x.ModelId,
+                    //    ItemName = x.Model,
+                    //    Quantity = x.Quanitity,
+                    //    Description = x.Description,
+                    //    StockReqMappingId = x.StockReqMappingId,
+                    //    x.NoOfItemsAvailable
+                    //}).ToList();
 
-                    var location = db.ClientLocations.Where(x => x.Id == stockRequest.Location_Id).FirstOrDefault();
+                   
+                  
 
-                    if (location != null)
-                    {
-                        stockRequest.ProjectLocation = stockRequest.OpportunityName + " ( " + location.AddressLine1 + "," +
-                         location.City.Name + "," + location.State.Name + "," + location.Country.Name + ","
-                           + location.ZIP + " )";
-                    }
-
-                    return Content(HttpStatusCode.OK, new { stockRequest, stockRequestItems });
+                    return Content(HttpStatusCode.OK, new { stockRequestData });
                 }
 
             }

@@ -17,14 +17,22 @@ namespace MaxMaster.Models
         public int Priority { get; set; }
         public string Status { get; set; }
         public System.DateTime CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
         public string Subject { get; set; }
         public string Description { get; set; }
-        public int Category_Id { get; set; }
-        public int SubCategory_Id { get; set; }
         public string Category { get; set; }
+        public string SubCategory { get; set; }
+        public System.DateTime EDOC { get; set; }
+        public Nullable<int> Project_Id { get; set; }
+        public string OpportunityName { get; set; }
+        public string TaskOwnerId { get; set; }
         public string TaskOwner { get; set; }
-        public string CreatedByName { get; set; }
+        public string CreatedById { get; set; }
+        public string CreatedBy { get; set; }
         public string TaskType { get; set; }
+        public Nullable<int> Quantity { get; set; }
+        public string Client_Id { get; set; }
+        public string Project { get; set; }
+        public string Client { get; set; }
+        public string ProjectLocation { get; set; }
     }
 }

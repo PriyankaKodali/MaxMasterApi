@@ -1,0 +1,505 @@
+activities 
+
+activitieslog
+
+opportunities
+
+get opportunities
+
+get my tasks
+
+get tasks created by me
+
+get tasks through me
+
+task basic info
+
+get emp activity log report
+
+get task log
+
+
+
+select * from Employees where AspNetUserId='79053824-8369-46e9-aecf-aed1a173cab2'
+
+86- 48db868a-bb20-4ca2-b7a9-1d82573d25bf
+
+
+
+
+
+
+-- exec EmployeeActivitiesLogReport 2070, '2018-05-01', '2018-05-29', null,null, null, 'MAX-2594'
+
+ALTER procedure [dbo].[EmployeeActivitiesLogReport]
+@EmpId int, 
+@FromDate datetime,
+@ToDate nvarchar(40),
+@ClientId int,
+@Status nvarchar(15),
+@Priority int,
+@TaskId nvarchar(10)
+
+as
+begin
+
+select act.TaskId, act.Subject, act.TaskType, act.CreatedDate, actLog.TaskDate,
+actLog.AssignedBy as AssignedById, e.FirstName + ' '+ e.LastName AssignedBy, 
+actLog.AssingedTo as  AssignedToId, assignedToemp.FirstName + ' ' + assignedToemp.LastName as 
+AssignedTo, actLog.status as LogStatus, actLog.Description, actLog.HoursWorked, act.Priority,
+createdEmp.FirstName + ' '+ createdEmp.LastName as CreatedBy, act.TaskOwner as TaskOwnerId ,
+taskowner.FirstName + ' ' + taskowner.LastName as TaskOwner,  actLog.StartDate, actLog.EndDate,
+actLog.BudgetedHours, dept.Name as Department, c.ShortName as ClientName,act.CompletedDate
+
+ 
+from Activities act join ActivitiesLog actLog on act.TaskId= actLog.TaskId
+join Employees e on e.Id = actLog.AssignedBy 
+join Employees assignedToemp on assignedToemp.Id = actLog.AssingedTo
+join Employees createdEmp on createdEmp.Id= act.CreatedBy
+join Employees taskowner on taskowner.Id= act.TaskOwner
+left join Departments dept on dept.Id= act.Department_Id
+left join Clients c on c.Id = act.Client_Id
+
+where (act.AssignedTo = @EmpId) and
+(act.CreatedDate >= @FromDate ) and
+(act.CreatedDate < CONCAT(@ToDate, ' 23:59:59')) and
+(@ClientId is null or act.Client_Id = @ClientId) and
+(@Status is null or act.Status = @Status) and
+(@Priority is null or act.Priority = @Priority) and
+(@TaskId is null or act.TaskId= @TaskId)
+
+end
+
+
+
+
+-------------------------------------------------------------------------------------
+
+
+ALTER procedure [dbo].[GetEmployeesActivitiesReport]
+@EmpId int,
+@Fromdate datetime,
+@Todate nvarchar(40),
+@Client int,
+@Priority int,
+@Status nvarchar(15)
+
+as
+begin
+
+select  act.CreatedDate, act.EDOC, act.TaskId, act.Subject, 
+ act.Status, act.Client_Id, act.CompletedDate, act.TaskOwner as TaskOwnerId, 
+emp.FirstName + ' '  + emp.LastName as AssignedBy,act.AssignedTo as AssignedToId,
+ e.FirstName + ' ' + e.LastName as AssignedTo,
+  em.FirstName + ' '+ em.LastName as TaskOwner, 
+act.Priority, clnt.Name  as ClientName, dept.Name as Department
+
+from  Activities  act
+left join Employees emp on emp.Id= act.CreatedBy
+join Employees e on e.Id = act.AssignedTo
+join Employees em on em.Id= act.TaskOwner
+left join Clients clnt on clnt.Id= act.Client_Id
+left join Departments dept on dept.Id = act.Department_Id
+
+ where (( @EmpId is null or act.AssignedTo = @EmpId) and
+ (@Client is null or act.Client_Id = @Client) and
+  (act.CreatedDate >= @Fromdate) and
+ (act.CreatedDate < CONCAT(@Todate ,' 23:59:59')) and
+ ( @Priority is null or act.Priority = @Priority) and
+ (@Status is null or act.Status like @Status)
+ )
+
+ group by act.TaskId, act.TaskOwner, act.CreatedDate, act.EDOC, act.Subject,
+ act.CreatedBy, act.Status, act.Priority, act.Client_Id, act.CompletedDate,
+ emp.FirstName + ' '+ emp.LastName, em.FirstName + ' ' + em.LastName,
+ e.FirstName + ' ' + e.LastName, clnt.Name, act.AssignedTo, dept.Name
+
+end
+
+
+--------------------------------------------------------------------------------------
+
+
+-- exec GetEmployeesTasksCount null,null,null,null
+ALTER procedure [dbo].[GetEmployeesTasksCount]
+@EmpId int,
+@FromDate dateTime,
+@ToDate nvarchar(40),
+@ClientId int
+
+as
+begin
+SELECT 
+  AssignedTo,
+  Employee,
+		sum(isnull(High,0)) High,
+		sum(isnull(Medium,0)) Medium,
+		sum(isnull(Low,0)) Low,
+		sum(isnull(Total,0)) TotalTaskCount
+		from(
+		   select 
+		   AssignedTo, e.FirstName + ' ' + e.LastName as Employee,
+		   High= case when Priority= 0   then count(*) End,
+		   Medium= case when Priority= 1 then count(*) End,
+		   Low = case when Priority=2 then count(*) End,
+		   Total= count(TaskId)	   
+		    from Activities join Employees e on e.Id = AssignedTo
+			where (@EmpId is null or AssignedTo= @EmpId) and
+	              (@FromDate is null or CreatedDate>= @FromDate) and
+		          (@ToDate is null or CreatedDate < CONCAT(@Todate ,' 23:59:59')) and
+		          (@ClientId is null or Client_Id = @ClientId)
+			  group by Priority, AssignedTo,e.FirstName + ' ' + e.LastName
+		) Activities
+
+		group by AssignedTo, Employee
+
+end
+
+
+
+-------------------------------------------------------------------------------------------------------
+
+-- exec GetMyTasks '7d8b6111-1661-45eb-a3e3-03638b9d1d70',null, null,null,null,null, 1, 10, 'TaskId', 'asc'
+
+ALTER procedure [dbo].[GetMyTasks]
+
+@EmpId int,
+@ClientId int,
+@DepartmentId int,
+@TaskType nvarchar(12),
+@Priority nvarchar(10),
+@TaskStatus nvarchar(20),
+@PageNumber int=1,
+@RecordsPerPage int=10,
+@SortCol nvarchar(50),
+@SortDir nvarchar(10)
+
+as
+begin
+
+ Declare @TotalPages int
+   if(@RecordsPerPage<0)
+    BEGIN
+                SET @PageNumber = 1
+				SET @RecordsPerPage = @TotalPages
+	END
+ ; with CTE_Activitites
+
+  as
+ (select Row_Number() over ( order by 
+ case when(@SortCol='TaskId' and @SortDir='asc') then a.TaskId end asc,
+ case when(@SortCol='TaskId' and @SortDir='desc') then  a.TaskId end desc,
+
+ case when(@SortCol='CreatedDate' and @SortDir='asc') then a.CreatedDate end asc,
+ case when(@SortCol='CreatedDate' and @SortDir='desc') then a.CreatedDate end desc,
+
+  case when(@SortCol='Subject' and @SortDir='asc') then a.Subject end asc,
+  case when(@SortCol='SubJect' and @SortDir='desc') then  a.Subject end desc,
+
+   case when(@SortCol='CategorySubCategory' and @SortDir='asc') then c.Name + '/' + sc.Name end asc,
+  case when(@SortCol='CategorySubCategory' and @SortDir='desc') then c.Name + '/' + sc.Name end desc,
+
+  case when(@SortCol= 'TAT' and @SortDir='asc'and @SortDir='asc') then DATEDIFF(DD, a.CreatedDate, GETDATE()) end asc,
+  case when(@SortCol='TAT' and @SortDir='desc' and @SortDir='desc') then DATEDIFF(DD, a.CreatedDate, GETDATE()) end desc, 
+
+  case when(@SortCol='Priority' and @SortDir='asc') then a.Priority end asc,
+ case when(@SortCol='Priority' and @SortDir='desc') then a.Priority end desc,
+
+  case when(@SortCol='Status' and @SortDir='asc') then a.Status end asc,
+ case when(@SortCol='Status' and @SortDir='desc') then a.Status end desc
+
+ ) as RowNum,
+ e.FirstName + ' ' + e.LastName CreatedByName,  emp.FirstName + ' ' + emp.LastName as TaskOwnerName,
+ empas.FirstName + empas.LastName as AssignedTo,
+  a.Status, a.TaskId as TaskId,a.CreatedBy, a.Priority, a.Category_Id , a.SubCategory_Id, 
+  c.Name + '/' + sc.Name as CategorySubCategory, a.Subject,
+ a.CreatedDate, a.TaskOwner,  DATEDIFF(DD, a.CreatedDate, GETDATE()) as TAT, a.Client_Id,
+ cl.ShortName as ClientName, a.Department_Id, d.Name Department, a.TaskType, COUNT(*) Over() TotalCount
+
+
+ from  Activities a  
+ left join Employees e on  e.Id =a.CreatedBy
+ left join Categories c on a.Category_Id=c.Id 
+ left join SubCategories sc on a.SubCategory_Id= sc.Id
+ left join Clients cl on cl.Id=a.Client_Id
+ left join Departments d on d.Id= a.Department_Id
+ left join Employees emp on emp.Id=a.TaskOwner
+ left Join Employees empas on empas.Id= a.AssignedTo 
+ where 
+ ( (@EmpId=a.TaskOwner and a.Status != 'Closed') and 
+   (@ClientId  is null or a.Client_Id = @ClientId) and
+   (@DepartmentId is null or a.Department_Id = @DepartmentId) and
+   (@Priority is null or a.Priority= @Priority)and
+   (@TaskStatus is null or a.Status = @TaskStatus) and
+    (@TaskType is null or a.TaskType= @TaskType)
+  ))
+ select * from CTE_Activitites as clcr order by RowNum
+    OFFSET ((@PageNumber-1) * @RecordsPerPage) ROWS
+    FETCH NEXT @RecordsPerPage ROWS ONLY
+end
+
+--------------------------------------------------------------------------------
+
+-- exec GetOpportunitiesList null,null,null,null,null,1,10
+ALTER procedure [dbo].[GetOpportunitiesList]
+@Opportunity nvarchar(100),
+@ClientId int,
+@AssignedTo nvarchar(50),
+@Status nvarchar(20),
+@OrgId int,
+@PageNumber int=1,
+@RecordsPerPage int=10
+
+as
+begin
+Declare @TotalPages int
+if(@RecordsPerPage<0)
+    BEGIN
+                SET @PageNumber = 1
+				SET @RecordsPerPage = @TotalPages
+ END
+
+ select opp.Id, opp.Client_Id,opp.AssignedTo as empId, opp.CreatedDate, 
+ opp.OpportunityName, e.FirstName + '' + e.LastName as AssignedTo,
+  c.Name as Client, opp.Status, count(*) Over() as TotalCount
+ from Opportunities  opp 
+join Clients c on opp.Client_Id = c.Id 
+join  Employees e on opp.AssignedTo = e.Id 
+
+ where (@Opportunity is null or opp.OpportunityName like  '%' +  @Opportunity + '%' ) and
+       (@ClientId is null or  opp.Client_Id = @ClientId) and
+	   (@AssignedTo is null or e.FirstName + e.LastName like '%' + @AssignedTo + '%' ) and
+	   (@Status is null or opp.Status like '%' + @Status + '%') and
+	   (@OrgId is null or opp.Org_Id = @OrgId)
+
+	ORDER BY opp.OpportunityName DESC
+    OFFSET ((@PageNumber-1) * @RecordsPerPage) ROWS
+    FETCH NEXT @RecordsPerPage ROWS ONLY
+
+ end
+
+
+------------------------------------------------------------------------
+
+ALTER procedure [dbo].[GetTask]
+@TaskId nvarchar(10)
+
+as
+begin
+select a.Priority, a.Status, a.CreatedDate, a.CreatedBy, a.Subject, a.Description, a.TaskId as TaskId,
+e.FirstName + ' ' + e.LastName as CreatedByName, a.Category_Id, a.SubCategory_Id, 
+c.Name + '/' + sc.Name as Category, al.TaskDate, emp.FirstName + ' ' + emp.LastName as TaskOwner
+
+from 
+
+Activities a   join ActivitiesLog al on a.TaskId= al.TaskId
+left join Employees e on e.Id = a.CreatedBy 
+left join Categories c on c.Id= a.Category_Id
+left join SubCategories sc on sc.Id= a.SubCategory_Id
+left join Employees emp on emp.Id= a.TaskOwner
+ 
+where a.TaskId= @TaskId
+
+end
+
+
+-----------------------------------------------------------------
+
+ALTER procedure [dbo].[GetTaskLog]
+
+@TaskId nvarchar(10)
+
+as
+begin
+
+select al.Status, a.Priority,  al.TaskDate,al.Description,al.HoursWorked,al.Id as ActivityLogId,
+e.FirstName + ' ' + e.LastName as AssignedBy, emp.FirstName + ' '+ emp.LastName as AssignedTo
+
+ from ActivitiesLog al  join Activities a on al.TaskId= a.TaskId
+ join Categories c on c.Id= a.Category_Id 
+ join SubCategories sc on sc.Id= a.SubCategory_Id
+ join Employees e on e.Id= al.AssignedBy
+ left join Employees emp on emp.Id= al.AssingedTo
+
+ where al.TaskId= @TaskId
+end
+
+------------------------------------------------------------------
+
+-- exec GetTasksByMe 'fd55cd9c-0454-4c22-859a-1039f5eeac81',null,null,null,null,null, 1,10,'TaskId','asc'
+
+ALTER procedure [dbo].[GetTasksByMe]
+
+@EmpId int,
+@ClientId int,
+@DepartmentId int,
+@TaskType nvarchar(12),
+@Priority nvarchar(10),
+@TaskStatus nvarchar(20),
+@PageNumber int=1,
+@RecordsPerPage int=10,
+@SortCol nvarchar(50),
+@SortDir nvarchar(10)
+
+as
+begin
+
+ Declare @TotalPages int
+   if(@RecordsPerPage<0)
+    BEGIN
+                SET @PageNumber = 1
+				SET @RecordsPerPage = @TotalPages
+	END
+ ; with CTE_Activitites
+
+  as
+ (select Row_Number() over ( order by 
+ case when(@SortCol='TaskId' and @SortDir='asc') then a.TaskId end asc,
+ case when(@SortCol='TaskId' and @SortDir='desc') then  a.TaskId end desc,
+
+ case when(@SortCol='CreatedDate' and @SortDir='asc') then a.CreatedDate end asc,
+ case when(@SortCol='CreatedDate' and @SortDir='desc') then a.CreatedDate end desc,
+
+  case when(@SortCol='Subject' and @SortDir='asc') then a.Subject end asc,
+  case when(@SortCol='SubJect' and @SortDir='desc') then  a.Subject end desc,
+
+   case when(@SortCol='CategorySubCategory' and @SortDir='asc') then c.Name + '/' + sc.Name end asc,
+  case when(@SortCol='CategorySubCategory' and @SortDir='desc') then c.Name + '/' + sc.Name end desc,
+
+   case when(@SortCol='TaskOwnerName' and @SortDir='asc') then emp.FirstName + ' ' + emp.LastName end asc,
+  case when(@SortCol='TaskOwnerName' and @SortDir='desc') then emp.FirstName + ' ' + emp.LastName  end desc,
+
+  case when(@SortCol= 'TAT' and @SortDir='asc'and @SortDir='asc') then DATEDIFF(DD, a.CreatedDate, GETDATE()) end asc,
+  case when(@SortCol='TAT' and @SortDir='desc' and @SortDir='desc') then DATEDIFF(DD, a.CreatedDate, GETDATE()) end desc, 
+
+  case when(@SortCol='Priority' and @SortDir='asc') then a.Priority end asc,
+ case when(@SortCol='Priority' and @SortDir='desc') then a.Priority end desc,
+
+  case when(@SortCol='Status' and @SortDir='asc') then a.Status end asc,
+ case when(@SortCol='Status' and @SortDir='desc') then a.Status end desc
+
+ ) as RowNum,
+ e.FirstName + ' ' + e.LastName AssignedByEmp, a.Status, a.TaskId as TaskId, a.CreatedBy,a.AssignedTo,
+ a.Priority, a.Category_Id , a.SubCategory_Id, c.Name + '/' + sc.Name as CategorySubCategory,
+  a.Subject,
+ a.CreatedDate, a.TaskOwner,  DATEDIFF(DD, a.CreatedDate, GETDATE()) as TAT, a.TaskType, 
+ a.Department_Id,  a.Client_Id, emp.FirstName + ' ' + emp.LastName as TaskOwnerName,
+ cl.ShortName as ClientName,
+ d.Name Department,
+COUNT(*) Over() TotalCount 
+
+from  Activities a 
+ left join Employees e on  e.Id =a.CreatedBy
+ left join Categories c on a.Category_Id=c.Id 
+ left join SubCategories sc on a.SubCategory_Id= sc.Id
+ left join Clients cl on cl.Id= a.Client_Id
+ left join Departments d on d.Id= a.Department_Id
+ left join Employees emp on emp.id=a.TaskOwner
+ 
+ where 
+ ((@EmpId = a.CreatedBy and a.Status != 'Closed') and
+ (@ClientId is null or a.Client_Id = @ClientId) and
+ (@DepartmentId is null or a.Department_Id = @DepartmentId) and
+ (@Priority is null or a.Priority= @Priority)and
+ (@TaskStatus is null or a.Status = @TaskStatus) and 
+ (@TaskType is null or a.TaskType= @TaskType))
+  )
+ select * from CTE_Activitites as clcr order by RowNum
+    OFFSET ((@PageNumber-1) * @RecordsPerPage) ROWS
+    FETCH NEXT @RecordsPerPage ROWS ONLY
+end
+
+--------------------------------------------------------------------------
+
+--  exec GetTasksThroughMe 65, null,null,null,null,null,1,10, 'TaskId', 'asc'
+ALTER procedure [dbo].[GetTasksThroughMe]
+
+@EmpId int,
+@ClientId int,
+@DepartmentId int,
+@TaskType nvarchar(12),
+@Priority nvarchar(10),
+@TaskStatus nvarchar(20),
+@PageNumber int=1,
+@RecordsPerPage int=10,
+@SortCol nvarchar(50),
+@SortDir nvarchar(10)
+
+ as
+ begin
+
+ Declare @TotalPages int
+   if(@RecordsPerPage<0)
+    BEGIN
+                SET @PageNumber = 1
+				SET @RecordsPerPage = @TotalPages
+	END
+ ; with CTE_Activitites
+
+as
+(
+select ROW_NUMBER() over (order by
+  case when(@SortCol='TaskId' and @SortDir='asc') then a.TaskId end asc,
+  case when(@SortCol='TaskId' and @SortDir='desc') then  a.TaskId end desc,
+
+  case when(@SortCol='CreatedDate' and @SortDir='asc') then a.CreatedDate end asc,
+  case when(@SortCol='CreatedDate' and @SortDir='desc') then a.CreatedDate end desc,
+
+  case when(@SortCol='Subject' and @SortDir='asc') then a.Subject end asc,
+  case when(@SortCol='SubJect' and @SortDir='desc') then  a.Subject end desc,
+
+  case when(@SortCol='CategorySubCategory' and @SortDir='asc') then c.Name + '/' + sc.Name end asc,
+  case when(@SortCol='CategorySubCategory' and @SortDir='desc') then c.Name + '/' + sc.Name end desc,
+
+  case when(@SortCol= 'TAT' and @SortDir='asc'and @SortDir='asc') then DATEDIFF(DD, a.CreatedDate, GETDATE()) end asc,
+  case when(@SortCol='TAT' and @SortDir='desc' and @SortDir='desc') then DATEDIFF(DD, a.CreatedDate, GETDATE()) end desc, 
+
+  case when(@SortCol='Priority' and @SortDir='asc') then a.Priority end asc,
+  case when(@SortCol='Priority' and @SortDir='desc') then a.Priority end desc,
+
+  case when(@SortCol='EmpCreatedBy' and @SortDir='asc') then e.FirstName + ' ' + e.LastName end asc,
+  case when(@SortCol='EmpCreatedBy' and @SortDir='desc') then e.FirstName + ' ' + e.LastName end desc,
+
+  case when(@SortCol='EmpTaskOwner' and @SortDir='asc') then emp.FirstName + ' ' + emp.LastName end asc,
+  case when(@SortCol='EmpTaskOwner' and @SortDir='desc') then emp.FirstName + ' ' + emp.LastName end desc,
+
+  case when(@SortCol='Status' and @SortDir='asc') then a.Status end asc,
+  case when(@SortCol='Status' and @SortDir='desc') then a.Status end desc
+
+ ) as RowNum,
+
+ a.Category_Id, a.SubCategory_Id, a.CreatedBy, a.CreatedDate, a.Subject, a.TaskId as TaskId,
+  a.Status, a.Priority,  c.Name + '/' + sc.Name as CategorySubCategory,
+  a.TaskOwner,   DATEDIFF(DD, a.CreatedDate, GETDATE()) as TAT,  a.Client_Id, cl.ShortName as ClientName,
+  a.Department_Id, d.Name Department, a.TaskType,
+  e.FirstName + ' ' + e.LastName as EmpCreatedBy,
+  emp.FirstName + ' ' + emp.LastName as EmpTaskOwner,
+  empas.FirstName  + ' ' + empas.LastName as ActuallyAssignedTo,
+
+  COUNT(*) Over() TotalCount 
+
+ from  Activities a 
+ left join Employees e on  e.Id =a.CreatedBy
+ left join Categories c on a.Category_Id=c.Id 
+ left join SubCategories sc on a.SubCategory_Id= sc.Id
+ left join Clients cl on cl.Id=a.Client_Id
+ left join Departments d on d.Id= a.Department_Id
+ left join Employees emp on emp.id=a.TaskOwner
+ left join Employees empas on empas.Id= a.AssignedTo
+
+ where 
+ ((a.AssignedTo = @EmpId and  a.TaskOwner != @EmpId and a.Status!='Closed') and
+ (@ClientId is null or a.Client_Id = @ClientId) and
+ (@DepartmentId is null or a.Department_Id = @DepartmentId) and
+ (@Priority is null or a.Priority= @Priority) and
+ (@TaskStatus is null or a.Status = @TaskStatus) and
+  (@TaskType is null or a.TaskType= @TaskType) ) 
+ )
+ select * from CTE_Activitites as clcr order by RowNum
+    OFFSET ((@PageNumber-1) * @RecordsPerPage) ROWS
+    FETCH NEXT @RecordsPerPage ROWS ONLY
+end
+
+
+--------------------------------------------------------------------------------------
+

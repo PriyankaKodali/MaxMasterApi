@@ -13,10 +13,8 @@ using System.Web.Mvc;
 namespace MaxMaster.Controllers
 {
     public class ChangePasswordController : ApiController
-    {
-
-        private ApplicationUserManager _userManager;
-        
+    { 
+        private ApplicationUserManager _userManager; 
         public ApplicationUserManager UserManager
         {
             get
@@ -36,7 +34,7 @@ namespace MaxMaster.Controllers
             if (user == null)
             {
                 return NotFound();
-            }
+            } 
             user.PasswordHash = UserManager.PasswordHasher.HashPassword(password);
             var result = await UserManager.UpdateAsync(user);
             if (!result.Succeeded)

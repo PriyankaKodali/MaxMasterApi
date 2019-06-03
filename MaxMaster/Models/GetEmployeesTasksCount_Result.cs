@@ -13,7 +13,7 @@ namespace MaxMaster.Models
     
     public partial class GetEmployeesTasksCount_Result
     {
-        public string AssignedTo { get; set; }
+        public string EmpId { get; set; }
         public string Employee { get; set; }
         public Nullable<int> High { get; set; }
         public Nullable<int> Medium { get; set; }

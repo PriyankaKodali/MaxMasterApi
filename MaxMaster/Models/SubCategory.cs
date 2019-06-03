@@ -18,14 +18,18 @@ namespace MaxMaster.Models
         public SubCategory()
         {
             this.Activities = new HashSet<Activity>();
+            this.PointsLogs = new HashSet<PointsLog>();
         }
     
         public int Id { get; set; }
         public int Category_Id { get; set; }
         public string Name { get; set; }
+        public Nullable<int> Points { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Activity> Activities { get; set; }
         public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PointsLog> PointsLogs { get; set; }
     }
 }

@@ -27,6 +27,9 @@
           <Property Name="TaskType" Type="nvarchar" MaxLength="12" Nullable="false" />
           <Property Name="AssignedTo" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Project_Id" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="ActivitiesLog">
           <Key>
@@ -34,8 +37,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TaskId" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="TaskDate" Type="datetime" />
-          <Property Name="AssingedTo" Type="nvarchar" MaxLength="128" />
+          <Property Name="TaskDate" Type="datetime" Nullable="false" />
+          <Property Name="AssignedTo" Type="nvarchar" MaxLength="128" />
           <Property Name="AssignedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="BudgetedHours" Type="int" />
           <Property Name="StartDate" Type="datetime" />
@@ -43,6 +46,8 @@
           <Property Name="HoursWorked" Type="int" />
           <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="QuantityWorked" Type="int" />
+          <Property Name="Points" Type="int" />
         </EntityType>
         <EntityType Name="ActivityAttachments">
           <Key>
@@ -52,6 +57,14 @@
           <Property Name="ActivityId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="AttachmentURL" Type="nvarchar" MaxLength="400" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActivityNotifications">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="ActivityId" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="EmployeeId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="ApprovedInvoices">
           <Key>
@@ -155,7 +168,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BillNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="BillNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="SupplierId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="BillDate" Type="datetime" Nullable="false" />
           <Property Name="DueDate" Type="datetime" />
@@ -441,13 +454,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Emp_Id" Type="int" Nullable="false" />
+          <Property Name="Emp_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Latitude" Type="nvarchar(max)" />
           <Property Name="Longitude" Type="nvarchar(max)" />
           <Property Name="IsClockIn" Type="bit" />
           <Property Name="IsClockOut" Type="bit" />
           <Property Name="Time" Type="datetime" />
           <Property Name="InsertedTime" Type="datetime" />
+          <Property Name="Address" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="EmployeePaymentRecords">
           <Key>
@@ -530,6 +544,9 @@
           <Property Name="Gender" Type="nvarchar(max)" />
           <Property Name="AspNetUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="OrgId" Type="int" Nullable="false" />
+          <Property Name="NotificationToken" Type="nvarchar(max)" />
+          <Property Name="LastActivityTime" Type="datetime" />
+          <Property Name="Shift_Id" Type="int" />
         </EntityType>
         <EntityType Name="EmployeeSpecialties">
           <Key>
@@ -556,6 +573,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GSTName" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Rate" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Holidays">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HolidayName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="HolidayDate" Type="date" Nullable="false" />
+          <Property Name="OrgId" Type="int" />
         </EntityType>
         <EntityType Name="Invoices">
           <Key>
@@ -625,7 +651,7 @@
           <Property Name="CGST" Type="decimal" Precision="4" Scale="2" />
           <Property Name="IGST" Type="decimal" Precision="4" Scale="2" />
           <Property Name="IsAvailable" Type="bit" Nullable="false" />
-          <Property Name="BillNumber" Type="nvarchar" MaxLength="25" />
+          <Property Name="BillNumber" Type="nvarchar" MaxLength="30" />
           <Property Name="DeliveryChallanNumber" Type="nvarchar" MaxLength="20" />
           <Property Name="InwardNumber" Type="nvarchar" MaxLength="20" />
           <Property Name="PONumber" Type="nvarchar" MaxLength="20" />
@@ -679,6 +705,28 @@
           <Property Name="IGST" Type="decimal" Precision="4" Scale="2" />
           <Property Name="SrlNoExists" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="LeaveRecords">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LeaveDate" Type="date" Nullable="false" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LeaveType" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Leaves">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FromDate" Type="date" />
+          <Property Name="ToDate" Type="date" />
+          <Property Name="LeaveType" Type="int" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="Status" Type="nvarchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="Opportunities">
           <Key>
             <PropertyRef Name="Id" />
@@ -698,6 +746,9 @@
           <Property Name="EDOS" Type="datetime" />
           <Property Name="Location_Id" Type="int" />
           <Property Name="ActualCompletedDate" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="FollowUpOn" Type="datetime" />
         </EntityType>
         <EntityType Name="OpportunitiesLog">
           <Key>
@@ -791,6 +842,16 @@
           <Property Name="FileName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AttachmentUrl" Type="nvarchar" MaxLength="400" Nullable="false" />
         </EntityType>
+        <EntityType Name="PointsLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubCatId" Type="int" Nullable="false" />
+          <Property Name="Points" Type="int" />
+          <Property Name="FromDate" Type="date" Nullable="false" />
+          <Property Name="ToDate" Type="date" />
+        </EntityType>
         <EntityType Name="POItemsMapping">
           <Key>
             <PropertyRef Name="Id" />
@@ -837,6 +898,15 @@
           <Property Name="CGST" Type="decimal" Precision="4" Scale="2" />
           <Property Name="IGST" Type="decimal" Precision="4" Scale="2" />
         </EntityType>
+        <EntityType Name="Shifts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShiftName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="InTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="OutTime" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
         <EntityType Name="SOAttachments">
           <Key>
             <PropertyRef Name="Id" />
@@ -871,6 +941,23 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Country_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="item_id" />
+          </Key>
+          <Property Name="item_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="item_name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="unit" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="sku" Type="nchar" MaxLength="10" />
+          <Property Name="quantity_purchased" Type="int" />
+          <Property Name="quantity_sold" Type="int" />
+          <Property Name="quantity_ordered" Type="int" />
+          <Property Name="quantity_demanded" Type="int" />
+          <Property Name="quantity_available" Type="int" />
+          <Property Name="quantity_available_for_sale" Type="int" />
+          <Property Name="reorder_level" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="StockManager">
           <Key>
@@ -927,6 +1014,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Category_Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Points" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -955,6 +1043,31 @@
           <Property Name="SectionId" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="Section" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'MaxMasterDb.dbo.TempTableForAttendanceReport' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TempTableForAttendanceReport">
+          <Property Name="EmployeeId" Type="nvarchar" MaxLength="128" />
+          <Property Name="EmployeeName" Type="nvarchar(max)" />
+          <Property Name="ClockInTime" Type="datetime" />
+          <Property Name="ClockInAddress" Type="nvarchar(max)" />
+          <Property Name="ClockInDelay" Type="bigint" />
+          <Property Name="ClockOutTime" Type="datetime" />
+          <Property Name="ClockOutDelay" Type="bigint" />
+          <Property Name="ClockOutAddress" Type="nvarchar(max)" />
+          <Property Name="AttendanceDate" Type="datetime" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'MaxMasterDb.dbo.TempTableForLatestLocation' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TempTableForLatestLocation">
+          <Property Name="EmployeeId" Type="nvarchar" MaxLength="128" />
+          <Property Name="EmployeeName" Type="nvarchar(max)" />
+          <Property Name="Latitude" Type="nvarchar(max)" />
+          <Property Name="Longitude" Type="nvarchar(max)" />
+          <Property Name="LastReportedTime" Type="datetime" />
+          <Property Name="LastReportedAddress" Type="nvarchar(max)" />
+          <Property Name="ClockInTime" Type="datetime" />
+          <Property Name="ClockOutTime" Type="datetime" />
+        </EntityType>-->
         <EntityType Name="TimeZones">
           <Key>
             <PropertyRef Name="Id" />
@@ -978,14 +1091,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <Association Name="FK_Activities_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="Activities" Type="Self.Activities" Multiplicity="*" />
+          <End Role="Activities" Type="Self.Activities" Multiplicity="0..1" />
+          <End Role="Activities1" Type="Self.Activities" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
+            <Principal Role="Activities">
+              <PropertyRef Name="TaskId" />
             </Principal>
-            <Dependent Role="Activities">
-              <PropertyRef Name="AssignedTo" />
+            <Dependent Role="Activities1">
+              <PropertyRef Name="ParentTask_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1033,6 +1146,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ActivityAttachments">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityNotifications_Activities">
+          <End Role="Activities" Type="Self.Activities" Multiplicity="1" />
+          <End Role="ActivityNotifications" Type="Self.ActivityNotifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activities">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="ActivityNotifications">
               <PropertyRef Name="ActivityId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1577,6 +1702,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Employees_Shifts">
+          <End Role="Shifts" Type="Self.Shifts" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shifts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Shift_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_InvoiceService_ClientReceivables">
           <End Role="ClientReceivables" Type="Self.ClientReceivables" Multiplicity="0..1" />
           <End Role="InvoiceService" Type="Self.InvoiceService" Multiplicity="*" />
@@ -1829,6 +1966,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PointsLog_SubCategories">
+          <End Role="SubCategories" Type="Self.SubCategories" Multiplicity="1" />
+          <End Role="PointsLog" Type="Self.PointsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PointsLog">
+              <PropertyRef Name="SubCatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_POItemsMapping_ItemsMaster">
           <End Role="ItemsMaster" Type="Self.ItemsMaster" Multiplicity="0..1" />
           <End Role="POItemsMapping" Type="Self.POItemsMapping" Multiplicity="*" />
@@ -2033,6 +2182,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AddActivityNotifications" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ActivityId" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmployeeId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CategoriesSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="ClientMasterReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ClientId" Type="int" Mode="In" />
           <Parameter Name="fromdate" Type="datetime" Mode="In" />
@@ -2044,6 +2200,9 @@
         </Function>
         <Function Name="ClientPayments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Client_Id" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ClientTasksSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="DoctorDetailsGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdigitalAuthorId" Type="nvarchar" Mode="In" />
@@ -2061,12 +2220,27 @@
         <Function Name="EmployeeActivitiesLogReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
           <Parameter Name="FromDate" Type="datetime" Mode="In" />
-          <Parameter Name="ToDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
           <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
           <Parameter Name="Status" Type="nvarchar" Mode="In" />
           <Parameter Name="Priority" Type="int" Mode="In" />
           <Parameter Name="TaskId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="EmployeeAttendanceReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="EmployeeDayReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
+          <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Priority" Type="int" Mode="In" />
+          <Parameter Name="TaskId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="EmployeeTasksSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="GetBilledItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BillId" Type="int" Mode="In" />
@@ -2079,6 +2253,7 @@
           <Parameter Name="PageNumber" Type="int" Mode="In" />
           <Parameter Name="RecordsPerPage" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetClientEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ClientId" Type="int" Mode="In" />
           <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
@@ -2135,6 +2310,10 @@
           <Parameter Name="SortCol" Type="nvarchar" Mode="In" />
           <Parameter Name="SortDir" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetEmployeeLocations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeId" Type="nvarchar" Mode="In" />
+          <Parameter Name="Date" Type="date" Mode="In" />
+        </Function>
         <Function Name="GetEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmpNumber" Type="nvarchar" Mode="In" />
           <Parameter Name="EmpName" Type="nvarchar" Mode="In" />
@@ -2150,18 +2329,26 @@
           <Parameter Name="SortDir" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetEmployeesActivitiesReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
-          <Parameter Name="Fromdate" Type="datetime" Mode="In" />
-          <Parameter Name="Todate" Type="nvarchar" Mode="In" />
-          <Parameter Name="Client" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmployeeId" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+          <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Priority" Type="int" Mode="In" />
-          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="TaskId" Type="nvarchar" Mode="In" />
+          <Parameter Name="Category" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEmployeesLatestLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Date" Type="date" Mode="In" />
         </Function>
         <Function Name="GetEmployeesTasksCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
           <Parameter Name="FromDate" Type="datetime" Mode="In" />
-          <Parameter Name="ToDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
           <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetEmployeesToBeLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Date" Type="datetime" Mode="In" />
         </Function>
         <Function Name="GetItemModels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ItemName" Type="nvarchar" Mode="In" />
@@ -2182,7 +2369,33 @@
           <Parameter Name="PageNumber" Type="int" Mode="In" />
           <Parameter Name="RecordsPerPage" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetLeadDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Opportunity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetLeads" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+          <Parameter Name="Opportunity" Type="nvarchar" Mode="In" />
+          <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
+          <Parameter Name="AssignedTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="OrgId" Type="int" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="RecordsPerPage" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetMyTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
+          <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
+          <Parameter Name="DepartmentId" Type="int" Mode="In" />
+          <Parameter Name="TaskType" Type="nvarchar" Mode="In" />
+          <Parameter Name="Priority" Type="nvarchar" Mode="In" />
+          <Parameter Name="TaskStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="RecordsPerPage" Type="int" Mode="In" />
+          <Parameter Name="SortCol" Type="nvarchar" Mode="In" />
+          <Parameter Name="SortDir" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetMyTasksWeb" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
           <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
           <Parameter Name="DepartmentId" Type="int" Mode="In" />
@@ -2235,14 +2448,18 @@
           <Parameter Name="Employee" Type="nvarchar" Mode="In" />
           <Parameter Name="Client" Type="nvarchar" Mode="In" />
           <Parameter Name="Project" Type="int" Mode="In" />
-          <Parameter Name="FromDate" Type="datetime" Mode="In" />
-          <Parameter Name="Todate" Type="datetime" Mode="In" />
+          <Parameter Name="FromDate" Type="date" Mode="In" />
+          <Parameter Name="Todate" Type="date" Mode="In" />
           <Parameter Name="Status" Type="nvarchar" Mode="In" />
           <Parameter Name="PageNumber" Type="int" Mode="In" />
           <Parameter Name="RecordsPerPage" Type="int" Mode="In" />
         </Function>
         <Function Name="GetTaskBasicInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TaskId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetTaskDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TaskId" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetTaskLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TaskId" Type="nvarchar" Mode="In" />
@@ -2273,6 +2490,40 @@
         </Function>
         <Function Name="GetTicketLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TicketId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetToDoLeads" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
+          <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
+          <Parameter Name="DepartmentId" Type="int" Mode="In" />
+          <Parameter Name="TaskType" Type="nvarchar" Mode="In" />
+          <Parameter Name="TaskStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="RecordsPerPage" Type="int" Mode="In" />
+          <Parameter Name="SortCol" Type="nvarchar" Mode="In" />
+          <Parameter Name="SortDir" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetToDoPendingTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
+          <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
+          <Parameter Name="DepartmentId" Type="int" Mode="In" />
+          <Parameter Name="TaskType" Type="nvarchar" Mode="In" />
+          <Parameter Name="Priority" Type="nvarchar" Mode="In" />
+          <Parameter Name="TaskStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="RecordsPerPage" Type="int" Mode="In" />
+          <Parameter Name="SortCol" Type="nvarchar" Mode="In" />
+          <Parameter Name="SortDir" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="LeadsSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="LogReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
+          <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
+          <Parameter Name="LogFromDate" Type="datetime" Mode="In" />
+          <Parameter Name="LogToDate" Type="datetime" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Priority" Type="int" Mode="In" />
+          <Parameter Name="TaskId" Type="nvarchar" Mode="In" />
+          <Parameter Name="Category" Type="int" Mode="In" />
         </Function>
         <Function Name="MaxClientDueDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Client_Id" Type="nvarchar" Mode="In" />
@@ -2320,13 +2571,18 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="StatusSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="TaskStatsGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmpId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="TopPerformances" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="MaxMasterDbModelStoreContainer">
           <EntitySet Name="Activities" EntityType="Self.Activities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActivitiesLog" EntityType="Self.ActivitiesLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActivityAttachments" EntityType="Self.ActivityAttachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActivityNotifications" EntityType="Self.ActivityNotifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApprovedInvoices" EntityType="Self.ApprovedInvoices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApprovedInvoiceService" EntityType="Self.ApprovedInvoiceService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -2364,12 +2620,15 @@
           <EntitySet Name="EmployeeSpecialties" EntityType="Self.EmployeeSpecialties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExceptionLogs" EntityType="Self.ExceptionLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GST" EntityType="Self.GST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Holidays" EntityType="Self.Holidays" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InvoiceService" EntityType="Self.InvoiceService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemPrices" EntityType="Self.ItemPrices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemsBillMappings" EntityType="Self.ItemsBillMappings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemsMaster" EntityType="Self.ItemsMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveRecords" EntityType="Self.LeaveRecords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Leaves" EntityType="Self.Leaves" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Opportunities" EntityType="Self.Opportunities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OpportunitiesLog" EntityType="Self.OpportunitiesLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OpportunityAttachments" EntityType="Self.OpportunityAttachments" Schema="dbo" store:Type="Tables" />
@@ -2380,13 +2639,16 @@
           <EntitySet Name="Organisations" EntityType="Self.Organisations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrgansationLocations" EntityType="Self.OrgansationLocations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POAttachments" EntityType="Self.POAttachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PointsLog" EntityType="Self.PointsLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POItemsMapping" EntityType="Self.POItemsMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PuchaseOrders" EntityType="Self.PuchaseOrders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalesOrders" EntityType="Self.SalesOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shifts" EntityType="Self.Shifts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SOAttachments" EntityType="Self.SOAttachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SOItemsMapping" EntityType="Self.SOItemsMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Specialties" EntityType="Self.Specialties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockManager" EntityType="Self.StockManager" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockOut" EntityType="Self.StockOut" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockRequest" EntityType="Self.StockRequest" Schema="dbo" store:Type="Tables" />
@@ -2398,8 +2660,8 @@
           <EntitySet Name="TimeZones" EntityType="Self.TimeZones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VoiceGradePricing" EntityType="Self.VoiceGradePricing" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Activities_AspNetUsers" Association="Self.FK_Activities_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Activities" EntitySet="Activities" />
+            <End Role="Activities1" EntitySet="Activities" />
           </AssociationSet>
           <AssociationSet Name="FK_Activities_Categories" Association="Self.FK_Activities_Categories">
             <End Role="Categories" EntitySet="Categories" />
@@ -2416,6 +2678,10 @@
           <AssociationSet Name="FK_ActivityAttachments_ActivitiesLog" Association="Self.FK_ActivityAttachments_ActivitiesLog">
             <End Role="ActivitiesLog" EntitySet="ActivitiesLog" />
             <End Role="ActivityAttachments" EntitySet="ActivityAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityNotifications_Activities" Association="Self.FK_ActivityNotifications_Activities">
+            <End Role="Activities" EntitySet="Activities" />
+            <End Role="ActivityNotifications" EntitySet="ActivityNotifications" />
           </AssociationSet>
           <AssociationSet Name="FK_ApprovedInvoiceService_ApprovedInvoices" Association="Self.FK_ApprovedInvoiceService_ApprovedInvoices">
             <End Role="ApprovedInvoices" EntitySet="ApprovedInvoices" />
@@ -2597,6 +2863,10 @@
             <End Role="Organisations" EntitySet="Organisations" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
+          <AssociationSet Name="FK_Employees_Shifts" Association="Self.FK_Employees_Shifts">
+            <End Role="Shifts" EntitySet="Shifts" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
           <AssociationSet Name="FK_InvoiceService_ClientReceivables" Association="Self.FK_InvoiceService_ClientReceivables">
             <End Role="ClientReceivables" EntitySet="ClientReceivables" />
             <End Role="InvoiceService" EntitySet="InvoiceService" />
@@ -2680,6 +2950,10 @@
           <AssociationSet Name="FK_POAttachments_PuchaseOrders" Association="Self.FK_POAttachments_PuchaseOrders">
             <End Role="PuchaseOrders" EntitySet="PuchaseOrders" />
             <End Role="POAttachments" EntitySet="POAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PointsLog_SubCategories" Association="Self.FK_PointsLog_SubCategories">
+            <End Role="SubCategories" EntitySet="SubCategories" />
+            <End Role="PointsLog" EntitySet="PointsLog" />
           </AssociationSet>
           <AssociationSet Name="FK_POItemsMapping_ItemsMaster" Association="Self.FK_POItemsMapping_ItemsMaster">
             <End Role="ItemsMaster" EntitySet="ItemsMaster" />
@@ -2777,13 +3051,18 @@
           <Property Name="TaskType" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AssignedTo" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Project_Id" Type="Int32" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Activities_AspNetUsers" FromRole="Activities" ToRole="AspNetUsers" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Activities1" Relationship="Self.FK_Activities_AspNetUsers" FromRole="Activities" ToRole="Activities1" />
+          <NavigationProperty Name="Activity1" Relationship="Self.FK_Activities_AspNetUsers" FromRole="Activities1" ToRole="Activities" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Activities_Categories" FromRole="Activities" ToRole="Categories" />
           <NavigationProperty Name="Department" Relationship="Self.FK_Activities_Departments" FromRole="Activities" ToRole="Departments" />
           <NavigationProperty Name="SubCategory" Relationship="Self.FK_Activities_SubCategories" FromRole="Activities" ToRole="SubCategories" />
+          <NavigationProperty Name="ActivityNotifications" Relationship="Self.FK_ActivityNotifications_Activities" FromRole="Activities" ToRole="ActivityNotifications" />
           <NavigationProperty Name="StockRequests" Relationship="Self.FK_StockRequest_Activities" FromRole="Activities" ToRole="StockRequest" />
-          <NavigationProperty Name="Activities1" Relationship="Self.FK_Tasks_SubTasks" FromRole="Activities" ToRole="Activities1" />
-          <NavigationProperty Name="Activity1" Relationship="Self.FK_Tasks_SubTasks" FromRole="Activities1" ToRole="Activities" />
+          <NavigationProperty Name="Activities11" Relationship="Self.FK_Tasks_SubTasks" FromRole="Activities" ToRole="Activities1" />
+          <NavigationProperty Name="Activity2" Relationship="Self.FK_Tasks_SubTasks" FromRole="Activities1" ToRole="Activities" />
           <NavigationProperty Name="ActivitiesLogs" Relationship="Self.FK_TaskTrack_Tasks" FromRole="Activities" ToRole="ActivitiesLog" />
         </EntityType>
         <EntityType Name="ActivitiesLog">
@@ -2792,8 +3071,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TaskId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TaskDate" Type="DateTime" Precision="3" />
-          <Property Name="AssingedTo" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="TaskDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AssignedTo" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="AssignedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BudgetedHours" Type="Int32" />
           <Property Name="StartDate" Type="DateTime" Precision="3" />
@@ -2801,6 +3080,8 @@
           <Property Name="HoursWorked" Type="Int32" />
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="QuantityWorked" Type="Int32" />
+          <Property Name="Points" Type="Int32" />
           <NavigationProperty Name="Activity" Relationship="Self.FK_TaskTrack_Tasks" FromRole="ActivitiesLog" ToRole="Activities" />
           <NavigationProperty Name="ActivityAttachments" Relationship="Self.FK_ActivityAttachments_ActivitiesLog" FromRole="ActivitiesLog" ToRole="ActivityAttachments" />
         </EntityType>
@@ -2813,6 +3094,15 @@
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AttachmentURL" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ActivitiesLog" Relationship="Self.FK_ActivityAttachments_ActivitiesLog" FromRole="ActivityAttachments" ToRole="ActivitiesLog" />
+        </EntityType>
+        <EntityType Name="ActivityNotification">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="ActivityId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployeeId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_ActivityNotifications_Activities" FromRole="ActivityNotifications" ToRole="Activities" />
         </EntityType>
         <EntityType Name="ApprovedInvoice">
           <Key>
@@ -2899,7 +3189,6 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Activities" Relationship="Self.FK_Activities_AspNetUsers" FromRole="AspNetUsers" ToRole="Activities" />
           <NavigationProperty Name="ClientEmployees" Relationship="Self.FK_ClientEmployees_AspNetUsers" FromRole="AspNetUsers" ToRole="ClientEmployees" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_AspNetUsers" FromRole="AspNetUsers" ToRole="Clients" />
           <NavigationProperty Name="Doctors" Relationship="Self.FK_Doctors_AspNetUsers" FromRole="AspNetUsers" ToRole="Doctors" />
@@ -2923,7 +3212,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BillNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BillNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SupplierId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BillDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DueDate" Type="DateTime" Precision="3" />
@@ -3254,13 +3543,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="Emp_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Latitude" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Longitude" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsClockIn" Type="Boolean" />
           <Property Name="IsClockOut" Type="Boolean" />
           <Property Name="Time" Type="DateTime" Precision="3" />
           <Property Name="InsertedTime" Type="DateTime" Precision="3" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="EmployeePaymentRecord">
           <Key>
@@ -3344,6 +3634,9 @@
           <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AspNetUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="OrgId" Type="Int32" Nullable="false" />
+          <Property Name="NotificationToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastActivityTime" Type="DateTime" Precision="3" />
+          <Property Name="Shift_Id" Type="Int32" />
           <NavigationProperty Name="AspNetRole" Relationship="Self.FK_Employees_AspNetRoles" FromRole="Employees" ToRole="AspNetRoles" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Employees_AspNetUsers" FromRole="Employees" ToRole="AspNetUsers" />
           <NavigationProperty Name="City" Relationship="Self.FK_Employees_Cities" FromRole="Employees" ToRole="Cities" />
@@ -3352,6 +3645,7 @@
           <NavigationProperty Name="Designation" Relationship="Self.FK_Employees_Designations" FromRole="Employees" ToRole="Designations" />
           <NavigationProperty Name="EmployeePayscales" Relationship="Self.FK_EmployeePayscales_Employees" FromRole="Employees" ToRole="EmployeePayscales" />
           <NavigationProperty Name="Organisation" Relationship="Self.FK_Employees_Organisations" FromRole="Employees" ToRole="Organisations" />
+          <NavigationProperty Name="Shift" Relationship="Self.FK_Employees_Shifts" FromRole="Employees" ToRole="Shifts" />
           <NavigationProperty Name="StockManagers" Relationship="Self.FK_StockManager_Employees" FromRole="Employees" ToRole="StockManager" />
         </EntityType>
         <EntityType Name="EmployeeSpecialty">
@@ -3380,6 +3674,15 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GSTName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Rate" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Holiday">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HolidayName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HolidayDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OrgId" Type="Int32" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -3453,7 +3756,7 @@
           <Property Name="CGST" Type="Decimal" Precision="4" Scale="2" />
           <Property Name="IGST" Type="Decimal" Precision="4" Scale="2" />
           <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
-          <Property Name="BillNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="BillNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="DeliveryChallanNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="InwardNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="PONumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -3520,6 +3823,28 @@
           <NavigationProperty Name="SOItemsMappings" Relationship="Self.FK_SOItemsMapping_ItemsMaster" FromRole="ItemsMaster" ToRole="SOItemsMapping" />
           <NavigationProperty Name="StockRequestMappings" Relationship="Self.FK_StockRequestMappings_ItemsMaster" FromRole="ItemsMaster" ToRole="StockRequestMappings" />
         </EntityType>
+        <EntityType Name="LeaveRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LeaveDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LeaveType" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Leaf">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FromDate" Type="DateTime" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Precision="0" />
+          <Property Name="LeaveType" Type="Int32" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Opportunity">
           <Key>
             <PropertyRef Name="Id" />
@@ -3539,6 +3864,9 @@
           <Property Name="EDOS" Type="DateTime" Precision="3" />
           <Property Name="Location_Id" Type="Int32" />
           <Property Name="ActualCompletedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="FollowUpOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ClientLocation" Relationship="Self.FK_Opportunities_ClientLocations" FromRole="Opportunities" ToRole="ClientLocations" />
           <NavigationProperty Name="Organisation" Relationship="Self.FK_Opportunities_Organisations" FromRole="Opportunities" ToRole="Organisations" />
           <NavigationProperty Name="OpportunitiesLogs" Relationship="Self.FK_OpportunitiesLog_Opportunities" FromRole="Opportunities" ToRole="OpportunitiesLog" />
@@ -3656,6 +3984,17 @@
           <Property Name="AttachmentUrl" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="PuchaseOrder" Relationship="Self.FK_POAttachments_PuchaseOrders" FromRole="POAttachments" ToRole="PuchaseOrders" />
         </EntityType>
+        <EntityType Name="PointsLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubCatId" Type="Int32" Nullable="false" />
+          <Property Name="Points" Type="Int32" />
+          <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="SubCategory" Relationship="Self.FK_PointsLog_SubCategories" FromRole="PointsLog" ToRole="SubCategories" />
+        </EntityType>
         <EntityType Name="POItemsMapping">
           <Key>
             <PropertyRef Name="Id" />
@@ -3710,6 +4049,16 @@
           <NavigationProperty Name="SOItemsMappings" Relationship="Self.FK_SOItemsMapping_SalesOrders" FromRole="SalesOrders" ToRole="SOItemsMapping" />
           <NavigationProperty Name="StockOuts" Relationship="Self.FK_StockOut_SalesOrders" FromRole="SalesOrders" ToRole="StockOut" />
         </EntityType>
+        <EntityType Name="Shift">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShiftName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="InTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="OutTime" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Shifts" FromRole="Shifts" ToRole="Employees" />
+        </EntityType>
         <EntityType Name="SOAttachment">
           <Key>
             <PropertyRef Name="Id" />
@@ -3753,6 +4102,23 @@
           <NavigationProperty Name="ClientLocations" Relationship="Self.FK_ClientLocations_States" FromRole="States" ToRole="ClientLocations" />
           <NavigationProperty Name="Country" Relationship="Self.FK_States_Countries" FromRole="States" ToRole="Countries" />
           <NavigationProperty Name="Doctors" Relationship="Self.FK_dbo_Doctors_dbo_States_State_Id" FromRole="States" ToRole="Doctors" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="item_id" />
+          </Key>
+          <Property Name="item_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="item_name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="unit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sku" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="quantity_purchased" Type="Int32" />
+          <Property Name="quantity_sold" Type="Int32" />
+          <Property Name="quantity_ordered" Type="Int32" />
+          <Property Name="quantity_demanded" Type="Int32" />
+          <Property Name="quantity_available" Type="Int32" />
+          <Property Name="quantity_available_for_sale" Type="Int32" />
+          <Property Name="reorder_level" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="StockManager">
           <Key>
@@ -3819,8 +4185,10 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Category_Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Points" Type="Int32" />
           <NavigationProperty Name="Activities" Relationship="Self.FK_Activities_SubCategories" FromRole="SubCategories" ToRole="Activities" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Categories_SubCategories" FromRole="SubCategories" ToRole="Categories" />
+          <NavigationProperty Name="PointsLogs" Relationship="Self.FK_PointsLog_SubCategories" FromRole="SubCategories" ToRole="PointsLog" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -3874,14 +4242,14 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <Association Name="FK_Activities_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="Activities" Type="Self.Activity" Multiplicity="*" />
+          <End Role="Activities" Type="Self.Activity" Multiplicity="0..1" />
+          <End Role="Activities1" Type="Self.Activity" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
+            <Principal Role="Activities">
+              <PropertyRef Name="TaskId" />
             </Principal>
-            <Dependent Role="Activities">
-              <PropertyRef Name="AssignedTo" />
+            <Dependent Role="Activities1">
+              <PropertyRef Name="ParentTask_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3918,6 +4286,18 @@
             </Principal>
             <Dependent Role="Activities">
               <PropertyRef Name="SubCategory_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityNotifications_Activities">
+          <End Role="Activities" Type="Self.Activity" Multiplicity="1" />
+          <End Role="ActivityNotifications" Type="Self.ActivityNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activities">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="ActivityNotifications">
+              <PropertyRef Name="ActivityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4533,6 +4913,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Employees_Shifts">
+          <End Role="Shifts" Type="Self.Shift" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shifts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Shift_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StockManager_Employees">
           <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
           <End Role="StockManager" Type="Self.StockManager" Multiplicity="*" />
@@ -4785,6 +5177,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PointsLog_SubCategories">
+          <End Role="SubCategories" Type="Self.SubCategory" Multiplicity="1" />
+          <End Role="PointsLog" Type="Self.PointsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PointsLog">
+              <PropertyRef Name="SubCatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_POItemsMapping_PuchaseOrders">
           <End Role="PuchaseOrders" Type="Self.PuchaseOrder" Multiplicity="1" />
           <End Role="POItemsMapping" Type="Self.POItemsMapping" Multiplicity="*" />
@@ -4873,6 +5277,7 @@
           <EntitySet Name="Activities" EntityType="Self.Activity" />
           <EntitySet Name="ActivitiesLogs" EntityType="Self.ActivitiesLog" />
           <EntitySet Name="ActivityAttachments" EntityType="Self.ActivityAttachment" />
+          <EntitySet Name="ActivityNotifications" EntityType="Self.ActivityNotification" />
           <EntitySet Name="ApprovedInvoices" EntityType="Self.ApprovedInvoice" />
           <EntitySet Name="ApprovedInvoiceServices" EntityType="Self.ApprovedInvoiceService" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
@@ -4907,12 +5312,15 @@
           <EntitySet Name="EmployeeSpecialties" EntityType="Self.EmployeeSpecialty" />
           <EntitySet Name="ExceptionLogs" EntityType="Self.ExceptionLog" />
           <EntitySet Name="GSTs" EntityType="Self.GST" />
+          <EntitySet Name="Holidays" EntityType="Self.Holiday" />
           <EntitySet Name="Invoices" EntityType="Self.Invoice" />
           <EntitySet Name="InvoiceServices" EntityType="Self.InvoiceService" />
           <EntitySet Name="ItemPrices" EntityType="Self.ItemPrice" />
           <EntitySet Name="Items" EntityType="Self.Item" />
           <EntitySet Name="ItemsBillMappings" EntityType="Self.ItemsBillMapping" />
           <EntitySet Name="ItemsMasters" EntityType="Self.ItemsMaster" />
+          <EntitySet Name="LeaveRecords" EntityType="Self.LeaveRecord" />
+          <EntitySet Name="Leaves" EntityType="Self.Leaf" />
           <EntitySet Name="Opportunities" EntityType="Self.Opportunity" />
           <EntitySet Name="OpportunitiesLogs" EntityType="Self.OpportunitiesLog" />
           <EntitySet Name="OpportunityAttachments" EntityType="Self.OpportunityAttachment" />
@@ -4923,13 +5331,16 @@
           <EntitySet Name="Organisations" EntityType="Self.Organisation" />
           <EntitySet Name="OrgansationLocations" EntityType="Self.OrgansationLocation" />
           <EntitySet Name="POAttachments" EntityType="Self.POAttachment" />
+          <EntitySet Name="PointsLogs" EntityType="Self.PointsLog" />
           <EntitySet Name="POItemsMappings" EntityType="Self.POItemsMapping" />
           <EntitySet Name="PuchaseOrders" EntityType="Self.PuchaseOrder" />
           <EntitySet Name="SalesOrders" EntityType="Self.SalesOrder" />
+          <EntitySet Name="Shifts" EntityType="Self.Shift" />
           <EntitySet Name="SOAttachments" EntityType="Self.SOAttachment" />
           <EntitySet Name="SOItemsMappings" EntityType="Self.SOItemsMapping" />
           <EntitySet Name="Specialties" EntityType="Self.Specialty" />
           <EntitySet Name="States" EntityType="Self.State" />
+          <EntitySet Name="Stocks" EntityType="Self.Stock" />
           <EntitySet Name="StockManagers" EntityType="Self.StockManager" />
           <EntitySet Name="StockOuts" EntityType="Self.StockOut" />
           <EntitySet Name="StockRequests" EntityType="Self.StockRequest" />
@@ -4941,8 +5352,8 @@
           <EntitySet Name="TimeZones" EntityType="Self.TimeZone" />
           <EntitySet Name="VoiceGradePricings" EntityType="Self.VoiceGradePricing" />
           <AssociationSet Name="FK_Activities_AspNetUsers" Association="Self.FK_Activities_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Activities" EntitySet="Activities" />
+            <End Role="Activities1" EntitySet="Activities" />
           </AssociationSet>
           <AssociationSet Name="FK_Activities_Categories" Association="Self.FK_Activities_Categories">
             <End Role="Categories" EntitySet="Categories" />
@@ -4955,6 +5366,10 @@
           <AssociationSet Name="FK_Activities_SubCategories" Association="Self.FK_Activities_SubCategories">
             <End Role="SubCategories" EntitySet="SubCategories" />
             <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityNotifications_Activities" Association="Self.FK_ActivityNotifications_Activities">
+            <End Role="Activities" EntitySet="Activities" />
+            <End Role="ActivityNotifications" EntitySet="ActivityNotifications" />
           </AssociationSet>
           <AssociationSet Name="FK_StockRequest_Activities" Association="Self.FK_StockRequest_Activities">
             <End Role="Activities" EntitySet="Activities" />
@@ -5160,6 +5575,10 @@
             <End Role="Organisations" EntitySet="Organisations" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
+          <AssociationSet Name="FK_Employees_Shifts" Association="Self.FK_Employees_Shifts">
+            <End Role="Shifts" EntitySet="Shifts" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
           <AssociationSet Name="FK_StockManager_Employees" Association="Self.FK_StockManager_Employees">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="StockManager" EntitySet="StockManagers" />
@@ -5244,6 +5663,10 @@
             <End Role="PuchaseOrders" EntitySet="PuchaseOrders" />
             <End Role="POAttachments" EntitySet="POAttachments" />
           </AssociationSet>
+          <AssociationSet Name="FK_PointsLog_SubCategories" Association="Self.FK_PointsLog_SubCategories">
+            <End Role="SubCategories" EntitySet="SubCategories" />
+            <End Role="PointsLog" EntitySet="PointsLogs" />
+          </AssociationSet>
           <AssociationSet Name="FK_POItemsMapping_PuchaseOrders" Association="Self.FK_POItemsMapping_PuchaseOrders">
             <End Role="PuchaseOrders" EntitySet="PuchaseOrders" />
             <End Role="POItemsMapping" EntitySet="POItemsMappings" />
@@ -5280,6 +5703,13 @@
             <End Role="Doctors" EntitySet="Doctors" />
             <End Role="Specialties" EntitySet="Specialties" />
           </AssociationSet>
+          <FunctionImport Name="AddActivityNotifications">
+            <Parameter Name="ActivityId" Mode="In" Type="String" />
+            <Parameter Name="EmployeeId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CategoriesSummary" ReturnType="Collection(MaxMasterDbModel.CategoriesSummary_Result)">
+            <Parameter Name="EmpId" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="ClientMasterReport" ReturnType="Collection(MaxMasterDbModel.ClientMasterReport_Result)">
             <Parameter Name="ClientId" Mode="In" Type="Int32" />
             <Parameter Name="fromdate" Mode="In" Type="DateTime" />
@@ -5291,6 +5721,9 @@
           </FunctionImport>
           <FunctionImport Name="ClientPayments" ReturnType="Collection(MaxMasterDbModel.ClientPayments_Result)">
             <Parameter Name="Client_Id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ClientTasksSummary" ReturnType="Collection(MaxMasterDbModel.ClientTasksSummary_Result)">
+            <Parameter Name="EmpId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="DoctorDetailsGet" ReturnType="Collection(MaxMasterDbModel.DoctorDetailsGet_Result)">
             <Parameter Name="IdigitalAuthorId" Mode="In" Type="String" />
@@ -5308,12 +5741,27 @@
           <FunctionImport Name="EmployeeActivitiesLogReport" ReturnType="Collection(MaxMasterDbModel.EmployeeActivitiesLogReport_Result)">
             <Parameter Name="EmpId" Mode="In" Type="String" />
             <Parameter Name="FromDate" Mode="In" Type="DateTime" />
-            <Parameter Name="ToDate" Mode="In" Type="String" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
             <Parameter Name="ClientId" Mode="In" Type="String" />
             <Parameter Name="Status" Mode="In" Type="String" />
             <Parameter Name="Priority" Mode="In" Type="Int32" />
             <Parameter Name="TaskId" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="EmployeeAttendanceReport" ReturnType="Collection(MaxMasterDbModel.EmployeeAttendanceReport_Result)">
+            <Parameter Name="EmpId" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="EmployeeDayReport" ReturnType="Collection(MaxMasterDbModel.EmployeeDayReport_Result)">
+            <Parameter Name="EmpId" Mode="In" Type="String" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Priority" Mode="In" Type="Int32" />
+            <Parameter Name="TaskId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EmployeeTasksSummary" ReturnType="Collection(MaxMasterDbModel.EmployeeTasksSummary_Result)" />
           <FunctionImport Name="GetBilledItems" ReturnType="Collection(MaxMasterDbModel.GetBilledItems_Result)">
             <Parameter Name="BillId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -5325,6 +5773,7 @@
             <Parameter Name="PageNumber" Mode="In" Type="Int32" />
             <Parameter Name="RecordsPerPage" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetCategories" ReturnType="Collection(MaxMasterDbModel.GetCategories_Result)" />
           <FunctionImport Name="GetClientEmployees" ReturnType="Collection(MaxMasterDbModel.GetClientEmployees_Result)">
             <Parameter Name="ClientId" Mode="In" Type="Int32" />
             <Parameter Name="FirstName" Mode="In" Type="String" />
@@ -5381,6 +5830,10 @@
             <Parameter Name="SortCol" Mode="In" Type="String" />
             <Parameter Name="SortDir" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GetEmployeeLocations" ReturnType="Collection(MaxMasterDbModel.GetEmployeeLocations_Result)">
+            <Parameter Name="EmployeeId" Mode="In" Type="String" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <FunctionImport Name="GetEmployees" ReturnType="Collection(MaxMasterDbModel.GetEmployees_Result)">
             <Parameter Name="EmpNumber" Mode="In" Type="String" />
             <Parameter Name="EmpName" Mode="In" Type="String" />
@@ -5396,18 +5849,26 @@
             <Parameter Name="SortDir" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetEmployeesActivitiesReport" ReturnType="Collection(MaxMasterDbModel.GetEmployeesActivitiesReport_Result)">
-            <Parameter Name="EmpId" Mode="In" Type="String" />
-            <Parameter Name="Fromdate" Mode="In" Type="DateTime" />
-            <Parameter Name="Todate" Mode="In" Type="String" />
-            <Parameter Name="Client" Mode="In" Type="String" />
-            <Parameter Name="Priority" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeId" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
             <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Priority" Mode="In" Type="Int32" />
+            <Parameter Name="TaskId" Mode="In" Type="String" />
+            <Parameter Name="Category" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmployeesLatestLocation" ReturnType="Collection(MaxMasterDbModel.GetEmployeesLatestLocation_Result)">
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetEmployeesTasksCount" ReturnType="Collection(MaxMasterDbModel.GetEmployeesTasksCount_Result)">
             <Parameter Name="EmpId" Mode="In" Type="String" />
             <Parameter Name="FromDate" Mode="In" Type="DateTime" />
-            <Parameter Name="ToDate" Mode="In" Type="String" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
             <Parameter Name="ClientId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmployeesToBeLogin" ReturnType="Collection(MaxMasterDbModel.GetEmployeesToBeLogin_Result)">
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetItemModels" ReturnType="Collection(MaxMasterDbModel.GetItemModels_Result)">
             <Parameter Name="ItemName" Mode="In" Type="String" />
@@ -5428,7 +5889,33 @@
             <Parameter Name="PageNumber" Mode="In" Type="Int32" />
             <Parameter Name="RecordsPerPage" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetLeadDetail" ReturnType="Collection(MaxMasterDbModel.GetLeadDetail_Result)">
+            <Parameter Name="Opportunity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetLeads" ReturnType="Collection(MaxMasterDbModel.GetLeads_Result)">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Opportunity" Mode="In" Type="String" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
+            <Parameter Name="AssignedTo" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="OrgId" Mode="In" Type="Int32" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="RecordsPerPage" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="GetMyTasks" ReturnType="Collection(MaxMasterDbModel.GetMyTasks_Result)">
+            <Parameter Name="EmpId" Mode="In" Type="String" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
+            <Parameter Name="DepartmentId" Mode="In" Type="Int32" />
+            <Parameter Name="TaskType" Mode="In" Type="String" />
+            <Parameter Name="Priority" Mode="In" Type="String" />
+            <Parameter Name="TaskStatus" Mode="In" Type="String" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="RecordsPerPage" Mode="In" Type="Int32" />
+            <Parameter Name="SortCol" Mode="In" Type="String" />
+            <Parameter Name="SortDir" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetMyTasksWeb" ReturnType="Collection(MaxMasterDbModel.GetMyTasksWeb_Result)">
             <Parameter Name="EmpId" Mode="In" Type="String" />
             <Parameter Name="ClientId" Mode="In" Type="String" />
             <Parameter Name="DepartmentId" Mode="In" Type="Int32" />
@@ -5490,6 +5977,10 @@
           <FunctionImport Name="GetTaskBasicInfo" ReturnType="Collection(MaxMasterDbModel.GetTaskBasicInfo_Result)">
             <Parameter Name="TaskId" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GetTaskDetail" ReturnType="Collection(MaxMasterDbModel.GetTaskDetail_Result)">
+            <Parameter Name="TaskId" Mode="In" Type="String" />
+            <Parameter Name="EmpId" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="GetTaskLog" ReturnType="Collection(MaxMasterDbModel.GetTaskLog_Result)">
             <Parameter Name="TaskId" Mode="In" Type="String" />
           </FunctionImport>
@@ -5519,6 +6010,40 @@
           </FunctionImport>
           <FunctionImport Name="GetTicketLog" ReturnType="Collection(MaxMasterDbModel.GetTicketLog_Result)">
             <Parameter Name="TicketId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetToDoLeads" ReturnType="Collection(MaxMasterDbModel.GetToDoLeads_Result)">
+            <Parameter Name="EmpId" Mode="In" Type="String" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
+            <Parameter Name="DepartmentId" Mode="In" Type="Int32" />
+            <Parameter Name="TaskType" Mode="In" Type="String" />
+            <Parameter Name="TaskStatus" Mode="In" Type="String" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="RecordsPerPage" Mode="In" Type="Int32" />
+            <Parameter Name="SortCol" Mode="In" Type="String" />
+            <Parameter Name="SortDir" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetToDoPendingTasks" ReturnType="Collection(MaxMasterDbModel.GetToDoPendingTasks_Result)">
+            <Parameter Name="EmpId" Mode="In" Type="String" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
+            <Parameter Name="DepartmentId" Mode="In" Type="Int32" />
+            <Parameter Name="TaskType" Mode="In" Type="String" />
+            <Parameter Name="Priority" Mode="In" Type="String" />
+            <Parameter Name="TaskStatus" Mode="In" Type="String" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="RecordsPerPage" Mode="In" Type="Int32" />
+            <Parameter Name="SortCol" Mode="In" Type="String" />
+            <Parameter Name="SortDir" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LeadsSummary" ReturnType="Collection(MaxMasterDbModel.LeadsSummary_Result)" />
+          <FunctionImport Name="LogReport" ReturnType="Collection(MaxMasterDbModel.LogReport_Result)">
+            <Parameter Name="EmpId" Mode="In" Type="String" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
+            <Parameter Name="LogFromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="LogToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Priority" Mode="In" Type="Int32" />
+            <Parameter Name="TaskId" Mode="In" Type="String" />
+            <Parameter Name="Category" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MaxClientDueDetails" ReturnType="Collection(MaxMasterDbModel.MaxClientDueDetails_Result)">
             <Parameter Name="Client_Id" Mode="In" Type="String" />
@@ -5566,10 +6091,37 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="StatusSummary" ReturnType="Collection(MaxMasterDbModel.StatusSummary_Result)">
+            <Parameter Name="EmpId" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="TaskStatsGet" ReturnType="Collection(MaxMasterDbModel.TaskStatsGet_Result)">
             <Parameter Name="EmpId" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="TopPerformances" ReturnType="Collection(MaxMasterDbModel.TopPerformances_Result)" />
         </EntityContainer>
+        <ComplexType Name="CategoriesSummary_Result">
+          <Property Type="Int32" Name="CategoryId" Nullable="false" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="StatusOpen" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthOpen" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekOpen" Nullable="true" />
+          <Property Type="Int32" Name="InProcess" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthInProcess" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekInprocess" Nullable="true" />
+          <Property Type="Int32" Name="Pending" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthPending" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekPending" Nullable="true" />
+          <Property Type="Int32" Name="Resolved" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthResolved" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekResolved" Nullable="true" />
+          <Property Type="Int32" Name="Reopened" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthReopened" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekReopened" Nullable="true" />
+          <Property Type="Int32" Name="Closed" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthClosed" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekClosed" Nullable="true" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="ClientMasterReport_Result">
           <Property Type="Int64" Name="RowNum" Nullable="true" />
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -5600,6 +6152,30 @@
           <Property Type="String" Name="InvoiceMonth" Nullable="false" MaxLength="3" />
           <Property Type="Int32" Name="InvoiceYear" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="ClientTasksSummary_Result">
+          <Property Type="String" Name="ClientId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="ClientName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="StatusOpen" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthOpen" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekOpen" Nullable="true" />
+          <Property Type="Int32" Name="InProcess" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthInProcess" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekInProcess" Nullable="true" />
+          <Property Type="Int32" Name="Pending" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthPending" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekPending" Nullable="true" />
+          <Property Type="Int32" Name="Resolved" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthResolved" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekResolved" Nullable="true" />
+          <Property Type="Int32" Name="Reopened" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthReopened" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekReopened" Nullable="true" />
+          <Property Type="Int32" Name="Closed" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthClosed" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekClosed" Nullable="true" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="DoctorDetailsGet_Result">
           <Property Type="Int64" Name="RowNum" Nullable="true" />
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -5620,7 +6196,7 @@
           <Property Type="String" Name="Subject" Nullable="false" />
           <Property Type="String" Name="TaskType" Nullable="false" MaxLength="12" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="TaskDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="TaskDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="AssignedById" Nullable="false" MaxLength="128" />
           <Property Type="String" Name="AssignedToId" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="TaskOwnerId" Nullable="false" MaxLength="128" />
@@ -5637,6 +6213,73 @@
           <Property Type="String" Name="Department" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="ClientName" Nullable="true" MaxLength="100" />
           <Property Type="DateTime" Name="CompletedDate" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="EmployeeAttendanceReport_Result">
+          <Property Type="String" Name="EmployeeId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="EmployeeName" Nullable="true" />
+          <Property Type="DateTime" Name="ClockInTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ClockInAddress" Nullable="true" />
+          <Property Type="Int64" Name="ClockInDelay" Nullable="true" />
+          <Property Type="DateTime" Name="ClockOutTime" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="ClockOutDelay" Nullable="true" />
+          <Property Type="String" Name="ClockOutAddress" Nullable="true" />
+          <Property Type="DateTime" Name="AttendanceDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="EmployeeDayReport_Result">
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="TaskId" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Department" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Subject" Nullable="false" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="SubCategory" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Status" Nullable="false" />
+          <Property Type="Int32" Name="Project_Id" Nullable="true" />
+          <Property Type="String" Name="Priority" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="TaskType" Nullable="false" MaxLength="12" />
+          <Property Type="DateTime" Name="CompletedDate" Nullable="true" />
+          <Property Type="DateTime" Name="EDOC" Nullable="false" />
+          <Property Type="String" Name="Client_Id" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="String" Name="Project" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Client" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TaskOwner" Nullable="false" MaxLength="71" />
+          <Property Type="String" Name="ProjectLocation" Nullable="true" MaxLength="573" />
+          <Property Type="DateTime" Name="TaskLogDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="TaskLogDescription" Nullable="false" />
+          <Property Type="Int32" Name="HoursWorked" Nullable="true" />
+          <Property Type="Int32" Name="QuantityWorked" Nullable="true" />
+          <Property Type="Int32" Name="TaskLogId" Nullable="false" />
+          <Property Type="String" Name="TaskLogAssignedTo" Nullable="true" MaxLength="71" />
+          <Property Type="String" Name="TaskLogAssignedBy" Nullable="true" MaxLength="71" />
+          <Property Type="String" Name="TaskLogAssignedById" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="TaskLogAssignedToId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="TaskLogStatus" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="EmployeeTasksSummary_Result">
+          <Property Type="String" Name="EmpId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Employee" Nullable="false" MaxLength="71" />
+          <Property Type="DateTime" Name="LastActivityTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="UnUpdatedTasks" Nullable="true" />
+          <Property Type="Int32" Name="StatusOpen" Nullable="false" />
+          <Property Type="Int32" Name="CurMonthOpen" Nullable="false" />
+          <Property Type="Int32" Name="CurWeekOpen" Nullable="false" />
+          <Property Type="Int32" Name="InProcess" Nullable="false" />
+          <Property Type="Int32" Name="CurMonthInProcess" Nullable="false" />
+          <Property Type="Int32" Name="CurWeekInprocess" Nullable="false" />
+          <Property Type="Int32" Name="Pending" Nullable="false" />
+          <Property Type="Int32" Name="CurMonthPending" Nullable="false" />
+          <Property Type="Int32" Name="CurWeekPending" Nullable="false" />
+          <Property Type="Int32" Name="Resolved" Nullable="false" />
+          <Property Type="Int32" Name="CurMonthResolved" Nullable="false" />
+          <Property Type="Int32" Name="CurWeekResolved" Nullable="false" />
+          <Property Type="Int32" Name="Reopened" Nullable="false" />
+          <Property Type="Int32" Name="CurMonthReopened" Nullable="false" />
+          <Property Type="Int32" Name="CurWeekReopened" Nullable="false" />
+          <Property Type="Int32" Name="Closed" Nullable="false" />
+          <Property Type="Int32" Name="CurMonthClosed" Nullable="false" />
+          <Property Type="Int32" Name="CurWeekClosed" Nullable="false" />
+          <Property Type="Int32" Name="Total" Nullable="false" />
         </ComplexType>
         <ComplexType Name="GetBilledItems_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -5659,7 +6302,7 @@
         </ComplexType>
         <ComplexType Name="GetBills_Result">
           <Property Type="Int32" Name="BillId" Nullable="false" />
-          <Property Type="String" Name="BillNumber" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="BillNumber" Nullable="false" MaxLength="30" />
           <Property Type="DateTime" Name="BillDate" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="DueDate" Nullable="true" Precision="23" />
           <Property Type="Decimal" Name="Total" Nullable="true" Precision="13" Scale="2" />
@@ -5672,6 +6315,16 @@
           <Property Type="Int32" Name="TotalQuantity" Nullable="true" />
           <Property Type="Int32" Name="QuantityAdded" Nullable="true" />
           <Property Type="Decimal" Name="BillAmount" Nullable="true" Precision="13" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="GetCategories_Result">
+          <Property Type="Int32" Name="DepartmentId" Nullable="false" />
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="CategoryId" Nullable="false" />
+          <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="SubCategoryId" Nullable="false" />
+          <Property Type="String" Name="SubCategory" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Points" Nullable="true" />
+          <Property Type="Int32" Name="PointsLogId" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetClientEmployees_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -5697,6 +6350,7 @@
           <Property Type="Int32" Name="OrgId" Nullable="false" />
           <Property Type="String" Name="OrgName" Nullable="false" MaxLength="255" />
           <Property Type="Int32" Name="TotalCount" Nullable="true" />
+          <Property Type="String" Name="AspNetUserId" Nullable="false" MaxLength="128" />
         </ComplexType>
         <ComplexType Name="GetClientTickets_Result">
           <Property Type="String" Name="TaskId" Nullable="false" MaxLength="10" />
@@ -5743,6 +6397,17 @@
           <Property Type="String" Name="Keywords" Nullable="true" MaxLength="255" />
           <Property Type="Int32" Name="TotalCount" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetEmployeeLocations_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="71" />
+          <Property Type="String" Name="EmployeeId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Latitude" Nullable="true" />
+          <Property Type="String" Name="Longitude" Nullable="true" />
+          <Property Type="Boolean" Name="IsClockIn" Nullable="true" />
+          <Property Type="Boolean" Name="IsClockOut" Nullable="true" />
+          <Property Type="DateTime" Name="Time" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Address" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="GetEmployees_Result">
           <Property Type="Int64" Name="RowNum" Nullable="true" />
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -5763,29 +6428,69 @@
           <Property Type="Int32" Name="TotalCount" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetEmployeesActivitiesReport_Result">
+          <Property Type="String" Name="TaskId" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Client" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Department" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="SubCategory" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Subject" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="String" Name="Priority" Nullable="true" MaxLength="6" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="EDOC" Nullable="false" />
-          <Property Type="String" Name="TaskId" Nullable="false" MaxLength="10" />
-          <Property Type="String" Name="Subject" Nullable="false" />
-          <Property Type="String" Name="Status" Nullable="false" />
-          <Property Type="String" Name="Client_Id" Nullable="true" MaxLength="128" />
-          <Property Type="DateTime" Name="CompletedDate" Nullable="true" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CreatedById" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="TaskOwner" Nullable="false" MaxLength="71" />
           <Property Type="String" Name="TaskOwnerId" Nullable="false" MaxLength="128" />
+          <Property Type="DateTime" Name="CompletedDate" Nullable="true" />
+          <Property Type="String" Name="ParentTask_Id" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Status" Nullable="false" />
+          <Property Type="String" Name="TaskType" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="AssignedTo" Nullable="false" MaxLength="71" />
           <Property Type="String" Name="AssignedToId" Nullable="false" MaxLength="128" />
-          <Property Type="String" Name="AssignedBy" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="TaskOwner" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="AssignedTo" Nullable="true" MaxLength="255" />
-          <Property Type="Int32" Name="Priority" Nullable="false" />
-          <Property Type="String" Name="ClientName" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Department" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Project" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="ProjectLocation" Nullable="true" MaxLength="823" />
+          <Property Type="String" Name="Client_Id" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="Project_Id" Nullable="true" />
+          <Property Type="Int32" Name="Category_Id" Nullable="false" />
+          <Property Type="Int32" Name="TaskLogId" Nullable="false" />
+          <Property Type="String" Name="TaskLogTaskId" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="TaskLogDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="TaskLogAssignedTo" Nullable="false" MaxLength="71" />
+          <Property Type="String" Name="TaskLogAssignedToId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="TaskLogAssignedBy" Nullable="false" MaxLength="71" />
+          <Property Type="String" Name="TaskLogAssignedById" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="TaskLogBudgetedHours" Nullable="true" />
+          <Property Type="DateTime" Name="TaskLogStartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="TaskLogEndDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="TaskLogHoursWorked" Nullable="true" />
+          <Property Type="String" Name="TaskLogStatus" Nullable="false" />
+          <Property Type="String" Name="TaskLogDescription" Nullable="false" />
+          <Property Type="Int32" Name="TaskLogQuantityWorked" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetEmployeesLatestLocation_Result">
+          <Property Type="String" Name="EmployeeId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="EmployeeName" Nullable="true" />
+          <Property Type="String" Name="Latitude" Nullable="true" />
+          <Property Type="String" Name="Longitude" Nullable="true" />
+          <Property Type="DateTime" Name="LastReportedTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="LastReportedAddress" Nullable="true" />
+          <Property Type="DateTime" Name="ClockInTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ClockOutTime" Nullable="true" Precision="23" />
         </ComplexType>
         <ComplexType Name="GetEmployeesTasksCount_Result">
-          <Property Type="String" Name="AssignedTo" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="EmpId" Nullable="false" MaxLength="128" />
           <Property Type="String" Name="Employee" Nullable="false" MaxLength="71" />
           <Property Type="Int32" Name="High" Nullable="true" />
           <Property Type="Int32" Name="Medium" Nullable="true" />
           <Property Type="Int32" Name="Low" Nullable="true" />
           <Property Type="Int32" Name="TotalTaskCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetEmployeesToBeLogin_Result">
+          <Property Type="String" Name="AspNetUserId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="71" />
+          <Property Type="String" Name="LeaveType" Nullable="true" MaxLength="15" />
         </ComplexType>
         <ComplexType Name="GetItemModels_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -5814,6 +6519,51 @@
           <Property Type="Boolean" Name="isAvailable" Nullable="false" />
           <Property Type="Int32" Name="TotalCount" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetLeadDetail_Result">
+          <Property Type="Int32" Name="OppId" Nullable="false" />
+          <Property Type="String" Name="OpportunityName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Client_Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="OppCurrentStatus" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="71" />
+          <Property Type="String" Name="OppTaskOwner" Nullable="true" MaxLength="71" />
+          <Property Type="String" Name="AssignedTo" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="DateTime" Name="ActualCompletedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="OpportunityLocation" Nullable="true" />
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="OppLogId" Nullable="false" />
+          <Property Type="String" Name="OppLogAssignedById" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="OppLogAssignedBy" Nullable="false" MaxLength="71" />
+          <Property Type="String" Name="OppLogAssignedToId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="OppLogAssignedTo" Nullable="false" MaxLength="71" />
+          <Property Type="DateTime" Name="OppLogDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="OppLogStatus" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="OppLogComments" Nullable="true" />
+          <Property Type="String" Name="LeadLocation" Nullable="true" MaxLength="825" />
+          <Property Type="Int32" Name="ClientEmpId" Nullable="false" />
+          <Property Type="String" Name="ClientEmpFirstName" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="ClientEmpLastName" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="ClientEmpEmail" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="ClientEmpPhoneNumber" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="clientEmpDepartment" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FileAttachment" Nullable="true" MaxLength="400" />
+          <Property Type="Int32" Name="AttachmentId" Nullable="true" />
+          <Property Type="Int32" Name="OppLogIdForAttachment" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetLeads_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Client_Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="empId" Nullable="false" MaxLength="128" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="OpportunityName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="AssignedTo" Nullable="false" MaxLength="71" />
+          <Property Type="String" Name="Client" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="ActualCompletedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="TotalCount" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="GetMyTasks_Result">
           <Property Type="Int64" Name="RowNum" Nullable="true" />
           <Property Type="String" Name="TaskOwnerName" Nullable="true" MaxLength="255" />
@@ -5825,7 +6575,7 @@
           <Property Type="Int32" Name="Priority" Nullable="false" />
           <Property Type="Int32" Name="Category_Id" Nullable="false" />
           <Property Type="Int32" Name="SubCategory_Id" Nullable="false" />
-          <Property Type="String" Name="CategorySubCategory" Nullable="true" MaxLength="81" />
+          <Property Type="String" Name="CategorySubCategory" Nullable="false" MaxLength="81" />
           <Property Type="String" Name="Subject" Nullable="false" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="TaskOwner" Nullable="false" MaxLength="128" />
@@ -5836,6 +6586,39 @@
           <Property Type="String" Name="Department" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="TaskType" Nullable="false" MaxLength="12" />
           <Property Type="Int32" Name="TotalCount" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Int32" Name="Notifications" Nullable="true" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="LastUpdatedById" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="71" />
+        </ComplexType>
+        <ComplexType Name="GetMyTasksWeb_Result">
+          <Property Type="Int64" Name="RowNum" Nullable="true" />
+          <Property Type="String" Name="TaskOwnerName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="AssignedTo" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Status" Nullable="false" />
+          <Property Type="String" Name="TaskId" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="Priority" Nullable="false" />
+          <Property Type="Int32" Name="Category_Id" Nullable="false" />
+          <Property Type="Int32" Name="SubCategory_Id" Nullable="false" />
+          <Property Type="String" Name="CategorySubCategory" Nullable="false" MaxLength="81" />
+          <Property Type="String" Name="Subject" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="TaskOwner" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="TAT" Nullable="true" />
+          <Property Type="String" Name="Client_Id" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="ClientName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Department_Id" Nullable="true" />
+          <Property Type="String" Name="Department" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TaskType" Nullable="false" MaxLength="12" />
+          <Property Type="Int32" Name="TotalCount" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Int32" Name="Notifications" Nullable="true" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="LastUpdatedById" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="71" />
         </ComplexType>
         <ComplexType Name="GetOpportunitiesList_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -5914,17 +6697,19 @@
           <Property Type="DateTime" Name="ExpectedStockDate" Nullable="false" />
           <Property Type="String" Name="Notes" Nullable="false" />
           <Property Type="String" Name="TaskId" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Employee" Nullable="true" MaxLength="71" />
           <Property Type="Int32" Name="opportunityId" Nullable="true" />
           <Property Type="String" Name="Status" Nullable="false" MaxLength="20" />
           <Property Type="Int32" Name="StockReqMappingId" Nullable="true" />
           <Property Type="String" Name="OpportunityName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="ProjectLocation" Nullable="true" />
           <Property Type="Int32" Name="Location_Id" Nullable="true" />
           <Property Type="Int32" Name="Quanitity" Nullable="true" />
           <Property Type="Int32" Name="ModelId" Nullable="true" />
           <Property Type="String" Name="Model" Nullable="true" MaxLength="152" />
           <Property Type="String" Name="Description" Nullable="true" />
           <Property Type="Int32" Name="NoOfItemsAvailable" Nullable="true" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ProjectLocation" Nullable="true" MaxLength="672" />
         </ComplexType>
         <ComplexType Name="GetStockRequests_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -5946,20 +6731,67 @@
           <Property Type="Int32" Name="Priority" Nullable="false" />
           <Property Type="String" Name="Status" Nullable="false" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
-          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="128" />
           <Property Type="String" Name="Subject" Nullable="false" />
           <Property Type="String" Name="Description" Nullable="false" />
-          <Property Type="Int32" Name="Category_Id" Nullable="false" />
-          <Property Type="Int32" Name="SubCategory_Id" Nullable="false" />
-          <Property Type="String" Name="Category" Nullable="true" MaxLength="81" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="SubCategory" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="EDOC" Nullable="false" />
+          <Property Type="Int32" Name="Project_Id" Nullable="true" />
+          <Property Type="String" Name="OpportunityName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TaskOwnerId" Nullable="false" MaxLength="128" />
           <Property Type="String" Name="TaskOwner" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CreatedById" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="TaskType" Nullable="false" MaxLength="12" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="Client_Id" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Project" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Client" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ProjectLocation" Nullable="true" MaxLength="928" />
+        </ComplexType>
+        <ComplexType Name="GetTaskDetail_Result">
+          <Property Type="String" Name="TaskId" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="TaskType" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="OpportunityName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CreatedById" Nullable="false" MaxLength="128" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="SubCategory" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Subject" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="DateTime" Name="EDOC" Nullable="false" />
+          <Property Type="String" Name="Priority" Nullable="true" MaxLength="6" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="TaskOwnerId" Nullable="false" MaxLength="128" />
+          <Property Type="DateTime" Name="CompletedDate" Nullable="true" />
+          <Property Type="Int32" Name="Project_Id" Nullable="true" />
+          <Property Type="String" Name="Client_Id" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Department" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Client" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Points" Nullable="true" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="TaskOwner" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Status" Nullable="false" />
+          <Property Type="String" Name="ProjectLocation" Nullable="true" MaxLength="929" />
+          <Property Type="Int32" Name="Notifications" Nullable="true" />
+          <Property Type="Int32" Name="TaskLogId" Nullable="false" />
+          <Property Type="DateTime" Name="TaskLogDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="TaskLogDescription" Nullable="false" />
+          <Property Type="String" Name="TaskLogStatus" Nullable="false" />
+          <Property Type="Int32" Name="HoursWorked" Nullable="true" />
+          <Property Type="Int32" Name="QuantityWorked" Nullable="true" />
+          <Property Type="String" Name="TaskLogAssignedById" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="TaskLogAssignedBy" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="TaskLogAssignedToId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="TaskLogAssignedTo" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="AtchmentId" Nullable="true" />
+          <Property Type="String" Name="AttachmentURL" Nullable="true" MaxLength="400" />
         </ComplexType>
         <ComplexType Name="GetTaskLog_Result">
+          <Property Type="String" Name="TaskId" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="Status" Nullable="false" />
           <Property Type="Int32" Name="Priority" Nullable="false" />
-          <Property Type="DateTime" Name="TaskDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="TaskDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="Description" Nullable="false" />
           <Property Type="Int32" Name="HoursWorked" Nullable="true" />
           <Property Type="Int32" Name="ActivityLogId" Nullable="false" />
@@ -5967,6 +6799,7 @@
           <Property Type="Int32" Name="Department_Id" Nullable="true" />
           <Property Type="String" Name="Department" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="AssignedById" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="QuantityWorked" Nullable="true" />
           <Property Type="String" Name="AssignedBy" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="AssignedTo" Nullable="true" MaxLength="255" />
         </ComplexType>
@@ -5982,7 +6815,7 @@
           <Property Type="Int32" Name="Priority" Nullable="false" />
           <Property Type="Int32" Name="Category_Id" Nullable="false" />
           <Property Type="Int32" Name="SubCategory_Id" Nullable="false" />
-          <Property Type="String" Name="CategorySubCategory" Nullable="true" MaxLength="81" />
+          <Property Type="String" Name="CategorySubCategory" Nullable="false" MaxLength="81" />
           <Property Type="String" Name="Subject" Nullable="false" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="TAT" Nullable="true" />
@@ -5992,6 +6825,11 @@
           <Property Type="String" Name="ClientName" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Department" Nullable="true" MaxLength="20" />
           <Property Type="Int32" Name="TotalCount" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="LastUpdatedById" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="71" />
+          <Property Type="Int32" Name="Notifications" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetTasksThroughMe_Result">
           <Property Type="Int64" Name="RowNum" Nullable="true" />
@@ -6015,10 +6853,15 @@
           <Property Type="String" Name="EmpTaskOwner" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="ActuallyAssignedTo" Nullable="true" MaxLength="71" />
           <Property Type="Int32" Name="TotalCount" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Int32" Name="Notifications" Nullable="true" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="LastUpdatedById" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="71" />
         </ComplexType>
         <ComplexType Name="GetTicketLog_Result">
           <Property Type="Int32" Name="ActivityLogId" Nullable="false" />
-          <Property Type="DateTime" Name="TaskDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="TaskDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="Description" Nullable="false" />
           <Property Type="String" Name="AssignedById" Nullable="false" MaxLength="128" />
           <Property Type="String" Name="AssignedToId" Nullable="true" MaxLength="128" />
@@ -6028,6 +6871,117 @@
           <Property Type="String" Name="Department" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="TaskOwner" Nullable="false" MaxLength="128" />
           <Property Type="String" Name="ActuallyAssigned" Nullable="false" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="GetToDoLeads_Result">
+          <Property Type="Int64" Name="RowNum" Nullable="true" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="OpportunityName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TaskOwner" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="128" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Location_Id" Nullable="true" />
+          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="128" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="TAT" Nullable="true" />
+          <Property Type="String" Name="OppOwner" Nullable="true" MaxLength="71" />
+          <Property Type="String" Name="OppCreator" Nullable="false" MaxLength="71" />
+          <Property Type="String" Name="OppLastUpdate" Nullable="true" MaxLength="71" />
+          <Property Type="String" Name="OppLocation" Nullable="true" MaxLength="569" />
+          <Property Type="Int32" Name="TotalCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetToDoPendingTasks_Result">
+          <Property Type="Int64" Name="RowNum" Nullable="true" />
+          <Property Type="String" Name="TaskOwnerName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="AssignedTo" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Status" Nullable="false" />
+          <Property Type="String" Name="TaskId" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="Priority" Nullable="false" />
+          <Property Type="Int32" Name="Category_Id" Nullable="false" />
+          <Property Type="Int32" Name="SubCategory_Id" Nullable="false" />
+          <Property Type="String" Name="CategorySubCategory" Nullable="false" MaxLength="81" />
+          <Property Type="String" Name="Subject" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="TaskOwner" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="TAT" Nullable="true" />
+          <Property Type="String" Name="Client_Id" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="ClientName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Department_Id" Nullable="true" />
+          <Property Type="String" Name="Department" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TaskType" Nullable="false" MaxLength="12" />
+          <Property Type="Int32" Name="TotalCount" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Int32" Name="Notifications" Nullable="true" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="LastUpdatedById" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="LastUpdatedBy" Nullable="true" MaxLength="71" />
+        </ComplexType>
+        <ComplexType Name="LeadsSummary_Result">
+          <Property Type="Int32" Name="Accepted" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekAcc" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthAcc" Nullable="true" />
+          <Property Type="Int32" Name="InProcess" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekInProcess" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthInProcess" Nullable="true" />
+          <Property Type="Int32" Name="Pending" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekPending" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthPending" Nullable="true" />
+          <Property Type="Int32" Name="ShowingInterest" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekShowingInterest" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthShowingInterest" Nullable="true" />
+          <Property Type="Int32" Name="QuotationSent" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthQuotationSent" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekQuotationSent" Nullable="true" />
+          <Property Type="Int32" Name="Closed" Nullable="true" />
+          <Property Type="Int32" Name="CurMonthCompleted" Nullable="true" />
+          <Property Type="Int32" Name="CurWeekCompleted" Nullable="true" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="LogReport_Result">
+          <Property Type="String" Name="TaskId" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Client" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Department" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="SubCategory" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Subject" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="String" Name="Priority" Nullable="true" MaxLength="6" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="EDOC" Nullable="false" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CreatedById" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="TaskOwner" Nullable="false" MaxLength="71" />
+          <Property Type="String" Name="TaskOwnerId" Nullable="false" MaxLength="128" />
+          <Property Type="DateTime" Name="CompletedDate" Nullable="true" />
+          <Property Type="String" Name="ParentTask_Id" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Status" Nullable="false" />
+          <Property Type="String" Name="TaskType" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="AssignedTo" Nullable="false" MaxLength="71" />
+          <Property Type="String" Name="AssignedToId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Project" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="Client_Id" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="Project_Id" Nullable="true" />
+          <Property Type="String" Name="ProjectLocation" Nullable="true" MaxLength="823" />
+          <Property Type="Int32" Name="TaskLogId" Nullable="false" />
+          <Property Type="String" Name="TaskLogTaskId" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="TaskLogDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="TaskLogAssignedTo" Nullable="false" MaxLength="71" />
+          <Property Type="String" Name="TaskLogAssignedToId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="TaskLogAssignedBy" Nullable="false" MaxLength="71" />
+          <Property Type="String" Name="TaskLogAssignedById" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="TaskLogBudgetedHours" Nullable="true" />
+          <Property Type="DateTime" Name="TaskLogStartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="TaskLogEndDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="TaskLogHoursWorked" Nullable="true" />
+          <Property Type="String" Name="TaskLogStatus" Nullable="false" />
+          <Property Type="String" Name="TaskLogDescription" Nullable="false" />
+          <Property Type="Int32" Name="TaskLogQuantityWorked" Nullable="true" />
+          <Property Type="Int32" Name="Notifications" Nullable="true" />
         </ComplexType>
         <ComplexType Name="MaxClientDueDetails_Result">
           <Property Type="Int32" Name="ClientId" Nullable="false" />
@@ -6060,6 +7014,27 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="StatusSummary_Result">
+          <Property Type="Int32" Name="StatusOpen" Nullable="false" />
+          <Property Type="Int32" Name="OpenCurMonth" Nullable="false" />
+          <Property Type="Int32" Name="OpenCurWeek" Nullable="false" />
+          <Property Type="Int32" Name="InProcess" Nullable="false" />
+          <Property Type="Int32" Name="InProcessCurMonth" Nullable="false" />
+          <Property Type="Int32" Name="InProcessCurWeek" Nullable="false" />
+          <Property Type="Int32" Name="Pending" Nullable="false" />
+          <Property Type="Int32" Name="PendingCurMonth" Nullable="false" />
+          <Property Type="Int32" Name="PendingCurWeek" Nullable="false" />
+          <Property Type="Int32" Name="Resolved" Nullable="false" />
+          <Property Type="Int32" Name="ResolvedCurMonth" Nullable="false" />
+          <Property Type="Int32" Name="ResolvedCurWeek" Nullable="false" />
+          <Property Type="Int32" Name="Reopened" Nullable="false" />
+          <Property Type="Int32" Name="ReopenedCurMonth" Nullable="false" />
+          <Property Type="Int32" Name="ReopenedCurWeek" Nullable="false" />
+          <Property Type="Int32" Name="Closed" Nullable="false" />
+          <Property Type="Int32" Name="ClosedCurMonth" Nullable="false" />
+          <Property Type="Int32" Name="ClosedCurWeek" Nullable="false" />
+          <Property Type="Int32" Name="Total" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="TaskStatsGet_Result">
           <Property Type="Int32" Name="HighByMe" Nullable="true" />
           <Property Type="Int32" Name="MediumByMe" Nullable="true" />
@@ -6067,9 +7042,20 @@
           <Property Type="Int32" Name="HighMy" Nullable="true" />
           <Property Type="Int32" Name="MediumMy" Nullable="true" />
           <Property Type="Int32" Name="LowMy" Nullable="true" />
+          <Property Type="Int32" Name="HighMyPending" Nullable="true" />
+          <Property Type="Int32" Name="MediumMyPending" Nullable="true" />
+          <Property Type="Int32" Name="LowMyPending" Nullable="true" />
           <Property Type="Int32" Name="HighThroughMe" Nullable="true" />
           <Property Type="Int32" Name="MediumThroughMe" Nullable="true" />
           <Property Type="Int32" Name="LowThroughMe" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="TopPerformances_Result">
+          <Property Type="String" Name="EmpId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Employee" Nullable="false" MaxLength="71" />
+          <Property Type="Int32" Name="MonthPoints" Nullable="false" />
+          <Property Type="Int32" Name="WeekPoints" Nullable="false" />
+          <Property Type="Int32" Name="DayPoints" Nullable="false" />
+          <Property Type="String" Name="PhotoURL" Nullable="true" MaxLength="400" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -6098,6 +7084,9 @@
                 <ScalarProperty Name="TaskType" ColumnName="TaskType" />
                 <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
                 <ScalarProperty Name="Project_Id" ColumnName="Project_Id" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6107,7 +7096,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TaskId" ColumnName="TaskId" />
                 <ScalarProperty Name="TaskDate" ColumnName="TaskDate" />
-                <ScalarProperty Name="AssingedTo" ColumnName="AssingedTo" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
                 <ScalarProperty Name="AssignedBy" ColumnName="AssignedBy" />
                 <ScalarProperty Name="BudgetedHours" ColumnName="BudgetedHours" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
@@ -6115,6 +7104,8 @@
                 <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="QuantityWorked" ColumnName="QuantityWorked" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6125,6 +7116,14 @@
                 <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="AttachmentURL" ColumnName="AttachmentURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivityNotifications">
+            <EntityTypeMapping TypeName="MaxMasterDbModel.ActivityNotification">
+              <MappingFragment StoreEntitySet="ActivityNotifications">
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6522,6 +7521,7 @@
                 <ScalarProperty Name="IsClockOut" ColumnName="IsClockOut" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="InsertedTime" ColumnName="InsertedTime" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6607,6 +7607,9 @@
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="NotificationToken" ColumnName="NotificationToken" />
+                <ScalarProperty Name="LastActivityTime" ColumnName="LastActivityTime" />
+                <ScalarProperty Name="Shift_Id" ColumnName="Shift_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6635,6 +7638,16 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GSTName" ColumnName="GSTName" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Holidays">
+            <EntityTypeMapping TypeName="MaxMasterDbModel.Holiday">
+              <MappingFragment StoreEntitySet="Holidays">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HolidayName" ColumnName="HolidayName" />
+                <ScalarProperty Name="HolidayDate" ColumnName="HolidayDate" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6766,6 +7779,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="LeaveRecords">
+            <EntityTypeMapping TypeName="MaxMasterDbModel.LeaveRecord">
+              <MappingFragment StoreEntitySet="LeaveRecords">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="LeaveDate" ColumnName="LeaveDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leaves">
+            <EntityTypeMapping TypeName="MaxMasterDbModel.Leaf">
+              <MappingFragment StoreEntitySet="Leaves">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Opportunities">
             <EntityTypeMapping TypeName="MaxMasterDbModel.Opportunity">
               <MappingFragment StoreEntitySet="Opportunities">
@@ -6784,6 +7821,9 @@
                 <ScalarProperty Name="EDOS" ColumnName="EDOS" />
                 <ScalarProperty Name="Location_Id" ColumnName="Location_Id" />
                 <ScalarProperty Name="ActualCompletedDate" ColumnName="ActualCompletedDate" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="FollowUpOn" ColumnName="FollowUpOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6888,6 +7928,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PointsLogs">
+            <EntityTypeMapping TypeName="MaxMasterDbModel.PointsLog">
+              <MappingFragment StoreEntitySet="PointsLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SubCatId" ColumnName="SubCatId" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="POItemsMappings">
             <EntityTypeMapping TypeName="MaxMasterDbModel.POItemsMapping">
               <MappingFragment StoreEntitySet="POItemsMapping">
@@ -6937,6 +7988,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Shifts">
+            <EntityTypeMapping TypeName="MaxMasterDbModel.Shift">
+              <MappingFragment StoreEntitySet="Shifts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SOAttachments">
             <EntityTypeMapping TypeName="MaxMasterDbModel.SOAttachment">
               <MappingFragment StoreEntitySet="SOAttachments">
@@ -6973,6 +8034,24 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Country_Id" ColumnName="Country_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stocks">
+            <EntityTypeMapping TypeName="MaxMasterDbModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="item_name" ColumnName="item_name" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="sku" ColumnName="sku" />
+                <ScalarProperty Name="quantity_purchased" ColumnName="quantity_purchased" />
+                <ScalarProperty Name="quantity_sold" ColumnName="quantity_sold" />
+                <ScalarProperty Name="quantity_ordered" ColumnName="quantity_ordered" />
+                <ScalarProperty Name="quantity_demanded" ColumnName="quantity_demanded" />
+                <ScalarProperty Name="quantity_available" ColumnName="quantity_available" />
+                <ScalarProperty Name="quantity_available_for_sale" ColumnName="quantity_available_for_sale" />
+                <ScalarProperty Name="reorder_level" ColumnName="reorder_level" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7034,6 +8113,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7115,6 +8195,34 @@
               <ScalarProperty Name="Id" ColumnName="Specialty_Id" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="AddActivityNotifications" FunctionName="MaxMasterDbModel.Store.AddActivityNotifications" />
+          <FunctionImportMapping FunctionImportName="CategoriesSummary" FunctionName="MaxMasterDbModel.Store.CategoriesSummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.CategoriesSummary_Result">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="StatusOpen" ColumnName="StatusOpen" />
+                <ScalarProperty Name="CurMonthOpen" ColumnName="CurMonthOpen" />
+                <ScalarProperty Name="CurWeekOpen" ColumnName="CurWeekOpen" />
+                <ScalarProperty Name="InProcess" ColumnName="InProcess" />
+                <ScalarProperty Name="CurMonthInProcess" ColumnName="CurMonthInProcess" />
+                <ScalarProperty Name="CurWeekInprocess" ColumnName="CurWeekInprocess" />
+                <ScalarProperty Name="Pending" ColumnName="Pending" />
+                <ScalarProperty Name="CurMonthPending" ColumnName="CurMonthPending" />
+                <ScalarProperty Name="CurWeekPending" ColumnName="CurWeekPending" />
+                <ScalarProperty Name="Resolved" ColumnName="Resolved" />
+                <ScalarProperty Name="CurMonthResolved" ColumnName="CurMonthResolved" />
+                <ScalarProperty Name="CurWeekResolved" ColumnName="CurWeekResolved" />
+                <ScalarProperty Name="Reopened" ColumnName="Reopened" />
+                <ScalarProperty Name="CurMonthReopened" ColumnName="CurMonthReopened" />
+                <ScalarProperty Name="CurWeekReopened" ColumnName="CurWeekReopened" />
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
+                <ScalarProperty Name="CurMonthClosed" ColumnName="CurMonthClosed" />
+                <ScalarProperty Name="CurWeekClosed" ColumnName="CurWeekClosed" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ClientMasterReport" FunctionName="MaxMasterDbModel.Store.ClientMasterReport">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MaxMasterDbModel.ClientMasterReport_Result">
@@ -7150,6 +8258,34 @@
                 <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
                 <ScalarProperty Name="InvoiceMonth" ColumnName="InvoiceMonth" />
                 <ScalarProperty Name="InvoiceYear" ColumnName="InvoiceYear" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ClientTasksSummary" FunctionName="MaxMasterDbModel.Store.ClientTasksSummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.ClientTasksSummary_Result">
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="StatusOpen" ColumnName="StatusOpen" />
+                <ScalarProperty Name="CurMonthOpen" ColumnName="CurMonthOpen" />
+                <ScalarProperty Name="CurWeekOpen" ColumnName="CurWeekOpen" />
+                <ScalarProperty Name="InProcess" ColumnName="InProcess" />
+                <ScalarProperty Name="CurMonthInProcess" ColumnName="CurMonthInProcess" />
+                <ScalarProperty Name="CurWeekInProcess" ColumnName="CurWeekInProcess" />
+                <ScalarProperty Name="Pending" ColumnName="Pending" />
+                <ScalarProperty Name="CurMonthPending" ColumnName="CurMonthPending" />
+                <ScalarProperty Name="CurWeekPending" ColumnName="CurWeekPending" />
+                <ScalarProperty Name="Resolved" ColumnName="Resolved" />
+                <ScalarProperty Name="CurMonthResolved" ColumnName="CurMonthResolved" />
+                <ScalarProperty Name="CurWeekResolved" ColumnName="CurWeekResolved" />
+                <ScalarProperty Name="Reopened" ColumnName="Reopened" />
+                <ScalarProperty Name="CurMonthReopened" ColumnName="CurMonthReopened" />
+                <ScalarProperty Name="CurWeekReopened" ColumnName="CurWeekReopened" />
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
+                <ScalarProperty Name="CurMonthClosed" ColumnName="CurMonthClosed" />
+                <ScalarProperty Name="CurWeekClosed" ColumnName="CurWeekClosed" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7199,6 +8335,85 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EmployeeAttendanceReport" FunctionName="MaxMasterDbModel.Store.EmployeeAttendanceReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.EmployeeAttendanceReport_Result">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="ClockInTime" ColumnName="ClockInTime" />
+                <ScalarProperty Name="ClockInAddress" ColumnName="ClockInAddress" />
+                <ScalarProperty Name="ClockInDelay" ColumnName="ClockInDelay" />
+                <ScalarProperty Name="ClockOutTime" ColumnName="ClockOutTime" />
+                <ScalarProperty Name="ClockOutDelay" ColumnName="ClockOutDelay" />
+                <ScalarProperty Name="ClockOutAddress" ColumnName="ClockOutAddress" />
+                <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EmployeeDayReport" FunctionName="MaxMasterDbModel.Store.EmployeeDayReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.EmployeeDayReport_Result">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Project_Id" ColumnName="Project_Id" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="EDOC" ColumnName="EDOC" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="TaskOwner" ColumnName="TaskOwner" />
+                <ScalarProperty Name="ProjectLocation" ColumnName="ProjectLocation" />
+                <ScalarProperty Name="TaskLogDate" ColumnName="TaskLogDate" />
+                <ScalarProperty Name="TaskLogDescription" ColumnName="TaskLogDescription" />
+                <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
+                <ScalarProperty Name="QuantityWorked" ColumnName="QuantityWorked" />
+                <ScalarProperty Name="TaskLogId" ColumnName="TaskLogId" />
+                <ScalarProperty Name="TaskLogAssignedTo" ColumnName="TaskLogAssignedTo" />
+                <ScalarProperty Name="TaskLogAssignedBy" ColumnName="TaskLogAssignedBy" />
+                <ScalarProperty Name="TaskLogAssignedById" ColumnName="TaskLogAssignedById" />
+                <ScalarProperty Name="TaskLogAssignedToId" ColumnName="TaskLogAssignedToId" />
+                <ScalarProperty Name="TaskLogStatus" ColumnName="TaskLogStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EmployeeTasksSummary" FunctionName="MaxMasterDbModel.Store.EmployeeTasksSummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.EmployeeTasksSummary_Result">
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="LastActivityTime" ColumnName="LastActivityTime" />
+                <ScalarProperty Name="UnUpdatedTasks" ColumnName="UnUpdatedTasks" />
+                <ScalarProperty Name="StatusOpen" ColumnName="StatusOpen" />
+                <ScalarProperty Name="CurMonthOpen" ColumnName="CurMonthOpen" />
+                <ScalarProperty Name="CurWeekOpen" ColumnName="CurWeekOpen" />
+                <ScalarProperty Name="InProcess" ColumnName="InProcess" />
+                <ScalarProperty Name="CurMonthInProcess" ColumnName="CurMonthInProcess" />
+                <ScalarProperty Name="CurWeekInprocess" ColumnName="CurWeekInprocess" />
+                <ScalarProperty Name="Pending" ColumnName="Pending" />
+                <ScalarProperty Name="CurMonthPending" ColumnName="CurMonthPending" />
+                <ScalarProperty Name="CurWeekPending" ColumnName="CurWeekPending" />
+                <ScalarProperty Name="Resolved" ColumnName="Resolved" />
+                <ScalarProperty Name="CurMonthResolved" ColumnName="CurMonthResolved" />
+                <ScalarProperty Name="CurWeekResolved" ColumnName="CurWeekResolved" />
+                <ScalarProperty Name="Reopened" ColumnName="Reopened" />
+                <ScalarProperty Name="CurMonthReopened" ColumnName="CurMonthReopened" />
+                <ScalarProperty Name="CurWeekReopened" ColumnName="CurWeekReopened" />
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
+                <ScalarProperty Name="CurMonthClosed" ColumnName="CurMonthClosed" />
+                <ScalarProperty Name="CurWeekClosed" ColumnName="CurWeekClosed" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetBilledItems" FunctionName="MaxMasterDbModel.Store.GetBilledItems">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MaxMasterDbModel.GetBilledItems_Result">
@@ -7242,6 +8457,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCategories" FunctionName="MaxMasterDbModel.Store.GetCategories">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.GetCategories_Result">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="PointsLogId" ColumnName="PointsLogId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetClientEmployees" FunctionName="MaxMasterDbModel.Store.GetClientEmployees">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MaxMasterDbModel.GetClientEmployees_Result">
@@ -7272,6 +8501,7 @@
                 <ScalarProperty Name="OrgId" ColumnName="OrgId" />
                 <ScalarProperty Name="OrgName" ColumnName="OrgName" />
                 <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7336,6 +8566,21 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeeLocations" FunctionName="MaxMasterDbModel.Store.GetEmployeeLocations">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.GetEmployeeLocations_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="IsClockIn" ColumnName="IsClockIn" />
+                <ScalarProperty Name="IsClockOut" ColumnName="IsClockOut" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetEmployees" FunctionName="MaxMasterDbModel.Store.GetEmployees">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MaxMasterDbModel.GetEmployees_Result">
@@ -7362,33 +8607,81 @@
           <FunctionImportMapping FunctionImportName="GetEmployeesActivitiesReport" FunctionName="MaxMasterDbModel.Store.GetEmployeesActivitiesReport">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MaxMasterDbModel.GetEmployeesActivitiesReport_Result">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="EDOC" ColumnName="EDOC" />
-                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
-                <ScalarProperty Name="Subject" ColumnName="Subject" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
-                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
-                <ScalarProperty Name="TaskOwnerId" ColumnName="TaskOwnerId" />
-                <ScalarProperty Name="AssignedToId" ColumnName="AssignedToId" />
-                <ScalarProperty Name="AssignedBy" ColumnName="AssignedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
                 <ScalarProperty Name="TaskOwner" ColumnName="TaskOwner" />
+                <ScalarProperty Name="TaskOwnerId" ColumnName="TaskOwnerId" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="ParentTask_Id" ColumnName="ParentTask_Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
                 <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
-                <ScalarProperty Name="Priority" ColumnName="Priority" />
-                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="AssignedToId" ColumnName="AssignedToId" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProjectLocation" ColumnName="ProjectLocation" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="Project_Id" ColumnName="Project_Id" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="TaskLogId" ColumnName="TaskLogId" />
+                <ScalarProperty Name="TaskLogTaskId" ColumnName="TaskLogTaskId" />
+                <ScalarProperty Name="TaskLogDate" ColumnName="TaskLogDate" />
+                <ScalarProperty Name="TaskLogAssignedTo" ColumnName="TaskLogAssignedTo" />
+                <ScalarProperty Name="TaskLogAssignedToId" ColumnName="TaskLogAssignedToId" />
+                <ScalarProperty Name="TaskLogAssignedBy" ColumnName="TaskLogAssignedBy" />
+                <ScalarProperty Name="TaskLogAssignedById" ColumnName="TaskLogAssignedById" />
+                <ScalarProperty Name="TaskLogBudgetedHours" ColumnName="TaskLogBudgetedHours" />
+                <ScalarProperty Name="TaskLogStartDate" ColumnName="TaskLogStartDate" />
+                <ScalarProperty Name="TaskLogEndDate" ColumnName="TaskLogEndDate" />
+                <ScalarProperty Name="TaskLogHoursWorked" ColumnName="TaskLogHoursWorked" />
+                <ScalarProperty Name="TaskLogStatus" ColumnName="TaskLogStatus" />
+                <ScalarProperty Name="TaskLogDescription" ColumnName="TaskLogDescription" />
+                <ScalarProperty Name="TaskLogQuantityWorked" ColumnName="TaskLogQuantityWorked" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeesLatestLocation" FunctionName="MaxMasterDbModel.Store.GetEmployeesLatestLocation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.GetEmployeesLatestLocation_Result">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="LastReportedTime" ColumnName="LastReportedTime" />
+                <ScalarProperty Name="LastReportedAddress" ColumnName="LastReportedAddress" />
+                <ScalarProperty Name="ClockInTime" ColumnName="ClockInTime" />
+                <ScalarProperty Name="ClockOutTime" ColumnName="ClockOutTime" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetEmployeesTasksCount" FunctionName="MaxMasterDbModel.Store.GetEmployeesTasksCount">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MaxMasterDbModel.GetEmployeesTasksCount_Result">
-                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
                 <ScalarProperty Name="Employee" ColumnName="Employee" />
                 <ScalarProperty Name="High" ColumnName="High" />
                 <ScalarProperty Name="Medium" ColumnName="Medium" />
                 <ScalarProperty Name="Low" ColumnName="Low" />
                 <ScalarProperty Name="TotalTaskCount" ColumnName="TotalTaskCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeesToBeLogin" FunctionName="MaxMasterDbModel.Store.GetEmployeesToBeLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.GetEmployeesToBeLogin_Result">
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7427,6 +8720,59 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLeadDetail" FunctionName="MaxMasterDbModel.Store.GetLeadDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.GetLeadDetail_Result">
+                <ScalarProperty Name="OppId" ColumnName="OppId" />
+                <ScalarProperty Name="OpportunityName" ColumnName="OpportunityName" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="OppCurrentStatus" ColumnName="OppCurrentStatus" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="OppTaskOwner" ColumnName="OppTaskOwner" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ActualCompletedDate" ColumnName="ActualCompletedDate" />
+                <ScalarProperty Name="OpportunityLocation" ColumnName="OpportunityLocation" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="OppLogId" ColumnName="OppLogId" />
+                <ScalarProperty Name="OppLogAssignedById" ColumnName="OppLogAssignedById" />
+                <ScalarProperty Name="OppLogAssignedBy" ColumnName="OppLogAssignedBy" />
+                <ScalarProperty Name="OppLogAssignedToId" ColumnName="OppLogAssignedToId" />
+                <ScalarProperty Name="OppLogAssignedTo" ColumnName="OppLogAssignedTo" />
+                <ScalarProperty Name="OppLogDate" ColumnName="OppLogDate" />
+                <ScalarProperty Name="OppLogStatus" ColumnName="OppLogStatus" />
+                <ScalarProperty Name="OppLogComments" ColumnName="OppLogComments" />
+                <ScalarProperty Name="LeadLocation" ColumnName="LeadLocation" />
+                <ScalarProperty Name="ClientEmpId" ColumnName="ClientEmpId" />
+                <ScalarProperty Name="ClientEmpFirstName" ColumnName="ClientEmpFirstName" />
+                <ScalarProperty Name="ClientEmpLastName" ColumnName="ClientEmpLastName" />
+                <ScalarProperty Name="ClientEmpEmail" ColumnName="ClientEmpEmail" />
+                <ScalarProperty Name="ClientEmpPhoneNumber" ColumnName="ClientEmpPhoneNumber" />
+                <ScalarProperty Name="clientEmpDepartment" ColumnName="clientEmpDepartment" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileAttachment" ColumnName="FileAttachment" />
+                <ScalarProperty Name="AttachmentId" ColumnName="AttachmentId" />
+                <ScalarProperty Name="OppLogIdForAttachment" ColumnName="OppLogIdForAttachment" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLeads" FunctionName="MaxMasterDbModel.Store.GetLeads">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.GetLeads_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="OpportunityName" ColumnName="OpportunityName" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="ActualCompletedDate" ColumnName="ActualCompletedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetMyTasks" FunctionName="MaxMasterDbModel.Store.GetMyTasks">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MaxMasterDbModel.GetMyTasks_Result">
@@ -7451,6 +8797,43 @@
                 <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="TaskType" ColumnName="TaskType" />
                 <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Notifications" ColumnName="Notifications" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedById" ColumnName="LastUpdatedById" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMyTasksWeb" FunctionName="MaxMasterDbModel.Store.GetMyTasksWeb">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.GetMyTasksWeb_Result">
+                <ScalarProperty Name="RowNum" ColumnName="RowNum" />
+                <ScalarProperty Name="TaskOwnerName" ColumnName="TaskOwnerName" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="SubCategory_Id" ColumnName="SubCategory_Id" />
+                <ScalarProperty Name="CategorySubCategory" ColumnName="CategorySubCategory" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="TaskOwner" ColumnName="TaskOwner" />
+                <ScalarProperty Name="TAT" ColumnName="TAT" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="Department_Id" ColumnName="Department_Id" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Notifications" ColumnName="Notifications" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedById" ColumnName="LastUpdatedById" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7557,17 +8940,19 @@
                 <ScalarProperty Name="ExpectedStockDate" ColumnName="ExpectedStockDate" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
                 <ScalarProperty Name="opportunityId" ColumnName="opportunityId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="StockReqMappingId" ColumnName="StockReqMappingId" />
                 <ScalarProperty Name="OpportunityName" ColumnName="OpportunityName" />
-                <ScalarProperty Name="ProjectLocation" ColumnName="ProjectLocation" />
                 <ScalarProperty Name="Location_Id" ColumnName="Location_Id" />
                 <ScalarProperty Name="Quanitity" ColumnName="Quanitity" />
                 <ScalarProperty Name="ModelId" ColumnName="ModelId" />
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="NoOfItemsAvailable" ColumnName="NoOfItemsAvailable" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="ProjectLocation" ColumnName="ProjectLocation" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7597,21 +8982,72 @@
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
-                <ScalarProperty Name="SubCategory_Id" ColumnName="SubCategory_Id" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+                <ScalarProperty Name="EDOC" ColumnName="EDOC" />
+                <ScalarProperty Name="Project_Id" ColumnName="Project_Id" />
+                <ScalarProperty Name="OpportunityName" ColumnName="OpportunityName" />
+                <ScalarProperty Name="TaskOwnerId" ColumnName="TaskOwnerId" />
                 <ScalarProperty Name="TaskOwner" ColumnName="TaskOwner" />
-                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="ProjectLocation" ColumnName="ProjectLocation" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTaskDetail" FunctionName="MaxMasterDbModel.Store.GetTaskDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.GetTaskDetail_Result">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="OpportunityName" ColumnName="OpportunityName" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EDOC" ColumnName="EDOC" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TaskOwnerId" ColumnName="TaskOwnerId" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="Project_Id" ColumnName="Project_Id" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="TaskOwner" ColumnName="TaskOwner" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ProjectLocation" ColumnName="ProjectLocation" />
+                <ScalarProperty Name="Notifications" ColumnName="Notifications" />
+                <ScalarProperty Name="TaskLogId" ColumnName="TaskLogId" />
+                <ScalarProperty Name="TaskLogDate" ColumnName="TaskLogDate" />
+                <ScalarProperty Name="TaskLogDescription" ColumnName="TaskLogDescription" />
+                <ScalarProperty Name="TaskLogStatus" ColumnName="TaskLogStatus" />
+                <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
+                <ScalarProperty Name="QuantityWorked" ColumnName="QuantityWorked" />
+                <ScalarProperty Name="TaskLogAssignedById" ColumnName="TaskLogAssignedById" />
+                <ScalarProperty Name="TaskLogAssignedBy" ColumnName="TaskLogAssignedBy" />
+                <ScalarProperty Name="TaskLogAssignedToId" ColumnName="TaskLogAssignedToId" />
+                <ScalarProperty Name="TaskLogAssignedTo" ColumnName="TaskLogAssignedTo" />
+                <ScalarProperty Name="AtchmentId" ColumnName="AtchmentId" />
+                <ScalarProperty Name="AttachmentURL" ColumnName="AttachmentURL" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetTaskLog" FunctionName="MaxMasterDbModel.Store.GetTaskLog">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MaxMasterDbModel.GetTaskLog_Result">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
                 <ScalarProperty Name="TaskDate" ColumnName="TaskDate" />
@@ -7622,6 +9058,7 @@
                 <ScalarProperty Name="Department_Id" ColumnName="Department_Id" />
                 <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="AssignedById" ColumnName="AssignedById" />
+                <ScalarProperty Name="QuantityWorked" ColumnName="QuantityWorked" />
                 <ScalarProperty Name="AssignedBy" ColumnName="AssignedBy" />
                 <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
               </ComplexTypeMapping>
@@ -7651,6 +9088,11 @@
                 <ScalarProperty Name="ClientName" ColumnName="ClientName" />
                 <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedById" ColumnName="LastUpdatedById" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="Notifications" ColumnName="Notifications" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7678,6 +9120,11 @@
                 <ScalarProperty Name="EmpTaskOwner" ColumnName="EmpTaskOwner" />
                 <ScalarProperty Name="ActuallyAssignedTo" ColumnName="ActuallyAssignedTo" />
                 <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Notifications" ColumnName="Notifications" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedById" ColumnName="LastUpdatedById" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7695,6 +9142,133 @@
                 <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="TaskOwner" ColumnName="TaskOwner" />
                 <ScalarProperty Name="ActuallyAssigned" ColumnName="ActuallyAssigned" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetToDoLeads" FunctionName="MaxMasterDbModel.Store.GetToDoLeads">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.GetToDoLeads_Result">
+                <ScalarProperty Name="RowNum" ColumnName="RowNum" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OpportunityName" ColumnName="OpportunityName" />
+                <ScalarProperty Name="TaskOwner" ColumnName="TaskOwner" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Location_Id" ColumnName="Location_Id" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="TAT" ColumnName="TAT" />
+                <ScalarProperty Name="OppOwner" ColumnName="OppOwner" />
+                <ScalarProperty Name="OppCreator" ColumnName="OppCreator" />
+                <ScalarProperty Name="OppLastUpdate" ColumnName="OppLastUpdate" />
+                <ScalarProperty Name="OppLocation" ColumnName="OppLocation" />
+                <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetToDoPendingTasks" FunctionName="MaxMasterDbModel.Store.GetToDoPendingTasks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.GetToDoPendingTasks_Result">
+                <ScalarProperty Name="RowNum" ColumnName="RowNum" />
+                <ScalarProperty Name="TaskOwnerName" ColumnName="TaskOwnerName" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="SubCategory_Id" ColumnName="SubCategory_Id" />
+                <ScalarProperty Name="CategorySubCategory" ColumnName="CategorySubCategory" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="TaskOwner" ColumnName="TaskOwner" />
+                <ScalarProperty Name="TAT" ColumnName="TAT" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="Department_Id" ColumnName="Department_Id" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Notifications" ColumnName="Notifications" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedById" ColumnName="LastUpdatedById" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LeadsSummary" FunctionName="MaxMasterDbModel.Store.LeadsSummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.LeadsSummary_Result">
+                <ScalarProperty Name="Accepted" ColumnName="Accepted" />
+                <ScalarProperty Name="CurWeekAcc" ColumnName="CurWeekAcc" />
+                <ScalarProperty Name="CurMonthAcc" ColumnName="CurMonthAcc" />
+                <ScalarProperty Name="InProcess" ColumnName="InProcess" />
+                <ScalarProperty Name="CurWeekInProcess" ColumnName="CurWeekInProcess" />
+                <ScalarProperty Name="CurMonthInProcess" ColumnName="CurMonthInProcess" />
+                <ScalarProperty Name="Pending" ColumnName="Pending" />
+                <ScalarProperty Name="CurWeekPending" ColumnName="CurWeekPending" />
+                <ScalarProperty Name="CurMonthPending" ColumnName="CurMonthPending" />
+                <ScalarProperty Name="ShowingInterest" ColumnName="ShowingInterest" />
+                <ScalarProperty Name="CurWeekShowingInterest" ColumnName="CurWeekShowingInterest" />
+                <ScalarProperty Name="CurMonthShowingInterest" ColumnName="CurMonthShowingInterest" />
+                <ScalarProperty Name="QuotationSent" ColumnName="QuotationSent" />
+                <ScalarProperty Name="CurMonthQuotationSent" ColumnName="CurMonthQuotationSent" />
+                <ScalarProperty Name="CurWeekQuotationSent" ColumnName="CurWeekQuotationSent" />
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
+                <ScalarProperty Name="CurMonthCompleted" ColumnName="CurMonthCompleted" />
+                <ScalarProperty Name="CurWeekCompleted" ColumnName="CurWeekCompleted" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LogReport" FunctionName="MaxMasterDbModel.Store.LogReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.LogReport_Result">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EDOC" ColumnName="EDOC" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="TaskOwner" ColumnName="TaskOwner" />
+                <ScalarProperty Name="TaskOwnerId" ColumnName="TaskOwnerId" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="ParentTask_Id" ColumnName="ParentTask_Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="AssignedToId" ColumnName="AssignedToId" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="Project_Id" ColumnName="Project_Id" />
+                <ScalarProperty Name="ProjectLocation" ColumnName="ProjectLocation" />
+                <ScalarProperty Name="TaskLogId" ColumnName="TaskLogId" />
+                <ScalarProperty Name="TaskLogTaskId" ColumnName="TaskLogTaskId" />
+                <ScalarProperty Name="TaskLogDate" ColumnName="TaskLogDate" />
+                <ScalarProperty Name="TaskLogAssignedTo" ColumnName="TaskLogAssignedTo" />
+                <ScalarProperty Name="TaskLogAssignedToId" ColumnName="TaskLogAssignedToId" />
+                <ScalarProperty Name="TaskLogAssignedBy" ColumnName="TaskLogAssignedBy" />
+                <ScalarProperty Name="TaskLogAssignedById" ColumnName="TaskLogAssignedById" />
+                <ScalarProperty Name="TaskLogBudgetedHours" ColumnName="TaskLogBudgetedHours" />
+                <ScalarProperty Name="TaskLogStartDate" ColumnName="TaskLogStartDate" />
+                <ScalarProperty Name="TaskLogEndDate" ColumnName="TaskLogEndDate" />
+                <ScalarProperty Name="TaskLogHoursWorked" ColumnName="TaskLogHoursWorked" />
+                <ScalarProperty Name="TaskLogStatus" ColumnName="TaskLogStatus" />
+                <ScalarProperty Name="TaskLogDescription" ColumnName="TaskLogDescription" />
+                <ScalarProperty Name="TaskLogQuantityWorked" ColumnName="TaskLogQuantityWorked" />
+                <ScalarProperty Name="Notifications" ColumnName="Notifications" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7750,6 +9324,31 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MaxMasterDbModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MaxMasterDbModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="StatusSummary" FunctionName="MaxMasterDbModel.Store.StatusSummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.StatusSummary_Result">
+                <ScalarProperty Name="StatusOpen" ColumnName="StatusOpen" />
+                <ScalarProperty Name="OpenCurMonth" ColumnName="OpenCurMonth" />
+                <ScalarProperty Name="OpenCurWeek" ColumnName="OpenCurWeek" />
+                <ScalarProperty Name="InProcess" ColumnName="InProcess" />
+                <ScalarProperty Name="InProcessCurMonth" ColumnName="InProcessCurMonth" />
+                <ScalarProperty Name="InProcessCurWeek" ColumnName="InProcessCurWeek" />
+                <ScalarProperty Name="Pending" ColumnName="Pending" />
+                <ScalarProperty Name="PendingCurMonth" ColumnName="PendingCurMonth" />
+                <ScalarProperty Name="PendingCurWeek" ColumnName="PendingCurWeek" />
+                <ScalarProperty Name="Resolved" ColumnName="Resolved" />
+                <ScalarProperty Name="ResolvedCurMonth" ColumnName="ResolvedCurMonth" />
+                <ScalarProperty Name="ResolvedCurWeek" ColumnName="ResolvedCurWeek" />
+                <ScalarProperty Name="Reopened" ColumnName="Reopened" />
+                <ScalarProperty Name="ReopenedCurMonth" ColumnName="ReopenedCurMonth" />
+                <ScalarProperty Name="ReopenedCurWeek" ColumnName="ReopenedCurWeek" />
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
+                <ScalarProperty Name="ClosedCurMonth" ColumnName="ClosedCurMonth" />
+                <ScalarProperty Name="ClosedCurWeek" ColumnName="ClosedCurWeek" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="TaskStatsGet" FunctionName="MaxMasterDbModel.Store.TaskStatsGet">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MaxMasterDbModel.TaskStatsGet_Result">
@@ -7759,9 +9358,24 @@
                 <ScalarProperty Name="HighMy" ColumnName="HighMy" />
                 <ScalarProperty Name="MediumMy" ColumnName="MediumMy" />
                 <ScalarProperty Name="LowMy" ColumnName="LowMy" />
+                <ScalarProperty Name="HighMyPending" ColumnName="HighMyPending" />
+                <ScalarProperty Name="MediumMyPending" ColumnName="MediumMyPending" />
+                <ScalarProperty Name="LowMyPending" ColumnName="LowMyPending" />
                 <ScalarProperty Name="HighThroughMe" ColumnName="HighThroughMe" />
                 <ScalarProperty Name="MediumThroughMe" ColumnName="MediumThroughMe" />
                 <ScalarProperty Name="LowThroughMe" ColumnName="LowThroughMe" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TopPerformances" FunctionName="MaxMasterDbModel.Store.TopPerformances">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MaxMasterDbModel.TopPerformances_Result">
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="MonthPoints" ColumnName="MonthPoints" />
+                <ScalarProperty Name="WeekPoints" ColumnName="WeekPoints" />
+                <ScalarProperty Name="DayPoints" ColumnName="DayPoints" />
+                <ScalarProperty Name="PhotoURL" ColumnName="PhotoURL" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -14,7 +14,7 @@ namespace MaxMaster.Models
     public partial class GetTicketLog_Result
     {
         public int ActivityLogId { get; set; }
-        public Nullable<System.DateTime> TaskDate { get; set; }
+        public System.DateTime TaskDate { get; set; }
         public string Description { get; set; }
         public string AssignedById { get; set; }
         public string AssignedToId { get; set; }

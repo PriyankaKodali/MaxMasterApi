@@ -17,8 +17,10 @@ namespace MaxMaster.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Activity()
         {
-            this.StockRequests = new HashSet<StockRequest>();
             this.Activities1 = new HashSet<Activity>();
+            this.ActivityNotifications = new HashSet<ActivityNotification>();
+            this.StockRequests = new HashSet<StockRequest>();
+            this.Activities11 = new HashSet<Activity>();
             this.ActivitiesLogs = new HashSet<ActivitiesLog>();
         }
     
@@ -40,16 +42,23 @@ namespace MaxMaster.Models
         public string TaskType { get; set; }
         public string AssignedTo { get; set; }
         public Nullable<int> Project_Id { get; set; }
+        public Nullable<int> Quantity { get; set; }
+        public Nullable<System.DateTime> LastUpdated { get; set; }
+        public string LastUpdatedBy { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Activity> Activities1 { get; set; }
+        public virtual Activity Activity1 { get; set; }
         public virtual Category Category { get; set; }
         public virtual Department Department { get; set; }
         public virtual SubCategory SubCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ActivityNotification> ActivityNotifications { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockRequest> StockRequests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Activity> Activities1 { get; set; }
-        public virtual Activity Activity1 { get; set; }
+        public virtual ICollection<Activity> Activities11 { get; set; }
+        public virtual Activity Activity2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActivitiesLog> ActivitiesLogs { get; set; }
     }

@@ -24,5 +24,6 @@ namespace MaxMaster.Models
         public int OrgId { get; set; }
         public string OrgName { get; set; }
         public Nullable<int> TotalCount { get; set; }
+        public string AspNetUserId { get; set; }
     }
 }

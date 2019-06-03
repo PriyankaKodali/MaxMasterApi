@@ -15,20 +15,19 @@ namespace MaxMaster.Controllers
         {
             try
             {
-                SmtpClient mailClient = new SmtpClient("smtp.1and1.com", 587);
-                mailClient.Credentials = new NetworkCredential("phanim@maxtranssystems.com", "Phani@1072");
+                SmtpClient mailClient = new SmtpClient("smtp.gmail.com", 587);
+                mailClient.Credentials = new NetworkCredential("maxtranssystems2018@gmail.com", "Max@12345");
                 mailClient.Port = 587;
-
+              
                 MailMessage message = new MailMessage();
-                message.From = new MailAddress("phanim@maxtranssystems.com", "Max Master App");
-
+                message.From = new MailAddress("maxtranssystems2018@gmail.com", "Max App");
                 message.To.Add(new MailAddress(to));
-                message.Bcc.Add(new MailAddress("priyankakodali611@gmail.com"));
+                message.Bcc.Add(new MailAddress("maxtranssystems2018@gmail.com"));
 
                 message.Subject = subject;
                 message.Body = body;
                 message.IsBodyHtml = true;
-
+                
                 mailClient.EnableSsl = true;
                 mailClient.Send(message);
 

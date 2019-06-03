@@ -54,7 +54,7 @@ namespace MaxMaster.Controllers
             try
             {
                 var form = HttpContext.Current.Request.Form;
-                var specialities = JsonConvert.DeserializeObject<List<DoctorSpecialitiesModel>>(form.Get("specialities"));
+                var specialities = JsonConvert.DeserializeObject<List<keyValueModel>>(form.Get("specialities"));
                 var email = form.Get("email");
                 var doctorGroup = form.Get("doctorGroup");
                 var macropercent = form.Get("macroPercent");
@@ -228,7 +228,7 @@ namespace MaxMaster.Controllers
                 using (MaxMasterDbEntities db = new MaxMasterDbEntities())
                 {
                     var form = HttpContext.Current.Request.Form;
-                    var specialities = JsonConvert.DeserializeObject<List<DoctorSpecialitiesModel>>(form.Get("specialities"));
+                    var specialities = JsonConvert.DeserializeObject<List<keyValueModel>>(form.Get("specialities"));
                     var newMail = form.Get("email");
                     var oldMail = form.Get("OldMail");
                     var macropercent = form.Get("macroPercent");

@@ -1,0 +1,924 @@
+05-09 16:15:23.929 25802 25802 I InCall : CallCardPresenter - callState: 2mOldCallState: 2
+05-09 16:15:23.930 25802 25802 I InCall : OPGlowPadAnswerFragment - Show answer UI: false
+05-09 16:15:23.930 25802 25802 I InCall : OPGlowPadAnswerFragment - isAnswerVoice: false
+05-09 16:15:23.930 25802 25802 I InCall : OPSlideAnswerLayout - stopAnimation
+05-09 16:15:23.930 25802 25802 I InCall : OPSlideAnswerLayout - stopShakeAnimation
+05-09 16:15:23.930 25802 25802 I InCall : OPSlideAnswerLayout - resetArrow
+05-09 16:15:23.932 7588 7603 W BroadcastQueue: Permission Denial: receiving Intent { act=android.intent.action.PHONE_STATE flg=0x1000010 (has extras) } to com.google.android.apps.t
+achyon/.PhoneStateMonitor requires android.permission.READ_PRIVILEGED_PHONE_STATE due to sender android (uid 1000)
+05-09 16:15:23.933 7588 7663 W BroadcastQueue: Permission Denial: receiving Intent { act=android.intent.action.PHONE_STATE flg=0x1000010 (has extras) } to com.myairtelapp/.dialer.r
+eceivers.IncomingCallReceiver requires android.permission.READ_PRIVILEGED_PHONE_STATE due to sender android (uid 1000)
+05-09 16:15:23.933 7588 7663 W BroadcastQueue: Permission Denial: receiving Intent { act=android.intent.action.PHONE_STATE flg=0x1000010 (has extras) } to com.myairtelapp/.certific
+ation.CallEndReceiver requires android.permission.READ_PRIVILEGED_PHONE_STATE due to sender android (uid 1000)
+05-09 16:15:23.933 7588 7663 W BroadcastQueue: Permission Denial: receiving Intent { act=android.intent.action.PHONE_STATE flg=0x1000010 (has extras) } to com.truecaller/.util.Call
+MonitoringReceiver requires android.permission.READ_PRIVILEGED_PHONE_STATE due to sender android (uid 1000)
+05-09 16:15:23.933 7588 7663 W BroadcastQueue: Permission Denial: receiving Intent { act=android.intent.action.PHONE_STATE flg=0x1000010 (has extras) } to com.zhiliaoapp.musically/
+com.ss.android.ugc.aweme.live.sdk.chatroom.receiver.PhoneReceiver requires android.permission.READ_PRIVILEGED_PHONE_STATE due to sender android (uid 1000)
+05-09 16:15:23.934 25802 25802 I InCall : OPCallCardFragment - setCallCardVisible : isVisible = true
+05-09 16:15:23.934 25802 25802 I InCall : CallCardFragment - setCallButtonsVisible isVisible: true, isButtonVisibility: true
+05-09 16:15:23.934 25802 25802 I InCall : CallCardFragment - enabled: true, isEnabled: true, animate: false
+05-09 16:15:23.934 25802 25802 I InCall : CallCardFragment - topVisible: false, bottomVisible: false
+05-09 16:15:23.934 25802 25802 I InCall : StatusBarNotifier - onStateChange oldState: NO_CALLS newState: NO_CALLS
+05-09 16:15:23.934 25802 25802 I InCall : StatusBarNotifier - updateInCallNotification...
+05-09 16:15:23.934 25802 25802 I InCall : StatusBarNotifier - updateInCallNotification end...
+05-09 16:15:23.934 25802 25802 I InCall : OPVideoCallFragment - cleanupSurfaces
+05-09 16:15:23.934 25802 25802 I InCall : VideoCallPresenter - onStateChange primary= null
+05-09 16:15:23.934 25802 25802 I InCall : VideoCallPresenter - onStateChange mPrimaryCall = null
+05-09 16:15:23.934 25802 25802 I InCall : VideoCallPresenter - updateCallCache: call= null
+05-09 16:15:23.938 25802 25802 I InCall : InCallPresenter - Finished InCallPresenter.setUp
+05-09 16:15:23.940 7588 7588 I Telecom : InCallController: onConnected to ComponentInfo{com.android.incallui/com.android.incallui.InCallServiceImpl}: ICSBC.oSC@Bn4
+05-09 16:15:23.940 7588 7588 I Telecom : InCallController: Adding 1 calls to InCallService after onConnected: ComponentInfo{com.android.incallui/com.android.incallui.InCallServiceI
+mpl}, including external calls: ICSBC.oSC@Bn4
+05-09 16:15:23.942 7588 7588 I Telecom : InCallController: 1 calls sent to InCallService.: ICSBC.oSC@Bn4
+05-09 16:15:23.944 25802 25802 I InCall : InCallServiceImpl - onCallAdded
+05-09 16:15:23.946 7588 8730 I Telecom : RingtoneFactory: phoneId = 0 defaultRingtoneUri = content://media/internal/audio/media/64: (...->CS.crCo->H.CS.crCo->H.CS.crCo.pICR)->CSW.
+hCCC->ABCF.oPE->ICF.oCFC->CAMSM.pM_2002@E-E-Bn0
+05-09 16:15:23.951 7588 8730 I MediaPlayer: constructor
+05-09 16:15:23.957 25802 25802 I InCall : InCallPresenter - setBoundAndWaitingForOutgoingCall: false
+05-09 16:15:23.957 25802 25802 I InCall : AudioModeProvider - the new mode is 1
+05-09 16:15:23.961 7472 7631 D MediaPlayerService: LF player type = 4
+05-09 16:15:23.961 7472 7631 D NuPlayerDriver: NuPlayerDriver(0xe80b27e0) created, clientPid(7588)
+05-09 16:15:23.963 25802 25802 I InCall : Call - updateFromTelecomCall: Call [id: TC@8, state: RINGING, details: [pa: ComponentInfo{com.android.phone/com.android.services.telephony.
+TelephonyConnectionService}, [], UserHandle{0}, hdl: [], caps: [Capabilities: CAPABILITY_SUPPORT_HOLD CAPABILITY_RESPOND_VIA_TEXT CAPABILITY_MUTE CAPABILITY_CANNOT_DOWNGRADE_
+VIDEO_TO_AUDIO], props: [Properties:]]]
+05-09 16:15:23.965 7472 7631 I ExtendedNuUtils: printFileName fd(16) -> /system/media/audio/ringtones/oneplus_tune.ogg
+05-09 16:15:23.965 8632 9931 D QtiEmergencyCallHelper: modem is in single standby mode
+05-09 16:15:23.974 25802 25802 I InCall : CallList - getSubId
+05-09 16:15:23.974 7472 10323 D GenericSource: FileSource remote
+05-09 16:15:23.977 25802 25802 I InCall : CallList - subId:1
+05-09 16:15:23.977 25802 25802 I InCall : Call - setSubId subId: 1
+05-09 16:15:23.981 7470 8911 I ExtendedExtractor: QTIParser is prefered .. flags 2
+05-09 16:15:23.981 7470 8911 I QComExtractorFactory: QTI parser is not preferred for mime: application/ogg
+05-09 16:15:23.981 7470 8911 E QCExtractor: ExtendedExtractor failed to instantiate extractor
+05-09 16:15:23.981 7470 8911 I ExtendedExtractor: ExtendedExtractor::create 0x0
+05-09 16:15:23.983 25802 25802 I InCall : CallList - isEmergencyCallfalse
+05-09 16:15:23.983 25802 25802 I InCall : CallList - onIncoming - [Call_7, INCOMING, [Capabilities: CAPABILITY_SUPPORT_HOLD CAPABILITY_RESPOND_VIA_TEXT CAPABILITY_MUTE CAPABILITY_CA
+NNOT_DOWNGRADE_VIDEO_TO_AUDIO], children:[], parent:null, conferenceable:[], videoState:Audio Only, mSessionModificationState:0, VideoSettings:(CameraDir:-1), mIsActivSub:false]
+05-09 16:15:23.984 7472 10323 E MediaExtractor: Trace connect 0xe66bd6c0 0xe6215200
+05-09 16:15:23.984 25802 25802 I InCall : OPSilenceUtils - isSillent: true, hasRegistered: false
+05-09 16:15:23.984 25802 25802 I InCall : OPSilenceUtils - sensor: {Sensor name="LSM6DS3 Accelerometer", vendor="STMicroelectronics", version=1, type=1, maxRange=78.4532, resolution
+=0.0023956299, power=0.9, minDelay=5000}
+05-09 16:15:23.986 7472 10322 D NuPlayerDriver: notifyListener_l(0xe80b27e0), (1, 0, 0, -1), loop setting(0, 0)
+05-09 16:15:23.987 25802 25802 I InCall : OPSilenceUtils - registerListener
+05-09 16:15:23.987 25802 25802 I InCall : InCallPresenter - startOrFinishUi mIsGameModeOn: false
+05-09 16:15:23.987 25802 25802 I InCall : InCallPresenter - Start Full Screen in call UI
+05-09 16:15:23.987 25802 25802 I InCall : StatusBarNotifier - updateInCallNotification...
+05-09 16:15:23.988 25802 25802 I InCall : ContactInfoCache - callNumber: +919*****5550
+05-09 16:15:23.988 25802 25802 I InCall : ContactInfoCache - Contact lookup. In memory cache miss; searching provider.
+05-09 16:15:23.988 25802 25802 D CallerInfoUtils: modifyForSpecialCnapCases: initially, number=xxxxxxxxxxxxx, presentation=1 ci com.android.incallui.CallerInfo@669afbd { name null, p
+honeNumber null }
+05-09 16:15:23.988 25802 25802 D CallerInfoUtils: SpecialCnap: number=xxxxxxxxxxxxx; presentation now=1
+05-09 16:15:23.988 25802 25802 D CallerInfoUtils: modifyForSpecialCnapCases: returning number string=xxxxxxxxxxxxx
+05-09 16:15:23.988 7588 8730 D Ringtone: Successfully created local player
+05-09 16:15:23.989 7588 8730 W Ringtone: Use of stream types is deprecated for operations other than volume control
+05-09 16:15:23.989 7588 8730 W Ringtone: See the documentation of setStreamType() for what to use instead with android.media.AudioAttributes to qualify your playback use case
+05-09 16:15:23.989 7472 7472 D NuPlayerDriver: reset(0xe80b27e0) at state 4
+05-09 16:15:23.989 7472 7472 D NuPlayerDriver: notifyListener_l(0xe80b27e0), (8, 0, 0, -1), loop setting(0, 0)
+05-09 16:15:23.990 8632 9931 D QtiEmergencyCallHelper: modem is in single standby mode
+05-09 16:15:23.991 7472 10322 W AMessage: failed to post message as target looper for handler 0 is gone.
+05-09 16:15:23.991 7472 10322 D NuPlayerDriver: notifyResetComplete(0xe80b27e0)
+05-09 16:15:23.991 7472 7472 D NuPlayerDriver: reset(0xe80b27e0) at state 0
+05-09 16:15:23.995 7588 8730 V MediaPlayer: resetDrmState: mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+05-09 16:15:23.995 7588 8730 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+05-09 16:15:23.995 7588 8730 V MediaPlayer: resetDrmState: mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+05-09 16:15:23.995 7588 8730 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+05-09 16:15:23.997 7588 8664 W BroadcastQueue: Permission Denial: receiving Intent { act=android.intent.action.PHONE_STATE flg=0x1000010 (has extras) } to com.yulore.framework/com.
+yulore.basic.cache.receiver.MultipleReceiver requires android.permission.READ_PHONE_STATE due to sender android (uid 1000)
+05-09 16:15:23.997 7588 8730 I MediaPlayer: constructor
+05-09 16:15:24.008 7588 20771 W BroadcastQueue: Permission Denial: receiving Intent { act=android.intent.action.PHONE_STATE flg=0x1000010 (has extras) } to com.google.android.apps.t
+achyon/.PhoneStateMonitor requires android.permission.READ_PHONE_STATE due to sender android (uid 1000)
+05-09 16:15:24.009 9436 9436 D NotificationListener: onNotificationPosted# hash: 138946954 sbn: StatusBarNotification(pkg=android user=UserHandle{0} id=40 tag=null key=0|android|40
+|null|1000: Notification(channel=FOREGROUND_SERVICE pri=0 contentView=null vibrate=null sound=null defaults=0x0 flags=0x2 color=0xff607d8b vis=PRIVATE))
+05-09 16:15:24.015 25802 25802 D CallerInfoUtils: ==> Actually starting CallerInfoAsyncQuery.startQuery()...
+05-09 16:15:24.016 7472 7472 D MediaPlayerService: LF player type = 4
+05-09 16:15:24.017 7472 7472 D NuPlayerDriver: NuPlayerDriver(0xe80b2a10) created, clientPid(7588)
+05-09 16:15:24.018 8632 8989 D QtiEmergencyCallHelper: modem is in single standby mode
+05-09 16:15:24.019 9436 9436 D NotificationListener: onNotificationPosted# hash: 138946954 sbn: StatusBarNotification(pkg=com.truecaller user=UserHandle{0} id=2131362196 tag=null k
+ey=0|com.truecaller|2131362196|null|10109: Notification(channel=null pri=0 contentView=null vibrate=null sound=null defaults=0x0 flags=0x62 color=0xff0091ea vis=PRIVATE))
+05-09 16:15:24.019 7472 7472 I ExtendedNuUtils: printFileName fd(16) -> /system/media/audio/ringtones/oneplus_tune.ogg
+05-09 16:15:24.021 25802 25802 I InCall : ContactInfoCache - lookupKey: null, phonebookLabel: null
+05-09 16:15:24.021 25802 25802 I InCall : ContactInfoCache - findInfoQueryComplete
+05-09 16:15:24.022 25802 25802 I InCall : StatusBarNotifier - callState: 4
+05-09 16:15:24.024 7472 10328 D GenericSource: FileSource remote
+05-09 16:15:24.025 7588 11245 W BroadcastQueue: Permission Denial: receiving Intent { act=android.intent.action.PHONE_STATE flg=0x1000010 (has extras) } to com.zhiliaoapp.musically/
+com.ss.android.ugc.aweme.live.sdk.chatroom.receiver.PhoneReceiver requires android.permission.READ_PHONE_STATE due to sender android (uid 1000)
+05-09 16:15:24.028 25802 25802 D CallUtil: getVideoCallingAvailability VIDEO_CALLING_DISABLED
+05-09 16:15:24.032 7470 16577 I ExtendedExtractor: QTIParser is prefered .. flags 2
+05-09 16:15:24.032 7470 16577 I QComExtractorFactory: QTI parser is not preferred for mime: application/ogg
+05-09 16:15:24.033 7470 16577 E QCExtractor: ExtendedExtractor failed to instantiate extractor
+05-09 16:15:24.033 7470 16577 I ExtendedExtractor: ExtendedExtractor::create 0x0
+05-09 16:15:24.038 25802 25802 D CallUtil: getVideoCallingAvailability VIDEO_CALLING_DISABLED
+05-09 16:15:24.039 7472 10328 E MediaExtractor: Trace connect 0xe66bd6c0 0xe66c4800
+05-09 16:15:24.040 7472 10326 D NuPlayerDriver: notifyListener_l(0xe80b2a10), (1, 0, 0, -1), loop setting(0, 0)
+05-09 16:15:24.042 7588 8730 D Ringtone: Successfully created local player
+05-09 16:15:24.043 25802 25802 I InCall : StatusBarNotifier - Data changed. Showing notification
+05-09 16:15:24.043 7588 8730 I Telecom : Event: RecordEntry TC@8: START_RINGER, null: (...->CS.crCo->H.CS.crCo->H.CS.crCo.pICR)->CSW.hCCC->ABCF.oPE->ICF.oCFC->CAMSM.pM_2002@E-E-Bn0
+05-09 16:15:24.045 7588 8730 I Telecom : OPTelecomUtils subid is 1
+05-09 16:15:24.047 7588 10332 I Telecom : AsyncRingtonePlayer: Play ringtone.
+05-09 16:15:24.047 7588 10332 I Telecom : RingtoneFactory: ringtoneUri is null
+05-09 16:15:24.047 7588 8730 I Telecom : Event: RecordEntry TC@8: START_VIBRATOR, hasVibrator=true, userRequestsVibrate=true, ringerMode=2, isVibrating=false: (...->CS.crCo->H.CS.c
+rCo->H.CS.crCo.pICR)->CSW.hCCC->ABCF.oPE->ICF.oCFC->CAMSM.pM_2002@E-E-Bn0
+05-09 16:15:24.047 7588 8730 I Ringer : Is support linear motor: false
+05-09 16:15:24.048 7588 8730 D VibratorService: , startTime: 7700705, effect: Waveform{mTimings=[0, 1000, 1000], mAmplitudes=[0, -1, 0], mRepeat=0}, usageHint: 6, uid: 1000, opPkg:
+com.android.server.telecom
+05-09 16:15:24.048 7588 8730 I MediaFocusControl: AudioFocus requestAudioFocus() from uid/pid 1000/7588 clientId=AudioFocus_For_Phone_Ring_And_Calls req=2 flags=0x4
+05-09 16:15:24.048 7588 8730 D AudioManager: PPD setMode mode = 1
+05-09 16:15:24.049 7588 8730 V AudioManager: Elem: dalvik.system.VMStack.getThreadStackTrace(Native Method)
+05-09 16:15:24.049 7588 8730 V AudioManager: Elem: java.lang.Thread.getStackTrace(Thread.java:1536)
+05-09 16:15:24.049 7588 8730 V AudioManager: Elem: android.media.AudioManager.setMode(AudioManager.java:1630)
+05-09 16:15:24.049 7588 8730 V AudioManager: Elem: com.android.server.telecom.CallAudioModeStateMachine$RingingFocusState.enter(CallAudioModeStateMachine.java:217)
+05-09 16:15:24.049 7588 8730 V AudioManager: Elem: com.android.internal.util.StateMachine$SmHandler.invokeEnterMethods(StateMachine.java:1037)
+05-09 16:15:24.049 7588 8730 V AudioManager: Elem: com.android.internal.util.StateMachine$SmHandler.performTransitions(StateMachine.java:879)
+05-09 16:15:24.049 7588 8730 V AudioManager: Elem: com.android.internal.util.StateMachine$SmHandler.handleMessage(StateMachine.java:819)
+05-09 16:15:24.049 7588 8730 V AudioManager: Elem: android.os.Handler.dispatchMessage(Handler.java:105)
+05-09 16:15:24.049 7588 8730 V AudioManager: Elem: android.os.Looper.loop(Looper.java:164)
+05-09 16:15:24.049 7588 8730 V AudioManager: Elem: android.os.HandlerThread.run(HandlerThread.java:65)
+05-09 16:15:24.049 529 1348 D audio_hw_primary: adev_set_mode: mode 1
+05-09 16:15:24.050 7379 4840 D AudioPolicyManagerCustom: setPhoneState() state 1
+05-09 16:15:24.050 7379 4840 D APM_AudioPolicyManager: checkOutputForAllStrategies()
+05-09 16:15:24.050 7379 4840 V AudioPolicyManagerCustom: checkOutputForStrategy(): policy related outputs
+05-09 16:15:24.050 7379 4840 I chatty : uid=1041(audioserver) Binder:7379_8 identical 6 lines
+05-09 16:15:24.050 7379 4840 V AudioPolicyManagerCustom: checkOutputForStrategy(): policy related outputs
+05-09 16:15:24.050 7379 4840 D APM_AudioPolicyManager: checkOutputForAllStrategies()--
+05-09 16:15:24.050 7379 4840 I APM_AudioPolicyManager: setOutputDevice() device 0000 delayMs 0
+05-09 16:15:24.050 7379 4840 I chatty : uid=1041(audioserver) Binder:7379_8 identical 1 line
+05-09 16:15:24.050 7379 4840 I APM_AudioPolicyManager: setOutputDevice() device 0000 delayMs 0
+05-09 16:15:24.050 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:0,index:6 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.050 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:1,index:7 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.050 7379 7724 I AudioFlinger: setStreamVolume() stream 1 value 0.501188 output 37
+05-09 16:15:24.050 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:2,index:7 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.050 7379 7724 I AudioFlinger: setStreamVolume() stream 2 value 1.000000 output 37
+05-09 16:15:24.051 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:3,index:30 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.051 7379 7724 I AudioFlinger: setStreamVolume() stream 3 value 1.000000 output 37
+05-09 16:15:24.055 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:4,index:7 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.055 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:5,index:7 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.055 7379 7724 I AudioFlinger: setStreamVolume() stream 5 value 1.000000 output 37
+05-09 16:15:24.055 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:6,index:7 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.055 7379 4840 V AudioPolicyManagerCustom: checkAndSetVolume() cannot set stream 6 volume with force use = 1 for comm
+05-09 16:15:24.055 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:7,index:7 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.055 7379 7724 I AudioFlinger: setStreamVolume() stream 7 value 0.501188 output 37
+05-09 16:15:24.055 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:8,index:15 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.055 7379 7724 I AudioFlinger: setStreamVolume() stream 8 value 0.501188 output 37
+05-09 16:15:24.056 7588 10332 I Telecom : RingtoneFactory: phoneId = 0 defaultRingtoneUri = content://media/internal/audio/media/64
+05-09 16:15:24.056 7379 4840 I AudioPolicyManagerCustCount:0
+05-09 16:15:24.059 7379 4840 V AudioPolicyManagerCustom: mLimitMusicVolume 0
+05-09 16:15:24.059 7379 4840 D AudioPolicyManagerCustom: setPhoneState()--
+05-09 16:15:24.060 7588 10332 I MediaPlayer: constructor
+05-09 16:15:24.061 25802 25802 I InCall : StatusBarNotifier - hasInCallUIStarted: false
+05-09 16:15:24.061 25802 25802 I InCall : StatusBarNotifier - shouldStartUIForContact
+05-09 16:15:24.061 25802 25802 D OPExtensionManager: getInstance
+05-09 16:15:24.061 25802 25802 D OPExtensionManager: shouldStartUIForContact mOPTelecomSvc: com.android.phone.common.IOPTelecomService$Stub$Proxy@ce1854e
+05-09 16:15:24.062 7588 8653 I OPTelecomService: zenMode: 0
+05-09 16:15:24.063 25802 25802 I InCall : StatusBarNotifier - - Setting fullScreenIntent: PendingIntent{886dd03: android.os.BinderProxy@2dd849}
+05-09 16:15:24.065 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{9c765fb u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{3ffdb55 8441 com.andro
+id.systemui/10030/u0 remote:52d360c}: process gone or crashing
+05-09 16:15:24.065 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{9c765fb u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{5744e22 8441 com.andro
+id.systemui/10030/u0 remote:9a5afed}: process gone or crashing
+05-09 16:15:24.070 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{61b1618 u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{3ffdb55 8441 com.andro
+id.systemui/10030/u0 remote:52d360c}: process gone or crashing
+05-09 16:15:24.070 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{61b1618 u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{5744e22 8441 com.andro
+id.systemui/10030/u0 remote:9a5afed}: process gone or crashing
+05-09 16:15:24.072 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{8d3e871 u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{3ffdb55 8441 com.andro
+id.systemui/10030/u0 remote:52d360c}: process gone or crashing
+05-09 16:15:24.072 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{8d3e871 u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{5744e22 8441 com.andro
+id.systemui/10030/u0 remote:9a5afed}: process gone or crashing
+05-09 16:15:24.074 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{b729656 u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{3ffdb55 8441 com.andro
+id.systemui/10030/u0 remote:52d360c}: process gone or crashing
+05-09 16:15:24.075 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{b729656 u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{5744e22 8441 com.andro
+id.systemui/10030/u0 remote:9a5afed}: process gone or crashing
+05-09 16:15:24.075 25802 25802 D CallUtil: getVideoCallingAvailability VIDEO_CALLING_DISABLED
+05-09 16:15:24.077 7472 7472 D MediaPlayerService: LF player type = 4
+05-09 16:15:24.077 7472 7472 D NuPlayerDriver: NuPlayerDriver(0xe622a380) created, clientPid(7588)
+05-09 16:15:24.078 25802 25802 I InCall : StatusBarNotifier - the ui state is: false
+05-09 16:15:24.078 25802 25802 I InCall : StatusBarNotifier - mShowHighLight: false showHighLight: true
+05-09 16:15:24.079 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{61c66d7 u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{3ffdb55 8441 com.andro
+id.systemui/10030/u0 remote:52d360c}: process gone or crashing
+05-09 16:15:24.079 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{61c66d7 u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{5744e22 8441 com.andro
+id.systemui/10030/u0 remote:9a5afed}: process gone or crashing
+05-09 16:15:24.079 7472 7472 I ExtendedNuUtils: printFileName fd(16) -> /system/media/audio/ringtones/oneplus_tune.ogg
+05-09 16:15:24.080 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{2b77bc4 u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{3ffdb55 8441 com.andro
+id.systemui/10030/u0 remote:52d360c}: process gone or crashing
+05-09 16:15:24.080 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{2b77bc4 u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{5744e22 8441 com.andro
+id.systemui/10030/u0 remote:9a5afed}: process gone or crashing
+05-09 16:15:24.081 25802 25802 D CallUtil: getVideoCallingAvailability VIDEO_CALLING_DISABLED
+05-09 16:15:24.083 7472 10337 D GenericSource: FileSource remote
+05-09 16:15:24.085 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{d6d9aad u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{3ffdb55 8441 com.andro
+id.systemui/10030/u0 remote:52d360c}: process gone or crashing
+05-09 16:15:24.085 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{d6d9aad u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{5744e22 8441 com.andro
+id.systemui/10030/u0 remote:9a5afed}: process gone or crashing
+05-09 16:15:24.086 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{b99c1e2 u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{3ffdb55 8441 com.andro
+id.systemui/10030/u0 remote:52d360c}: process gone or crashing
+05-09 16:15:24.086 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{b99c1e2 u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{5744e22 8441 com.andro
+id.systemui/10030/u0 remote:9a5afed}: process gone or crashing
+05-09 16:15:24.087 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{569973 u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{3ffdb55 8441 com.androi
+d.systemui/10030/u0 remote:52d360c}: process gone or crashing
+05-09 16:15:24.088 7588 7663 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{569973 u-1 android.media.VOLUME_CHANGED_ACTION} to ReceiverList{5744e22 8441 com.androi
+d.systemui/10030/u0 remote:9a5afed}: process gone or crashing
+05-09 16:15:24.089 7588 8729 I Telecom : CallAudioRouteStateMachine: Message received: SWITCH_FOCUS=4001, arg1=3: (...->CS.crCo->H.CS.crCo->H.CS.crCo.pICR)->CSW.hCCC->ABCF.oPE->ICF
+.oCFC->CAMSM.pM_2002->CARSM.pM_SWITCH_FOCUS@E-E-Bn0
+05-09 16:15:24.089 7588 8729 I Telecom : Event: RecordEntry TC@8: AUDIO_ROUTE, Leaving state QuiescentEarpieceRoute: (...->CS.crCo->H.CS.crCo->H.CS.crCo.pICR)->CSW.hCCC->ABCF.oPE->
+ICF.oCFC->CAMSM.pM_2002->CARSM.pM_SWITCH_FOCUS@E-E-Bn0
+05-09 16:15:24.089 7588 8729 I Telecom : Event: RecordEntry TC@8: AUDIO_ROUTE, Entering state ActiveEarpieceRoute: (...->CS.crCo->H.CS.crCo->H.CS.crCo.pICR)->CSW.hCCC->ABCF.oPE->IC
+F.oCFC->CAMSM.pM_2002->CARSM.pM_SWITCH_FOCUS@E-E-Bn0
+05-09 16:15:24.089 7588 8729 I Telecom : CallAudioRouteStateMachine: turning speaker phone false: (...->CS.crCo->H.CS.crCo->H.CS.crCo.pICR)->CSW.hCCC->ABCF.oPE->ICF.oCFC->CAMSM.pM_
+2002->CARSM.pM_SWITCH_FOCUS@E-E-Bn0
+05-09 16:15:24.089 7588 8729 I AudioManager: setSpeakerphoneOn false java.lang.Throwable
+05-09 16:15:24.089 7588 8729 I AudioManager: at android.media.AudioManager.setSpeakerphoneOn(AudioManager.java:1235)
+05-09 16:15:24.089 7588 8729 I AudioManager: at com.android.server.telecom.CallAudioRouteStateMachine.setSpeakerphoneOn(CallAudioRouteStateMachine.java:1267)
+05-09 16:15:24.089 7588 8729 I AudioManager: at com.android.server.telecom.CallAudioRouteStateMachine.-wrap5(Unknown Source:0)
+05-09 16:15:24.089 7588 8729 I AudioManager: at com.android.server.telecom.CallAudioRouteStateMachine$ActiveEarpieceRoute.enter(CallAudioRouteStateMachine.java:269)
+05-09 16:15:24.089 7588 8729 I AudioManager: at com.android.internal.util.StateMachine$SmHandler.invokeEnterMethods(StateMachine.java:1037)
+05-09 16:15:24.089 7588 8729 I AudioManager: at com.android.internal.util.StateMachine$SmHandler.performTransitions(StateMachine.java:879)
+05-09 16:15:24.089 7588 8729 I AudioManager: at com.android.internal.util.StateMachine$SmHandler.handleMessage(StateMachine.java:819)
+05-09 16:15:24.089 7588 8729 I AudioManager: at android.os.Handler.dispatchMessage(Handler.java:105)
+05-09 16:15:24.089 7588 8729 I AudioManager: at android.os.Looper.loop(Looper.java:164)
+05-09 16:15:24.089 7588 8729 I AudioManager: at android.os.HandlerThread.run(HandlerThread.java:65)
+05-09 16:15:24.090 7588 8729 D AudioService: isHasSpeakerAuthority APP keys: com.android.server.telecom,mIsTelName=true
+05-09 16:15:24.090 7470 7609 I ExtendedExtractor: QTIParser is prefered .. flags 2
+05-09 16:15:24.090 7470 7609 I QComExtractorFactory: QTI parser is not preferred for mime: application/ogg
+05-09 16:15:24.090 7470 7609 E QCExtractor: ExtendedExtractor failed to instantiate extractor
+05-09 16:15:24.090 7470 7609 I ExtendedExtractor: ExtendedExtractor::create 0x0
+05-09 16:15:24.090 25802 25802 I InCall : StatusBarNotifier - Displaying notification for 2 showOnStatusBar: false
+05-09 16:15:24.090 7470 7609 E QCExtractor: ExtendedExtractor failed to instantiate extractor
+05-09 16:15:24.090 7470 7609 I ExtendedExtractor: ExtendedExtractor::create 0x0
+05-09 16:15:24.094 7588 8729 D AudioService: isInCallState =true
+05-09 16:15:24.094 7588 8729 I Telecom : CallAudioRouteStateMachine: setSystemAudioState: changing from [AudioState isMuted: false, route: EARPIECE, supportedRouteMask: EARPIECE, S
+PEAKER] to [AudioState isMuted: false, route: EARPIECE, supportedRouteMask: EARPIECE, SPEAKER]: (...->CS.crCo->H.CS.crCo->H.CS.crCo.pICR)->CSW.hCCC->ABCF.oPE->ICF.oCFC->CAMSM.pM_2002
+->CARSM.pM_SWITCH_FOCUS@E-E-Bn0
+05-09 16:15:24.095 7588 8729 I Telecom : InCallController: Calling onAudioStateChanged, audioState: [AudioState isMuted: false, route: EARPIECE, supportedRouteMask: EARPIECE, SPEAK
+ER] -> [AudioState isMuted: false, route: EARPIECE, supportedRouteMask: EARPIECE, SPEAKER]: (...->CS.crCo->H.CS.crCo->H.CS.crCo.pICR)->CSW.hCCC->ABCF.oPE->ICF.oCFC->CAMSM.pM_2002->CA
+RSM.pM_SWITCH_FOCUS@E-E-Bn0
+05-09 16:15:24.095 7379 4840 D AudioPolicyManagerCustom: setForceUse() usage 0, config 0, mPhoneState 1
+05-09 16:15:24.095 7379 4840 D APM_AudioPolicyManager: checkOutputForAllStrategies()
+05-09 16:15:24.095 7379 4840 V AudioPolicyManagerCustom: checkOutputForStrategy(): policy related outputs
+05-09 16:15:24.095 7379 4840 I chatty : uid=1041(audioserver) Binder:7379_8 identical 6 lines
+05-09 16:15:24.095 7379 4840 V AudioPolicyManagerCustom: checkOutputForStrategy(): policy related outputs
+05-09 16:15:24.095 7379 4840 D APM_AudioPolicyManager: checkOutputForAllStrategies()--
+05-09 16:15:24.096 7379 4840 I APM_AudioPolicyManager: setOutputDevice() device 0000 delayMs 0
+05-09 16:15:24.096 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:0,index:6 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.096 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:1,index:7 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.096 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:2,index:7 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.096 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:3,index:30 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.096 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:4,index:7 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.096 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:5,index:7 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.096 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:6,index:7 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.096 7379 4840 V AudioPolicyManagerCustom: checkAndSetVolume() cannot set stream 6 volume with force use = 0 for comm
+05-09 16:15:24.096 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:7,index:7 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.096 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:8,index:15 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.096 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:9,index:15 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.096 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:10,index:15 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.096 7379 4840 I AudioPolicyManagerCustom: checkAndSetVolume:stream:11,index:0 device:0,delayMs:0,muteCount:0
+05-09 16:15:24.096 7379 4840 I APM_AudioPolicyManager: setOutputDevice() device 0000 delayMs 0
+05-09 16:15:24.096 7379 4840 I APM_AudioPolicyManager: setOutputDevice() device 0000 delayMs 0
+05-09 16:15:24.096 7379 4840 D AudioPolicyManagerCustom: setForceUse()--
+05-09 16:15:24.098 7472 10337 E MediaExtractor: Trace connect 0xe66bd840 0xe66c3400
+05-09 16:15:24.099 25802 25802 I InCall : StatusBarNotifier - updateInCallNotification end...
+05-09 16:15:24.099 25802 25802 I InCall : InCallPresenter - Phone switching state: NO_CALLS -> INCOMING
+05-09 16:15:24.099 25802 25802 I InCall : CallCardPresenter - onStateChange() oldState: NO_CALLS, newState: INCOMING
+05-09 16:15:24.099 25802 25802 I InCall : CallCardPresenter - Primary call: [Call_7, INCOMING, [Capabilities: CAPABILITY_SUPPORT_HOLD CAPABILITY_RESPOND_VIA_TEXT CAPABILITY_MUTE CAP
+ABILITY_CANNOT_DOWNGRADE_VIDEO_TO_AUDIO], children:[], parent:null, conferenceable:[], videoState:Audio Only, mSessionModificationState:0, VideoSettings:(CameraDir:-1), mIsActivSub:f
+alse]
+05-09 16:15:24.099 25802 25802 I InCall : CallCardPresenter - Secondary call: null
+05-09 16:15:24.099 9436 9436 D NotificationListener: onNotificationPosted# hash: 138946954 sbn: StatusBarNotification(pkg=com.android.incallui user=UserHandle{0} id=2 tag=null key=
+0|com.android.incallui|2|null|1001: Notification(channel=null pri=2 contentView=null vibrate=null sound=null defaults=0x0 flags=0x82 color=0xff0288d1 category=call actions=2 vis=PRIV
+ATE publicVersion=Notification(channel=null pri=0 contentView=null vibrate=null sound=null defaults=0x0 flags=0x0 color=0xff0288d1 vis=PRIVATE)))
+05-09 16:15:24.099 25802 25802 I OPRecordLog: CallCardPresenter: mPreviousPrimaryState: 2
+05-09 16:15:24.099 25802 25802 D CallerInfoUtils: modifyForSpecialCnapCases: initially, number=xxxxxxxxxxxxx, presentation=1 ci com.android.incallui.CallerInfo@6068ab9 { name null, p
+honeNumber null }
+05-09 16:15:24.099 25802 25802 D CallerInfoUtils: SpecialCnap: number=xxxxxxxxxxxxx; presentation now=1
+05-09 16:15:24.099 25802 25802 D CallerInfoUtils: modifyForSpecialCnapCases: returning number string=xxxxxxxxxxxxx
+05-09 16:15:24.101 7472 10336 D NuPlayerDriver: notifyListener_l(0xe622a380), (1, 0, 0, -1), loop setting(0, 0)
+05-09 16:15:24.101 8632 8989 D QtiEmergencyCallHelper: modem is in single standby mode
+05-09 16:15:24.103 7588 10332 D Ringtone: Successfully created local player
+05-09 16:15:24.103 7588 10332 W Ringtone: Use of stream types is deprecated for operations other than volume control
+05-09 16:15:24.103 7588 10332 W Ringtone: See the documentation of setStreamType() for what to use instead with android.media.AudioAttributes to qualify your playback use case
+05-09 16:15:24.103 7472 7472 D NuPlayerDriver: reset(0xe622a380) at state 4
+05-09 16:15:24.103 7472 7472 D NuPlayerDriver: notifyListener_l(0xe622a380), (8, 0, 0, -1), loop setting(0, 0)
+05-09 16:15:24.104 7472 10336 W AMessage: failed to post message as target looper for handler 0 is gone.
+05-09 16:15:24.105 7472 10336 D NuPlayerDriver: notifyResetComplete(0xe622a380)
+05-09 16:15:24.105 7472 7472 D NuPlayerDriver: reset(0xe622a380) at state 0
+05-09 16:15:24.106 7588 10332 V MediaPlayer: resetDrmState: mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+05-09 16:15:24.106 7588 10332 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+05-09 16:15:24.106 7588 10332 V MediaPlayer: resetDrmState: mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+05-09 16:15:24.106 7588 10332 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+05-09 16:15:24.109 7588 10332 I MediaPlayer: constructor
+05-09 16:15:24.119 25802 25802 I InCall : ContactInfoCache - callNumber: +9195550
+05-09 16:15:24.119 25802 25802 I InCall : ContactInfoCache - cacheEntry.number: +9195550
+05-09 16:15:24.119 25802 25802 I InCall : ContactInfoCache - Contact lookup. In memory cache hit; lookup still running
+05-09 16:15:24.119 25802 25802 I InCall : CallCardPresenter - presenter com.android.incallui.CallCardPresenter@b76297e
+05-09 16:15:24.119 25802 25802 I InCall : CallCardPresenter - Update primary display info for ContactCacheEntry{name=null, nameAlternative=null, number=xxxxxxxxxxxxx, location=null,
+label=null, photo=null, isSipCall=false, contactUri=null, displayPhotoUri=null, locationAddress=null, openingHours=null, contactLookupResult=1, userType=0, contactRingtoneUri=conten
+t://settings/system/ringtone, isEmergencyNumber=false, starred=0, isAutoRecording=false, isContactsExist=false, isVoiceMail=false}
+05-09 16:15:24.119 25802 25802 I InCall : CallCardPresenter - mYuloreInfo: null, isVoiceMail: false
+05-09 16:15:24.119 25802 25802 I InCall : OPCallCardFragment - Setting primary call
+05-09 16:15:24.121 25802 25802 I InCall : CallCardFragment - updatePrimaryInfo
+05-09 16:15:24.122 25802 25802 I InCall : CallCardFragment - name = +919*****5550
+05-09 16:15:24.122 7472 7631 D MediaPlayerService: LF player type = 4
+05-09 16:15:24.122 7472 7631 D NuPlayerDriver: NuPlayerDriver(0xe622a700) created, clientPid(7588)
+05-09 16:15:24.123 25802 25802 I InCall : CallCardFragment - setPrimaryName name = +91 ****5550
+05-09 16:15:24.124 25802 25802 I InCall : CallCardFragment - isOverSea: true
+05-09 16:15:24.124 25802 25802 V PhoneNumberUtil: getGeoDescription('[db8a5a3c2d96f4d9353f27275442297dba3c7696]')...
+05-09 16:15:24.125 7472 7631 I ExtendedNuUtils: printFileName fd(16) -> /system/media/audio/ringtones/oneplus_tune.ogg
+05-09 16:15:24.125 25802 25802 V PhoneNumberUtil: parsing '[db8a5a3c2d96f4d9353f27275442297dba3c7696]' for countryIso 'IN'...
+05-09 16:15:24.126 25802 25802 V PhoneNumberUtil: - parsed number: [a4a366b279d479bf4a3896f40560841c34871702]
+05-09 16:15:24.126 25802 25802 V PhoneNumberUtil: - got description: 'India'
+05-09 16:15:24.126 25802 25802 I InCall : CallCardFragment - location: India
+05-09 16:15:24.129 7472 10340 D GenericSource: FileSource remote
+05-09 16:15:24.130 25802 25802 I InCall : CallCardFragment - setPrimaryPhoneNumber number = Ia
+05-09 16:15:24.130 25802 25802 I InCall : CallCardFragment - settLocationAnimation isPrimaryCallActive: false, isPrimaryAnimationRunning: false, active: true
+05-09 16:15:24.130 25802 25802 I InCall : CallCardFragment - isShowTime = false
+05-09 16:15:24.130 25802 25802 I InCall : CallCardFragment - isLocationVisible = false
+05-09 16:15:24.130 25802 25802 I InCall : CallCardFragment - setDrawableToImageView photo: null
+05-09 16:15:24.131 25802 25802 I OPRecordLog: CallCardPresenter: getRecordFilePrefix Retrieve mPrimaryContactInfo...
+05-09 16:15:24.131 25802 25802 I InCall : CallCardFragment - showfalse, duration0
+05-09 16:15:24.133 25802 25802 I InCall : CallCardFragment - state: 4, connectionLabel : null
+05-09 16:15:24.134 7470 8911 I ExtendedExtractor: QTIParser is prefered .. flags 2
+05-09 16:15:24.134 7470 8911 I QComExtractorFactory: QTI parser is not preferred for mime: application/ogg
+05-09 16:15:24.134 7470 8911 E QCExtractor: ExtendedExtractor failed to instantiate extractor
+05-09 16:15:24.134 7470 8911 I ExtendedExtractor: ExtendedExtractor::create 0x0
+05-09 16:15:24.135 7472 10340 E MediaExtractor: Trace connect 0xe66bd980 0xe66c3400
+05-09 16:15:24.136 25802 25802 I InCall : CallCardFragment - updateSimIcon isShowIcon: false
+05-09 16:15:24.137 25802 25802 I InCall : CallCardFragment - call = [Call_7, INCOMING, [Capabilities: CAPABILITY_SUPPORT_HOLD CAPABILITY_RESPOND_VIA_TEXT CAPABILITY_MUTE CAPABILITY_
+CANNOT_DOWNGRADE_VIDEO_TO_AUDIO], children:[], parent:null, conferenceable:[], videoState:Audio Only, mSessionModificationState:0, VideoSettings:(CameraDir:-1), mIsActivSub:false]
+05-09 16:15:24.137 7472 10339 D NuPlayerDriver: notifyListener_l(0xe622a700), (1, 0, 0, -1), loop setting(0, 0)
+05-09 16:15:24.139 25802 25802 I InCall : CallCardFragment - isEmergency = false
+05-09 16:15:24.139 25802 25802 I InCall : CallCardPresenter - isAnswerVoice: false
+05-09 16:15:24.139 25802 25802 I InCall : CallCardPresenter - callState: 4mOldCallState: 2
+05-09 16:15:24.139 25802 25802 I InCall : CallCardFragment - setPrimaryCallInfoAnimation active: false, isPrimaryCallActive active: false
+05-09 16:15:24.139 7588 10332 D Ringtone: Successfully created local player
+05-09 16:15:24.139 7588 10332 I Ringtone: play java.lang.Throwable
+05-09 16:15:24.139 7588 10332 I Ringtone: at android.media.Ringtone.play(Ringtone.java:360)
+05-09 16:15:24.139 7588 10332 I Ringtone: at com.android.server.telecom.AsyncRingtonePlayer.handleRepeat(AsyncRingtonePlayer.java:165)
+05-09 16:15:24.139 7588 10332 I Ringtone: at com.android.server.telecom.AsyncRingtonePlayer.handlePlay(AsyncRingtonePlayer.java:154)
+05-09 16:15:24.139 7588 10332 I Ringtone: at com.android.server.telecom.AsyncRingtonePlayer.-wrap0(Unknown Source:0)
+05-09 16:15:24.139 7588 10332 I Ringtone: at com.android.server.telecom.AsyncRingtonePlayer$1.handleMessage(AsyncRingtonePlayer.java:107)
+05-09 16:15:24.139 7588 10332 I Ringtone: at android.os.Handler.dispatchMessage(Handler.java:105)
+05-09 16:15:24.139 7588 10332 I Ringtone: at android.os.Looper.loop(Looper.java:164)
+05-09 16:15:24.139 7588 10332 I Ringtone: at android.os.HandlerThread.run(HandlerThread.java:65)
+05-09 16:15:24.140 25802 25802 D OPPhoneUtils: getPhoneType phone type = 1
+05-09 16:15:24.140 25802 25802 I InCall : OPCallCardFragment - setCallCardVisible : isVisible = true
+05-09 16:15:24.140 7379 4840 D AudioFlinger: setParameters(): io 0, keyvalue playback=ring, calling pid 7588
+05-09 16:15:24.140 25802 25802 I InCall : CallCardFragment - setCallButtonsVisible isVisible: false, isButtonVisibility: true
+05-09 16:15:24.140 529 1348 D audio_hw_primary: adev_set_parameters: enter: playback=ring
+05-09 16:15:24.140 529 1348 D audio_hw_primary: playback is ring
+05-09 16:15:24.140 529 1348 D audio_hw_extn: audio_extn_set_anc_parameters: anc_enabled:0
+05-09 16:15:24.140 529 1348 D audio_hw_spkr_prot: audio_extn_fbsp_set_parameters: Speaker protection disabled
+05-09 16:15:24.140 25802 25802 I InCall : CallCardFragment - enabled: false, isEnabled: true, animate: false
+05-09 16:15:24.140 25802 25802 I InCall : CallCardFragment - topVisible: false, bottomVisible: false
+05-09 16:15:24.140 25802 25802 I InCall : InCallActivity - showDialpad : false, isSlideOuting : false
+05-09 16:15:24.140 25802 25802 I InCall : OPCallButtonFragment - changed : false, value : false
+05-09 16:15:24.140 25802 25802 I InCall : CallButtonPresenter - updateButtonsState
+05-09 16:15:24.141 25802 25802 I InCall : InCall - isTransmissionEnabled =false, isTransmissionEnable=false, isBidirectiona=false
+05-09 16:15:24.141 7588 10332 I MediaPlayer: start
+05-09 16:15:24.141 7588 10332 D AudioPlaybackMonitor: Found a new active media playback. ID:591 -- type:android.media.MediaPlayer -- u/pid:1000/7588 -- state:started -- attr:AudioAt
+tributes: usage=6 content=4 flags=0x0 tags= bundle=null
+05-09 16:15:24.142 7588 10332 D MediaSessionStack: updateMediaButtonSessionIfNeeded, callers=com.android.server.media.MediaSessionService$1.onAudioPlaybackStarted:151 com.android.se
+rver.media.AudioPlaybackMonitor.dispatchPlaybackConfigChange:127
+05-09 16:15:24.142 25802 25802 D OPPhoneUtils: getPhoneType phone type = 1
+05-09 16:15:24.142 25802 25802 I InCall : CallButtonPresenter - showSwap: false, showHold: false
+05-09 16:15:24.142 25802 25802 I InCall : CallButtonPresenter - showAddCall: true, showMerge: false
+05-09 16:15:24.143 25802 25802 I InCall : CallButtonPresenter - isAnswerVoice: false
+05-09 16:15:24.143 25802 25802 I InCall : CallButtonPresenter - showUpgradeToVideo: false
+05-09 16:15:24.143 7472 7631 D NuPlayerDriver: start(0xe622a700), state is 4, eos is 0
+05-09 16:15:24.143 25802 25802 I InCall : OPCallButtonFragment - isSelected : false, value : false
+05-09 16:15:24.143 7472 10339 I GenericSource: start
+05-09 16:15:24.143 25802 25802 I InCall : VideoCallPresenter - onStateChange primary= [Call_7, INCOMING, [Capabilities: CAPABILITY_SUPPORT_HOLD CAPABILITY_RESPOND_VIA_TEXT CAPABILIT
+Y_MUTE CAPABILITY_CANNOT_DOWNGRADE_VIDEO_TO_AUDIO], children:[], parent:null, conferenceable:[], videoState:Audio Only, mSessionModificationState:0, VideoSettings:(CameraDir:-1), mIs
+ActivSub:false]
+05-09 16:15:24.143 7588 10332 I Telecom : AsyncRingtonePlayer: Repeat ringtone.
+05-09 16:15:24.143 25802 25802 I InCall : VideoCallPresenter - onStateChange mPrimaryCall = null
+05-09 16:15:24.143 25802 25802 I InCall : InCall - isTransmissionEnabled =false, isTransmissionEnable=false, isBidirectiona=false
+05-09 16:15:24.143 25802 25802 I InCall : VideoCallPresenter - onPrimaryCallChanged: isVideoCall=false isVideoMode=false
+05-09 16:15:24.143 25802 25802 I InCall : InCall - isTransmissionEnabled =false, isTransmissionEnable=false, isBidirectiona=false
+05-09 16:15:24.143 25802 25802 I InCall : VideoCallPresenter - checkForOrientationAllowedChange: currMode = 5 newMode = 5
+05-09 16:15:24.143 25802 25802 I InCall : VideoCallPresenter - updateCallCache: call= [Call_7, INCOMING, [Capabilities: CAPABILITY_SUPPORT_HOLD CAPABILITY_RESPOND_VIA_TEXT CAPABILIT
+Y_MUTE CAPABILITY_CANNOT_DOWNGRADE_VIDEO_TO_AUDIO], children:[], parent:null, conferenceable:[], videoState:Audio Only, mSessionModificationState:0, VideoSettings:(CameraDir:-1), mIs
+ActivSub:false]
+05-09 16:15:24.143 25802 25802 I InCall : InCall - isTransmissionEnabled =false, isTransmissionEnable=false, isBidirectiona=false
+05-09 16:15:24.143 25802 25802 I InCall : VideoCallPresenter - updateButtonsState
+05-09 16:15:24.143 25802 25802 I InCall : InCall - isTransmissionEnabled =false, isTransmissionEnable=false, isBidirectiona=false
+05-09 16:15:24.144 25802 25802 I InCall : AnswerPresenter - call.getId(): Call_7, mCallId[phoneId]: null
+05-09 16:15:24.144 25802 25802 I InCall : AnswerPresenter - Showing incoming for call id: Call_7, subId: 1, phoneId: 0
+05-09 16:15:24.145 25802 25802 I InCall : AnswerPresenter - activitynull
+05-09 16:15:24.145 25802 25802 I InCall : OPGlowPadAnswerFragment - Show answer UI: true
+05-09 16:15:24.145 25802 25802 I InCall : OPGlowPadAnswerFragment - isAnswerVoice: false
+05-09 16:15:24.146 7472 10339 W Utils : track of type 'audio/vorbis' does not publish channel mask, channel count 2
+05-09 16:15:24.146 7379 4840 V AudioPolicyManagerCustom: isOffloadSupported: SR=44100, CM=0x3, Format=0x7000000, StreamType=2, BitRate=4294967295, duration=14743696 us, has_video=0
+05-09 16:15:24.146 7379 4840 D AudioPolicyManagerCustom: isOffloadSupported: stream_type != MUSIC, returning false
+05-09 16:15:24.147 25802 25802 I InCall : OPSlideAnswerLayout - resetArrow
+05-09 16:15:24.147 25802 25802 I InCall : OPSlideAnswerLayout - startAnimation
+05-09 16:15:24.147 25802 25802 I InCall : OPSlideAnswerLayout - startShakeAnimation
+05-09 16:15:24.147 7472 10339 W Utils : track of type 'audio/vorbis' does not publish channel mask, channel count 2
+05-09 16:15:24.147 7379 4840 V AudioPolicyManagerCustom: isOffloadSupported: SR=44100, CM=0x3, Format=0x7000000, StreamType=2, BitRate=4294967295, duration=14743696 us, has_video=0
+05-09 16:15:24.147 7379 4840 D AudioPolicyManagerCustom: isOffloadSupported: stream_type != MUSIC, returning false
+05-09 16:15:24.147 25802 25802 I InCall : InCall - isTransmissionEnabled =false, isTransmissionEnable=false, isBidirectiona=false
+05-09 16:15:24.148 25802 25802 I InCall : InCall - isTransmissionEnabled =false, isTransmissionEnable=false, isBidirectiona=false
+05-09 16:15:24.148 7379 4840 D HalHidl : getParameters() keys is_hw_dec_session_available=audio/vorbis,
+05-09 16:15:24.148 529 1348 D audio_hw_spkr_prot: audio_extn_fbsp_get_parameters: Speaker protection disabled
+05-09 16:15:24.148 529 1348 D audio_hw_extn: audio_extn_get_parameters: returns
+05-09 16:15:24.148 7379 4840 I hash_map_utils: key: 'is_hw_dec_session_available' value: 'audio/vorbis'
+05-09 16:15:24.148 7379 4840 D HalHidl : getParameters() keys is_hw_dec_session_available=audio/vorbis,
+05-09 16:15:24.149 7379 4840 D HalHidl : getParameters() keys is_hw_dec_session_available=audio/vorbis,
+05-09 16:15:24.149 7472 10343 D NuPlayerDecoder: LF MediaCodec::CreateByType ,select ComponentName+++++
+05-09 16:15:24.149 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.695663, isScreenUp: false
+05-09 16:15:24.151 7472 10344 I OMXClient: Treble IOmx obtained
+05-09 16:15:24.152 7476 8556 I OMXMaster: makeComponentInstance(OMX.google.vorbis.decoder) in omx@1.0-service process
+05-09 16:15:24.155 7472 10343 D NuPlayerDecoder: LF MediaCodec::CreateByType ,select ComponentName-----
+05-09 16:15:24.155 7472 10343 D NuPlayerDecoder: LF configure ComponentName+++++
+05-09 16:15:24.155 7476 8556 E OMXNodeInstance: setConfig(0xefc23fe0:google.vorbis.decoder, ConfigPriority(0x6f800002)) ERROR: Undefined(0x80001001)
+05-09 16:15:24.156 7472 10344 I ACodec : codec does not support config priority (err -2147483648)
+05-09 16:15:24.156 7476 8556 E OMXNodeInstance: setConfig(0xefc23fe0:google.vorbis.decoder, ConfigPriority(0x6f800002)) ERROR: Undefined(0x80001001)
+05-09 16:15:24.156 7472 10344 I ACodec : codec does not support config priority (err -2147483648)
+05-09 16:15:24.157 7476 18229 E OMXNodeInstance: getConfig(0xefc23fe0:google.vorbis.decoder, ConfigAndroidVendorExtension(0x6f100004)) ERROR: Undefined(0x80001001)
+05-09 16:15:24.158 7472 10344 W ExtendedACodec: Failed to get extension for extradata parameter
+05-09 16:15:24.158 7472 10343 D NuPlayerDecoder: LF configure ComponentName----
+05-09 16:15:24.159 7472 10344 I MediaCodec: MediaCodec will operate in async mode
+05-09 16:15:24.160 528 528 W /system/bin/hw/android.hidl.allocator@1.0-service: ashmem_create_region(32768) returning hidl_memory(0x7b62c2c4e0, 32768)
+05-09 16:15:24.173 528 528 I chatty : uid=1000(system) allocator@1.0-s identical 10 lines
+05-09 16:15:24.174 528 528 W /system/bin/hw/android.hidl.allocator@1.0-service: ashmem_create_region(32768) returning hidl_memory(0x7b62c2c4e0, 32768)
+05-09 16:15:24.176 7472 10343 I ExtendedNuUtils: Both src and dst missing for bit-width
+05-09 16:15:24.176 7472 10343 I ExtendedNuUtils: Overriding durationUs: with 64 bit src value 14743696
+05-09 16:15:24.176 7472 10343 I ExtendedNuUtils: Both src and dst missing for channel-mask
+05-09 16:15:24.177 25802 25802 I InCall : ContactInfoCache - contactExists: trueisVoiceMailNumber: false
+05-09 16:15:24.177 7379 4840 V AudioPolicyManagerCustom: getOutput() The last flag 0
+05-09 16:15:24.177 7379 4840 I AudioPolicyManagerCustom: FLAG None hence request for a primary output
+05-09 16:15:24.177 7379 4840 D AudioPolicyManagerCustom: getOutputForDevice() returns output 13 flag 2
+05-09 16:15:24.177 25802 25802 I InCall : ContactInfoCache - lookupKey: 714i7bf68d60ab1284a.3789r343-4F294B51434D414541.2791r587-4F294B51434D414541.1419r3253-4F294B51434D414541, pho
+nebookLabel: T
+05-09 16:15:24.177 7379 4840 V AudioPolicyManagerCustom: getOutput() The last flag 0
+05-09 16:15:24.177 7379 4840 I AudioPolicyManagerCustom: FLAG None hence request for a primary output
+05-09 16:15:24.177 7379 4840 D AudioPolicyManagerCustom: getOutputForDevice() returns output 13 flag 2
+05-09 16:15:24.177 7472 10342 D AudioTrack: set(): streamType 2, sampleRate 44100, format 0x1, channelMask 0x3, frameCount 22050, flags #1, notificationFrames 0, sessionId 657, tran
+sferType 0, uid 1000, pid 7588, cbf 1
+05-09 16:15:24.177 7379 4840 V AudioPolicyManagerCustom: found attribute .. setting usage 6
+05-09 16:15:24.177 7379 4840 D AudioPolicyManagerCustom: Offloading is disabled or Stream is not music --> Force Remove Direct Flag
+05-09 16:15:24.177 7379 4840 V AudioPolicyManagerCustom: getOutput() The last flag 0
+05-09 16:15:24.177 7379 4840 I AudioPolicyManagerCustom: FLAG None hence request for a primary output
+05-09 16:15:24.177 7379 4840 D AudioPolicyManagerCustom: getOutputForDevice() returns output 13 flag 2
+05-09 16:15:24.180 7379 4840 D HalHidl : getParameters() keys is_direct_pcm_track,
+05-09 16:15:24.180 529 1348 D compress_voip: voice_extn_compress_voip_out_get_parameters: enter
+05-09 16:15:24.180 7379 4840 W AudioFlinger: createTrack_l(): mismatch between requested flags (00000001) and output flags (00000006)
+05-09 16:15:24.181 7379 4840 D AudioFlinger: AudioOut_D createTrack_l() stmType 2,typeVolume 0.000000,mute 0,fc 22050,sId 657, flags 0
+05-09 16:15:24.181 7379 4840 D AudioFlinger: Creating track with 131072 buffers bytes.format 1,mFrameSize 4,mFrameCount 22050,roundup(frameCount) 32768
+05-09 16:15:24.182 7472 10342 D AudioTrack: Client defaulted notificationFrames to 7350 for frameCount 22050
+05-09 16:15:24.185 528 528 W /system/bin/hw/android.hidl.allocator@1.0-service: ashmem_create_region(3840) returning hidl_memory(0x7b62c2c4e0, 3840)
+05-09 16:15:24.187 528 528 W /system/bin/hw/android.hidl.allocator@1.0-service: ashmem_create_region(3840) returning hidl_memory(0x7b62c2c4e0, 3840)
+05-09 16:15:24.188 7379 7725 I APM_AudioPolicyManager: startOutput() output 13, stream 2, session 657
+05-09 16:15:24.188 7379 7725 I APM_AudioPolicyManager: setOutputDevice() device 0002 delayMs 0
+05-09 16:15:24.188 7379 7725 I AudioPolicyManagerCustom: checkAndSetVolume:stream:2,index:7 device:2,delayMs:0,muteCount:0
+05-09 16:15:24.188 7379 7724 I AudioFlinger: setStreamVolume() stream 2 value 1.000000 output 13
+05-09 16:15:24.188 7379 7725 D APM_AudioPolicyManager: startOutput()--
+05-09 16:15:24.189 7472 10339 D NuPlayerDriver: notifyListener_l(0xe622a700), (6, 0, 0, -1), loop setting(0, 0)
+05-09 16:15:24.190 529 9444 D audio_hw_primary: start_output_stream: enter: stream(0xec26b000)usecase(1: low-latency-playback) devices(0x2)
+05-09 16:15:24.190 529 9444 D audio_hw_primary: select_devices for use case (low-latency-playback)
+05-09 16:15:24.190 529 9444 D audio_hw_primary: select_devices: out_snd_device(2: speaker) in_snd_device(0: )
+05-09 16:15:24.190 529 9444 I msm8974_platform: platform_check_and_set_codec_backend_cfg:becf: afe: bitwidth 16, samplerate 48000 channels 2, backend_idx 0 usecase = 1 device (spe
+aker)
+05-09 16:15:24.190 529 9444 D msm8974_platform: platform_split_snd_device: snd_device(2) num devices(1) new_snd_devices(0)
+05-09 16:15:24.190 529 9444 I msm8974_platform: platform_check_and_set_codec_backend_cfg: new_snd_devices[0] is 2
+05-09 16:15:24.190 529 9444 I msm8974_platform: platform_check_codec_backend_cfg:becf: afe: bitwidth 16, samplerate 48000 channels 2, backend_idx 0 usecase = 1 device (speaker)
+05-09 16:15:24.190 529 9444 D msm8974_platform: platform_check_codec_backend_cfg:becf: afe: playback on codec device not supporting native playback set default Sample Rate(48k)
+05-09 16:15:24.190 529 9444 I msm8974_platform: platform_check_codec_backend_cfg:becf: afe: Codec selected backend: 0 updated bit width: 16 and sample rate: 48000
+05-09 16:15:24.190 529 9444 D audio_hw_primary: check_usecases_codec_backend:becf: force routing 0
+05-09 16:15:24.190 529 9444 E msm8974_platform: platform_check_backends_match: Invalid snd_device =
+05-09 16:15:24.190 529 9444 D audio_hw_primary: check_usecases_codec_backend:becf: (47) check_usecases curr device: speaker, usecase device: backends match 0
+05-09 16:15:24.190 529 9444 D audio_hw_primary: check_usecases_codec_backend:becf: check_usecases num.of Usecases to switch 0
+05-09 16:15:24.190 529 9444 D hardware_info: hw_info_append_hw_type : device_name = speaker
+05-09 16:15:24.190 529 9444 D msm8974_platform: platform_split_snd_device: snd_device(2) num devices(0) new_snd_devices(0)
+05-09 16:15:24.190 529 9444 D audio_hw_primary: enable_snd_device: snd_device(2: speaker)
+05-09 16:15:24.190 529 9444 I soundtrigger: audio_extn_sound_trigger_update_device_status: device 0x2 of type 0 for Event 1, with Raise=0
+05-09 16:15:24.195 25802 25802 I InCall : ContactInfoCache - findInfoQueryComplete
+05-09 16:15:24.195 25802 25802 I InCall : StatusBarNotifier - callState: 4
+05-09 16:15:24.196 529 9444 D soundtrigger: audio_extn_sound_trigger_update_stream_status: uc_id 1 of type 0 for Event 3, with Raise=0
+05-09 16:15:24.196 529 9444 D audio_hw_utils: audio_extn_utils_send_app_type_cfg: usecase->out_snd_device speaker
+05-09 16:15:24.196 529 9444 D msm8974_platform: platform_split_snd_device: snd_device(2) num devices(0) new_snd_devices(0)
+05-09 16:15:24.197 529 9444 E msm8974_platform: platform_get_snd_device_backend_index: BE DAI Name Table is not present
+05-09 16:15:24.197 529 9444 E audio_hw_utils: send_app_type_cfg_for_device: Couldn't get the backend index for snd device speaker ret=-14
+05-09 16:15:24.197 529 9444 I audio_hw_utils: send_app_type_cfg_for_device PLAYBACK app_type 69937, acdb_dev_id 15, sample_rate 48000, snd_device_be_idx -14
+05-09 16:15:24.197 529 9444 D msm8974_platform: platform_split_snd_device: snd_device(2) num devices(1) new_snd_devices(0)
+05-09 16:15:24.197 529 9444 D msm8974_platform: ring mode using the loudly audio params 101
+05-09 16:15:24.197 529 9444 D ACDB-LOADER: ACDB -> send_audio_cal, acdb_id = 101, path = 0, app id = 0x11131, sample rate = 48000
+05-09 16:15:24.197 529 9444 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_GAIN_DEP_STEP_TABLE, vol index 0
+05-09 16:15:24.197 529 9444 D ACDB-LOADER: ACDB -> AUDIO_SET_VOL_CAL cal type = 12
+05-09 16:15:24.197 529 9444 D ACDB-LOADER: ACDB -> audstrm_cal->cal_type.cal_data.cal_size = 16
+05-09 16:15:24.197 529 9444 D ACDB-LOADER: ACDB -> GET_AFE_TOPOLOGY_ID for adcd_id 101, Topology Id 1025d
+05-09 16:15:24.197 529 9444 D ACDB-LOADER: ACDB -> send_hw_delay : acdb_id = 101 path = 0
+05-09 16:15:24.198 529 9444 D audio_hw_primary: enable_audio_route: apply mixer and update path: low-latency-playback quat_i2s
+05-09 16:15:24.199 529 9444 D audio_hw_primary: select_devices: done
+05-09 16:15:24.214 25802 25802 D CallUtil: getVideoCallingAvailability VIDEO_CALLING_DISABLED
+05-09 16:15:24.216 25802 25802 D CallUtil: getVideoCallingAvailability VIDEO_CALLING_DISABLED
+05-09 16:15:24.217 25802 25802 I InCall : StatusBarNotifier - Data changed. Showing notification
+05-09 16:15:24.221 25802 25802 D CallUtil: getVideoCallingAvailability VIDEO_CALLING_DISABLED
+05-09 16:15:24.223 25802 25802 I InCall : StatusBarNotifier - hasInCallUIStarted: false
+05-09 16:15:24.223 25802 25802 I InCall : StatusBarNotifier - shouldStartUIForContact
+05-09 16:15:24.223 25802 25802 D OPExtensionManager: getInstance
+05-09 16:15:24.223 25802 25802 D OPExtensionManager: shouldStartUIForContact mOPTelecomSvc: com.android.phone.common.IOPTelecomService$Stub$Proxy@ce1854e
+05-09 16:15:24.223 7588 8653 I OPTelecomService: zenMode: 0
+05-09 16:15:24.223 25802 25802 I InCall : StatusBarNotifier - - Setting fullScreenIntent: PendingIntent{596ad0a: android.os.BinderProxy@2dd849}
+05-09 16:15:24.226 25802 25802 D CallUtil: getVideoCallingAvailability VIDEO_CALLING_DISABLED
+05-09 16:15:24.228 25802 25802 I InCall : StatusBarNotifier - the ui state is: false
+05-09 16:15:24.228 25802 25802 I InCall : StatusBarNotifier - mShowHighLight: false showHighLight: true
+05-09 16:15:24.230 25802 25802 D CallUtil: getVideoCallingAvailability VIDEO_CALLING_DISABLED
+05-09 16:15:24.232 25802 25802 I InCall : StatusBarNotifier - Displaying notification for 2 showOnStatusBar: false
+05-09 16:15:24.236 25802 25802 I InCall : CallCardPresenter - presenter com.android.incallui.CallCardPresenter@b76297e
+05-09 16:15:24.236 25802 25802 I InCall : CallCardPresenter - Update primary display info for ContactCacheEntry{name=xxxxxxxxxxx, nameAlternative=xxxxxxxxxxxx, number=xxxxxxxxxxxxxx
+x, location=null, label=Mobile, photo=android.graphics.drawable.VectorDrawable@99ce97b, isSipCall=false, contactUri=null, displayPhotoUri=null, locationAddress=null, openingHours=nul
+l, contactLookupResult=2, userType=0, contactRingtoneUri=content://settings/system/ringtone, isEmergencyNumber=false, starred=1, isAutoRecording=false, isContactsExist=true, isVoiceM
+ail=false}
+05-09 16:15:24.236 25802 25802 I InCall : CallCardPresenter - mYuloreInfo: null, isVoiceMail: false
+05-09 16:15:24.236 25802 25802 I InCall : OPCallCardFragment - Setting primary call
+05-09 16:15:24.238 25802 25802 I InCall : CallCardFragment - updatePrimaryInfo
+05-09 16:15:24.238 25802 25802 I InCall : CallCardFragment - name = TarMom
+05-09 16:15:24.238 25802 25802 I InCall : CallCardFragment - setPrimaryName name = TarMom
+05-09 16:15:24.239 25802 25802 I InCall : CallCardFragment - setPrimaryPhoneNumber number = +91 5550
+05-09 16:15:24.239 25802 25802 I InCall : CallCardFragment - isShowTime = false
+05-09 16:15:24.239 25802 25802 I InCall : CallCardFragment - isLocationVisible = false
+05-09 16:15:24.239 25802 25802 I InCall : CallCardFragment - setDrawableToImageView photo: android.graphics.drawable.VectorDrawable@99ce97b
+05-09 16:15:24.248 25802 25802 I InCall : OPSlideAnswerLayout - startDelayAnimation
+05-09 16:15:24.248 25802 25802 I InCall : OPSlideAnswerLayout - startDelayShakeAnimation
+05-09 16:15:24.249 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.747986, isScreenUp: true
+05-09 16:15:24.251 9436 9436 D NotificationListener: onNotificationPosted# hash: 138946954 sbn: StatusBarNotification(pkg=com.android.incallui user=UserHandle{0} id=2 tag=null key=
+0|com.android.incallui|2|null|1001: Notification(channel=null pri=2 contentView=null vibrate=null sound=null defaults=0x0 flags=0x82 color=0xff0288d1 category=call actions=2 vis=PRIV
+ATE publicVersion=Notification(channel=null pri=0 contentView=null vibrate=null sound=null defaults=0x0 flags=0x0 color=0xff0288d1 vis=PRIVATE)))
+05-09 16:15:24.253 529 9444 D msm8974_platform: platform_set_channel_map mixer_ctl_name:Playback Channel Map15
+05-09 16:15:24.253 529 9444 D msm8974_platform: platform_set_channel_map: set mapping(1 2 0 0 0 0 0 0) for channel:2
+05-09 16:15:24.253 529 9444 D audio_hw_primary: start_output_stream: exit
+05-09 16:15:24.269 529 1348 D msm8974_platform: platform_split_snd_device: snd_device(2) num devices(1) new_snd_devices(0)
+05-09 16:15:24.269 529 1348 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_GAIN_DEP_STEP_TABLE, vol index 1
+05-09 16:15:24.269 529 1348 D ACDB-LOADER: ACDB -> AUDIO_SET_VOL_CAL cal type = 40
+05-09 16:15:24.270 7379 8023 D AudioResampler: resampler create load 102 -> 136 MHz due to delta +34 MHz from quality 8
+05-09 16:15:24.359 7379 8023 D AudioFlinger: After screen off,track of uid 1000 is not silent.
+05-09 16:15:24.406 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.624023, isScreenUp: true
+05-09 16:15:24.718 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.636337, isScreenUp: true
+05-09 16:15:25.158 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.708893, isScreenUp: true
+05-09 16:15:25.354 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.733063, isScreenUp: true
+05-09 16:15:25.549 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.7335205, isScreenUp: true
+05-09 16:15:25.670 25802 25802 I InCall : OPSlideAnswerLayout - Animation end
+05-09 16:15:25.671 25802 25802 I InCall : OPSlideAnswerLayout - ShakeAnimation end
+05-09 16:15:26.028 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.695816, isScreenUp: true
+05-09 16:15:26.184 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.70105, isScreenUp: true
+05-09 16:15:26.272 25802 25802 I InCall : OPSlideAnswerLayout - startDelayAnimation
+05-09 16:15:26.274 25802 25802 I InCall : OPSlideAnswerLayout - startDelayShakeAnimation
+05-09 16:15:26.340 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.7202, isScreenUp: true
+05-09 16:15:26.651 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.651138, isScreenUp: true
+05-09 16:15:26.806 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.611176, isScreenUp: true
+05-09 16:15:26.963 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.662964, isScreenUp: true
+05-09 16:15:27.252 543 976 E qti_sensors_hal: processInd: pocket data: pocket:1.000000 mean:215.000000 lux:0.000000 SAM TS: 449652099 HAL TS:13719184613746 elapsedRealtimeNano:13
+719189654993
+05-09 16:15:27.273 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.674927, isScreenUp: true
+05-09 16:15:27.293 7588 8101 E DeviceKeyHandler: p-sensor near, disable gesture
+05-09 16:15:27.428 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.684586, isScreenUp: true
+05-09 16:15:27.584 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.710617, isScreenUp: true
+05-09 16:15:27.707 25802 25802 I InCall : OPSlideAnswerLayout - Animation end
+05-09 16:15:27.708 25802 25802 I InCall : OPSlideAnswerLayout - ShakeAnimation end
+05-09 16:15:27.740 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.712952, isScreenUp: true
+05-09 16:15:27.983 7588 8106 I Telecom : : Silence Ringer requested by android: TSI.sR@Bp0
+05-09 16:15:27.983 7588 8106 I Telecom : Call: Send silence to connection service for call [TC@8, RINGING, com.android.phone/com.android.services.telephony.TelephonyConnectionServi
+ce, tel:, A, childs(0), has_parent(false), [Capabilities: CAPABILITY_SUPPORT_HOLD CAPABILITY_MUTE CAPABILITY_CANNOT_DOWNGRADE_VIDEO_TO_AUDIO CAPABILITY_SPEED_UP_MT_AUDIO
+], [Properties:]]: TSI.sR@Bp0
+05-09 16:15:27.983 7588 8106 I Telecom : Event: RecordEntry TC@8: SILENCE, null: TSI.sR@Bp0
+05-09 16:15:27.984 7588 8106 I Telecom : Event: RecordEntry TC@8: STOP_RINGER, null: TSI.sR@Bp0
+05-09 16:15:27.984 7588 8106 I Telecom : Event: RecordEntry TC@8: STOP_VIBRATOR, null: TSI.sR@Bp0
+05-09 16:15:27.984 7588 10332 I Telecom : AsyncRingtonePlayer: Stop ringtone.
+05-09 16:15:27.984 7588 10332 I Ringtone: stop java.lang.Throwable
+05-09 16:15:27.984 7588 10332 I Ringtone: at android.media.Ringtone.stop(Ringtone.java:404)
+05-09 16:15:27.984 7588 10332 I Ringtone: at com.android.server.telecom.AsyncRingtonePlayer.handleStop(AsyncRingtonePlayer.java:186)
+05-09 16:15:27.984 7588 10332 I Ringtone: at com.android.server.telecom.AsyncRingtonePlayer.-wrap2(Unknown Source:0)
+05-09 16:15:27.984 7588 10332 I Ringtone: at com.android.server.telecom.AsyncRingtonePlayer$1.handleMessage(AsyncRingtonePlayer.java:113)
+05-09 16:15:27.984 7588 10332 I Ringtone: at android.os.Handler.dispatchMessage(Handler.java:105)
+05-09 16:15:27.984 7588 10332 I Ringtone: at android.os.Looper.loop(Looper.java:164)
+05-09 16:15:27.984 7588 10332 I Ringtone: at android.os.HandlerThread.run(HandlerThread.java:65)
+05-09 16:15:27.985 7588 8106 I GestureLauncherService: mHits[0] = 6958126ms
+05-09 16:15:27.985 7588 8106 I GestureLauncherService: mHits[1] = 7115445ms
+05-09 16:15:27.985 7588 8106 I GestureLauncherService: mHits[2] = 7704643ms
+05-09 16:15:27.986 7588 8106 D DisplayManagerService: setWakingupReason: android.policy:POWER
+05-09 16:15:27.986 7588 8106 I PowerManagerService: Waking up from sleep (uid 1000, android.policy:POWER)...
+05-09 16:15:27.986 7379 4840 D AudioFlinger: setParameters(): io 0, keyvalue playback=music, calling pid 7588
+05-09 16:15:27.987 7588 7588 I WindowManager: Started waking up...
+05-09 16:15:27.987 7588 7752 I ColorBalanceService: MSG:1
+05-09 16:15:27.987 7588 7588 V KeyguardServiceDelegate: onStartedWakingUp()
+05-09 16:15:27.987 7588 7752 I DisplayPowerController: useProximityForceSuspend = false
+05-09 16:15:27.987 8441 9455 D KeyguardViewMediator: onStartedWakingUp, seq = 47
+05-09 16:15:27.987 8441 9455 D KeyguardViewMediator: notifyStartedWakingUp
+05-09 16:15:27.987 8441 9455 D OPFacelockController: onPreStartedWakingUp, bound:false
+05-09 16:15:27.987 7588 7752 I DisplayPowerController: Blocking screen on until initial contents have been drawn.
+05-09 16:15:27.987 7588 7752 I WindowManager: Screen turning on...
+05-09 16:15:27.987 7588 8306 D ColorBalanceService: MSG_SCREEN_ON
+05-09 16:15:27.987 7588 8306 I ColorBalanceService: processScreenOn:true
+05-09 16:15:27.988 549 549 E ANDR-PERF-MPCTL: hint lookup failed
+05-09 16:15:27.988 542 542 E QCOM PowerHAL: Failed to acquire lock.
+05-09 16:15:27.988 529 1348 D audio_hw_primary: adev_set_parameters: enter: playback=music
+05-09 16:15:27.988 529 1348 D audio_hw_primary: playback is music
+05-09 16:15:27.988 529 1348 D audio_hw_extn: audio_extn_set_anc_parameters: anc_enabled:0
+05-09 16:15:27.988 529 1348 D audio_hw_spkr_prot: audio_extn_fbsp_set_parameters: Speaker protection disabled
+05-09 16:15:27.990 7472 7631 D NuPlayerDriver: reset(0xe622a700) at state 5
+05-09 16:15:27.991 7472 7631 D NuPlayerDriver: notifyListener_l(0xe622a700), (8, 0, 0, -1), loop setting(0, 0)
+05-09 16:15:28.002 7472 10342 D AudioTrack: stop() called with 0 frames delivered
+05-09 16:15:28.004 25802 25802 I InCall : ProximitySensor - isDisplayOn: false
+05-09 16:15:28.004 25802 25802 D AccelerometerListener: enable(false)
+05-09 16:15:28.007 7472 10339 D NuPlayerDriver: notifyResetComplete(0xe622a700)
+05-09 16:15:28.007 7472 7631 D NuPlayerDriver: reset(0xe622a700) at state 0
+05-09 16:15:28.008 7588 10332 V MediaPlayer: resetDrmState: mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+05-09 16:15:28.008 7588 10332 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+05-09 16:15:28.008 7588 10332 V MediaPlayer: resetDrmState: mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+05-09 16:15:28.008 7588 10332 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+05-09 16:15:28.050 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.693756, isScreenUp: true
+05-09 16:15:28.072 7588 7752 V KeyguardServiceDelegate: onScreenTurnedOn(showListener = com.android.server.policy.PhoneWindowManager$2@3c98ea7)
+05-09 16:15:28.072 7588 7752 D RestartProcessManager: Screen off is false
+05-09 16:15:28.073 7588 7663 D RestartProcessManager: Update Total Launch Times :com.mzi.gaurab.testrnapp
+05-09 16:15:28.073 7588 7752 I DisplayPowerController: useProximityForceSuspend = false
+05-09 16:15:28.073 7588 7752 D RestartProcessManager: Screen off is false
+05-09 16:15:28.073 7588 7663 D RestartProcessManager: updateSelf : com.mzi.gaurab.testrnapp, size : 30
+05-09 16:15:28.073 7588 7663 D RestartProcessManager: Last Running Package : com.mzi.gaurab.testrnapp , start time 1525862728073
+05-09 16:15:28.073 8441 9455 D KeyguardViewMediator: onScreenTurningOn
+05-09 16:15:28.073 8441 9455 D KeyguardViewMediator: notifyScreenOn
+05-09 16:15:28.073 590 590 D SurfaceFlinger: Set power mode=2, type=0 flinger=0x7c59e5f000
+05-09 16:15:28.074 536 536 I SDM : DisplayBase::SetDisplayState: Set state = 1, display 0
+05-09 16:15:28.076 7523 8390 E fpc_fingerprint_hal: screenStateFunction screen ON 0,aut 0, id 0
+05-09 16:15:28.078 7588 8106 I InputReader: Reconfiguring input devices. changes=0x00000004
+05-09 16:15:28.085 16445 16445 I DigitalAppWidgetProvider: onReceive: com.android.deskclock.ON_QUARTER_HOUR
+0 from quality 8
+05-09 16:15:28.120 529 1348 D msm8974_platform: platform_split_snd_device: snd_device(2) num devices(1) new_snd_devices(0)
+05-09 16:15:28.120 529 1348 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_GAIN_DEP_STEP_TABLE, vol index 5
+05-09 16:15:28.120 529 1348 D ACDB-LOADER: ACDB -> AUDIO_SET_VOL_CAL cal type = 40
+05-09 16:15:28.121 7379 7725 W AudioFlinger::EffectHandle: disconnect Effect handle 0xecd8f580 disconnected after thread destruction
+05-09 16:15:28.121 7379 7725 I APM_AudioPolicyManager: stopOutput() output 13, stream 2, session 657
+05-09 16:15:28.121 7379 7725 I APM_AudioPolicyManager: setOutputDevice() device 0000 delayMs 96
+05-09 16:15:28.140 7588 8339 D SurfaceControl: Excessive delay in setPowerMode(): 67ms
+05-09 16:15:28.145 7588 7740 I DisplayManagerService: Display device changed state: "Built-in Screen", ON
+05-09 16:15:28.153 7379 7379 D AudioFlinger: setParameters(): io 0, keyvalue screen_state=on, calling pid 7588
+05-09 16:15:28.153 529 1348 D audio_hw_primary: adev_set_parameters: enter: screen_state=on
+05-09 16:15:28.153 529 1348 D audio_hw_extn: audio_extn_set_anc_parameters: anc_enabled:0
+05-09 16:15:28.153 529 1348 D audio_hw_spkr_prot: audio_extn_fbsp_set_parameters: Speaker protection disabled
+05-09 16:15:28.153 25802 25802 I InCall : ProximitySensor - isDisplayOn: true
+05-09 16:15:28.154 25802 25802 D AccelerometerListener: enable(true)
+05-09 16:15:28.159 7588 8106 I InputReader: Reconfiguring input devices. changes=0x00000004
+05-09 16:15:28.167 8422 8422 I DeviceStatusMonitor: onReceive() : Action = android.intent.action.SCREEN_ON
+05-09 16:15:28.176 8597 8704 I QCNEJ/CndHalConnector: -> SND notifyScreenStateChanged(true)
+05-09 16:15:28.198 7588 7602 W BroadcastQueue: Skipping deliver [foreground] BroadcastRecord{11ecfe1 u-1 android.intent.action.SCREEN_ON} to ReceiverList{89a6bfc 8441 com.android.s
+ystemui/10030/u0 remote:3a094ef}: process gone or crashing
+05-09 16:15:28.200 7618 7715 D QMI_FW : chen-screen on: is_screen_off = 0
+05-09 16:15:28.178 8597 8704 I QCNEJ/CndHalConnector: -> SND notifyScreenStateChanged(true)
+05-09 16:15:28.210 7588 9486 V LocSvc_HIDL_Subscription_jni: screen_status_update
+05-09 16:15:28.210 7588 9486 V LocSvc_HIDL_Subscription_jni: [screen_status_update][485] [HC] =>> [HS]
+05-09 16:15:28.210 7478 7478 V LocSvc_HIDL_IzatSubscription: [screenStatusUpdate][552] [HS] <<<<= [HC]
+05-09 16:15:28.210 7477 7622 D QMI_FW : chen-screen on: is_screen_off = 0
+05-09 16:15:28.211 7588 9486 V LocSvc_HIDL_Subscription_jni: Exit Result 0
+05-09 16:15:28.214 9684 9684 D AbstractProcessor: onScreenOn
+05-09 16:15:28.230 8441 8713 I NetworkController.MobileSignalController(1): showDisableIcon:false
+05-09 16:15:28.253 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.704346, isScreenUp: true
+05-09 16:15:28.253 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.718674, isScreenUp: true
+05-09 16:15:28.263 9753 9753 D WidgetViewService: ScreenOnOffReceiver action=android.intent.action.SCREEN_ON
+05-09 16:15:28.266 9753 9753 D WidgetViewService: --------onStartCommand-----------
+05-09 16:15:28.266 9753 9753 D WidgetViewService: --------requestDataUsageUpdate mCurrentDataSim=0
+05-09 16:15:28.271 9753 10367 D FileSizeUtil: getAvailableStoragePercentValue totalBytes=57586184192,freeBytes=36671700992,availableStoragePercent=0.6368142203993178
+05-09 16:15:28.271 9753 10367 D WidgetViewService: availableStorage has no change,availableStorage:64%
+05-09 16:15:28.272 9753 10366 D nOperatorDataModel: retrieved value is 0
+05-09 16:15:28.273 9753 10366 D nOperatorDataModel: retrieved value is 5368709120
+05-09 16:15:28.274 9753 10366 I NativeTrafficDataModel: requesetDataUsage lastCalibrateTime:1525862559263, slot:0, block:false
+05-09 16:15:28.277 9753 10366 I RegionTimeUtils: region:[1525113000000, 1527791399999]
+05-09 16:15:28.277 9753 10366 D NativeTrafficDataModel: originalDataUsed or lastCalibrateTime is invalid slotId:0,originalDataUsed:0
+05-09 16:15:28.278 9753 10366 I NativeTrafficDataModel: getNetworkTemplate subId:1
+05-09 16:15:28.279 12367 12367 V ContentDetectionIntentReceiver: Screen on
+05-09 16:15:28.282 12367 12367 V ContentDetectionService: onStartCommand()
+05-09 16:15:28.282 12367 12367 D ContentDetectionService: onStartCommand() - Command : com.oneplus.gallery.NOTIFY_SCREEN_ON
+05-09 16:15:28.282 12367 12367 E ContentDetectionService: updateSceneDetectionState() - No SceneDetector
+05-09 16:15:28.288 12463 12463 D OSTracker: OS Event: screen_on
+05-09 16:15:28.288 9753 10366 I NativeTrafficDataModel: getSpecificTimeUsageBySlotId from framework slotId=0,startTime=1525113000000,endTime=1527791399999block=false,totalBytes=2445
+414642
+05-09 16:15:28.301 9753 10366 W ContextImpl: Calling a method in the system process without a qualified user: android.app.ContextImpl.startService:1477 android.content.ContextWrappe
+r.startService:645 com.oneplus.security.network.calibrate.AutoSaveNativeTrafficUsageService.getAndSaveCurrentNativeTrafficTotalUsage:37 com.oneplus.security.network.calibrate.AutoCal
+ibrateUtil.setLastCalibrateTime:210 com.oneplus.security.network.calibrate.AutoCalibrateUtil.setLastCalibrateTime:187
+05-09 16:15:28.307 25802 25802 I InCall : OPSlideAnswerLayout - startDelayAnimation
+05-09 16:15:28.309 25802 25802 I InCall : OPSlideAnswerLayout - startDelayShakeAnimation
+05-09 16:15:28.310 9753 10366 I AutoCalibrateUtil: save last calibrate time 1525862728288
+05-09 16:15:28.310 9753 10366 I NativeOperatorDataModel: requesetDataUsage total:5368709120, used:0, extra:2445414642, slot:0, block:false
+05-09 16:15:28.310 9753 10366 D AbstractOperatorModel: mOperatorQueryResultUpdaterList size:1
+05-09 16:15:28.310 9753 10366 D WidgetViewService: onTrafficTotalAndUsedUpdate totalByte=5368709120,usedByte=2445414642,slotId=0
+05-09 16:15:28.310 9753 10366 D WidgetViewService: --------notifyMonthlyRemainingDataChanged-----------total=5368709120,used=2445414642
+05-09 16:15:28.315 9753 10366 D nOperatorDataModel: retrieved value is 0
+05-09 16:15:28.316 9753 10366 D nOperatorDataModel: retrieved value is 5368709120
+05-09 16:15:28.319 12463 12463 D AbstractTracker: Event success
+05-09 16:15:28.319 9753 10366 I NativeTrafficDataModel: requesetDataUsage lastCalibrateTime:1525862728288, slot:0, block:true
+05-09 16:15:28.322 9753 10366 I RegionTimeUtils: region:[1525113000000, 1527791399999]
+05-09 16:15:28.322 9753 10366 D NativeTrafficDataModel: originalDataUsed or lastCalibrateTime is invalid slotId:0,originalDataUsed:0
+05-09 16:15:28.322 2341 2341 D ApplockerActivity: onReceive: android.intent.action.SCREEN_ONfocus = false
+05-09 16:15:28.324 9753 10366 I NativeTrafficDataModel: getNetworkTemplate subId:1
+05-09 16:15:28.331 7588 7602 D NetworkStats: forceUpdate()
+05-09 16:15:28.331 7588 7602 D NetworkStats: performPollLocked(flags=0x3)
+05-09 16:15:28.331 7588 7602 D NtpTrustedTime: currentTimeMillis() cache hit
+05-09 16:15:28.334 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.715958, isScreenUp: true
+05-09 16:15:28.346 7588 7602 D NtpTrustedTime: currentTimeMillis() cache hit
+05-09 16:15:28.347 9753 10372 I NativeTrafficDataModel: getNetworkTemplate subId:1
+05-09 16:15:28.350 9753 10366 D NativeTrafficDataModel: slotId:0, mStatsSession.getHistoryForNetwork time:20
+05-09 16:15:28.350 7588 8223 D NtpTrustedTime: currentTimeMillis() cache hit
+05-09 16:15:28.353 9753 10366 I NativeTrafficDataModel: getSpecificTimeUsageBySlotId from framework slotId=0,startTime=1525113000000,endTime=1527791399999block=true,totalBytes=24454
+39495
+05-09 16:15:28.360 9753 10366 W ContextImpl: Calling a method in the system process without a qualified user: android.app.ContextImpl.startService:1477 android.content.ContextWrappe
+r.startService:645 com.oneplus.security.network.calibrate.AutoSaveNativeTrafficUsageService.getAndSaveCurrentNativeTrafficTotalUsage:37 com.oneplus.security.network.calibrate.AutoCal
+ibrateUtil.setLastCalibrateTime:210 com.oneplus.security.network.calibrate.AutoCalibrateUtil.setLastCalibrateTime:187
+05-09 16:15:28.361 9753 10366 I AutoCalibrateUtil: save last calibrate time 1525862728353
+05-09 16:15:28.362 9753 10366 I NativeOperatorDataModel: requesetDataUsage total:5368709120, used:0, extra:2445439495, slot:0, block:true
+05-09 16:15:28.362 9753 10366 D AbstractOperatorModel: mOperatorQueryResultUpdaterList size:1
+05-09 16:15:28.363 9753 10366 D WidgetViewService: onTrafficTotalAndUsedUpdate totalByte=5368709120,usedByte=2445439495,slotId=0
+05-09 16:15:28.363 9753 10366 D WidgetViewService: --------notifyMonthlyRemainingDataChanged-----------total=5368709120,used=2445439495
+05-09 16:15:28.363 9753 10372 I NativeTrafficDataModel: getSpecificTimeUsageBySlotId from framework slotId=0,startTime=0,endTime=1525862728288block=true,totalBytes=12996675125
+05-09 16:15:28.365 7588 8223 D NtpTrustedTime: currentTimeMillis() cache hit
+05-09 16:15:28.366 9753 10372 D SaveNativeTrafficUsage: saveNativeTotalUsageWhenLastCalibrated for slotid:0,value:12996675125,lastCalibrateTime:1525862728288
+05-09 16:15:28.368 25802 25802 I InCall : StatusBarNotifier - onReceive: screen on
+05-09 16:15:28.369 25802 25802 I InCall : StatusBarNotifier - updateInCallNotification...
+05-09 16:15:28.369 25802 25802 I InCall : ContactInfoCache - callNumber: +919*****5550
+05-09 16:15:28.369 25802 25802 I InCall : ContactInfoCache - cacheEntry.number: +91 5550
+05-09 16:15:28.369 25802 25802 I InCall : ContactInfoCache - Contact lookup. In memory cache hit; lookup complete
+05-09 16:15:28.369 25802 25802 I InCall : StatusBarNotifier - callState: 4
+05-09 16:15:28.375 25802 25802 D CallUtil: getVideoCallingAvailability VIDEO_CALLING_DISABLED
+05-09 16:15:28.375 9753 10372 I NativeTrafficDataModel: getNetworkTemplate subId:1
+05-09 16:15:28.377 7588 8223 D NetworkPolicy: set needToBroadcastDataUsageAlarm to true due to TYPE_WARNING
+05-09 16:15:28.378 25802 25802 D CallUtil: getVideoCallingAvailability VIDEO_CALLING_DISABLED
+05-09 16:15:28.379 7588 8223 W ContextImpl: Calling a method in the system process without a qualified user: android.app.ContextImpl.sendBroadcast:967 com.android.server.net.Networ
+kPolicyManagerService.broadcastDataUsageAlarm:4518 com.android.server.net.NetworkPolicyManagerService.updateNotificationsNL:1173 com.android.server.net.NetworkPolicyManagerService$8.
+onReceive:986 android.app.LoadedApk$ReceiverDispatcher$Args.lambda$-android_app_LoadedApk$ReceiverDispatcher$Args_53427:1339
+05-09 16:15:28.383 9753 10372 I NativeTrafficDataModel: getSpecificTimeUsageBySlotId from framework slotId=0,startTime=0,endTime=1525862728353block=true,totalBytes=12996675125
+05-09 16:15:28.384 9753 10372 D SaveNativeTrafficUsage: saveNativeTotalUsageWhenLastCalibrated for slotid:0,value:12996675125,lastCalibrateTime:1525862728353
+05-09 16:15:28.389 9753 10373 D NetworkStateUtils: netWorkState=3
+05-09 16:15:28.389 9753 10373 D TrafficAlarmReceiver: onReceive action DATAUSAGE_ALARM
+05-09 16:15:28.388 9753 9753 D clear_o : data before clear traffic data 2
+05-09 16:15:28.390 9753 9753 D clear_o : data clear traffic data part 1
+05-09 16:15:28.391 9753 10373 W ContextImpl: Calling a method in the system process without a qualified user: android.app.ContextImpl.startService:1477 android.content.ContextWrappe
+r.startService:645 com.oneplus.security.network.trafficalarm.TrafficUsageAlarmIntentService.startService:73 com.oneplus.security.network.trafficalarm.TrafficUsageAlarmReceiver$1.doIn
+Background:60 com.oneplus.security.network.trafficalarm.TrafficUsageAlarmReceiver$1.doInBackground:32
+05-09 16:15:28.394 25802 25802 D CallUtil: getVideoCallingAvailability VIDEO_CALLING_DISABLED
+05-09 16:15:28.398 25802 25802 I InCall : StatusBarNotifier - hasInCallUIStarted: false
+05-09 16:15:28.398 25802 25802 I InCall : StatusBarNotifier - shouldStartUIForContact
+05-09 16:15:28.398 25802 25802 D OPExtensionManager: getInstance
+05-09 16:15:28.398 25802 25802 D OPExtensionManager: shouldStartUIForContact mOPTelecomSvc: com.android.phone.common.IOPTelecomService$Stub$Proxy@ce1854e
+05-09 16:15:28.398 7588 7602 I OPTelecomService: zenMode: 0
+05-09 16:15:28.398 25802 25802 I InCall : StatusBarNotifier - - Setting fullScreenIntent: PendingIntent{7151398: android.os.BinderProxy@2dd849}
+05-09 16:15:28.399 9753 9753 D TrafficUsageAlarmIntentService: create usage alarm service
+05-09 16:15:28.404 25802 25802 D CallUtil: getVideoCallingAvailability VIDEO_CALLING_DISABLED
+05-09 16:15:28.405 9753 9753 E SimcardDataModel: provide unsupported slot id 0
+05-09 16:15:28.405 9753 9753 D clear_o : a new reference incurred 3
+05-09 16:15:28.406 25802 25802 I InCall : StatusBarNotifier - the ui state is: false
+05-09 16:15:28.406 25802 25802 I InCall : StatusBarNotifier - mShowHighLight: false showHighLight: true
+05-09 16:15:28.408 25802 25802 D CallUtil: getVideoCallingAvailability VIDEO_CALLING_DISABLED
+05-09 16:15:28.408 9753 10366 D nOperatorDataModel: retrieved value is 0
+005-09 16:15:28.411 25802 25802 I InCall : StatusBarNotifier - Displaying notification for 2 showOnStatusBar: false
+05-09 16:15:28.411 9753 10366 I NativeTrafficDataModel: requesetDataUsage lastCalibrateTime:1525862728353, slot:0, block:false
+05-09 16:15:28.421 25802 25802 I InCall : StatusBarNotifier - updateInCallNotification end...
+05-09 16:15:28.422 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.701324, isScreenUp: true
+05-09 16:15:28.423 9753 10366 I RegionTimeUtils: region:[1525113000000, 1527791399999]
+05-09 16:15:28.423 9753 10366 D NativeTrafficDataModel: originalDataUsed or lastCalibrateTime is invalid slotId:0,originalDataUsed:0
+05-09 16:15:28.424 9753 10366 I NativeTrafficDataModel: getNetworkTemplate subId:1
+05-09 16:15:28.425 9436 9436 D NotificationListener: onNotificationPosted# hash: 138946954 sbn: StatusBarNotification(pkg=com.android.incallui user=UserHandle{0} id=2 tag=null key=
+0|com.android.incallui|2|null|1001: Notification(channel=null pri=2 contentView=null vibrate=null sound=null defaults=0x0 flags=0x82 color=0xff0288d1 category=call actions=2 vis=PRIV
+ATE publicVersion=Notification(channel=null pri=0 contentView=null vibrate=null sound=null defaults=0x0 flags=0x0 color=0xff0288d1 vis=PRIVATE)))
+05-09 16:15:28.446 9753 10366 I NativeTrafficDataModel: getSpecificTimeUsageBySlotId from framework slotId=0,startTime=1525113000000,endTime=1527791399999block=false,totalBytes=2445
+439495
+05-09 16:15:28.447 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.733765, isScreenUp: true
+05-09 16:15:28.448 9753 10366 W ContextImpl: Calling a method in the system process without a qualified user: android.app.ContextImpl.startService:1477 android.content.ContextWrappe
+r.startService:645 com.oneplus.security.network.calibrate.AutoSaveNativeTrafficUsageService.getAndSaveCurrentNativeTrafficTotalUsage:37 com.oneplus.security.network.calibrate.AutoCal
+ibrateUtil.setLastCalibrateTime:210 com.oneplus.security.network.calibrate.AutoCalibrateUtil.setLastCalibrateTime:187
+05-09 16:15:28.454 9753 10366 I AutoCalibrateUtil: save last calibrate time 1525862728446
+05-09 16:15:28.454 9753 10366 I NativeOperatorDataModel: requesetDataUsage total:5368709120, used:0, extra:2445439495, slot:0, block:false
+05-09 16:15:28.454 9753 10366 D AbstractOperatorModel: mOperatorQueryResultUpdaterList size:2
+05-09 16:15:28.454 9753 10366 D WidgetViewService: onTrafficTotalAndUsedUpdate totalByte=5368709120,usedByte=2445439495,slotId=0
+05-09 16:15:28.454 9753 10366 D WidgetViewService: --------notifyMonthlyRemainingDataChanged-----------total=5368709120,used=2445439495
+05-09 16:15:28.455 9753 10366 D TrafficUsageAlarmIntentService: onTrafficTotalAndUsedUpdate totalByte:5368709120,usedByte:2445439495,slotId:0
+05-09 16:15:28.456 9753 10366 D TrafficUsageAlarmIntentService: total is 5368709120 used is 2445439495
+05-09 16:15:28.457 9753 10376 I NativeTrafficDataModel: getNetworkTemplate subId:1
+05-09 16:15:28.458 9753 10366 D TrafficUsageAlarmIntentService: shouldAlert is false
+05-09 16:15:28.460 9753 9753 D clear_o : before clear opera data 3
+05-09 16:15:28.460 9753 9753 D clear_o : clear opera data partially 2
+05-09 16:15:28.460 9753 9753 D TrafficUsageAlarmIntentService: destroy usage alarm service
+05-09 16:15:28.478 9753 10376 I NativeTrafficDataModel: getSpecificTimeUsageBySlotId from framework slotId=0,startTime=0,endTime=1525862728446block=true,totalBytes=12996675125
+05-09 16:15:28.479 9753 10376 D SaveNativeTrafficUsage: saveNativeTotalUsageWhenLastCalibrated for slotid:0,value:12996675125,lastCalibrateTime:1525862728446
+05-09 16:15:28.494 9753 10366 D nOperatorDataModel: retrieved value is 0
+05-09 16:15:28.495 9753 10366 D nOperatorDataModel: retrieved value is 5368709120
+05-09 16:15:28.496 9753 10366 I NativeTrafficDataModel: requesetDataUsage lastCalibrateTime:1525862728446, slot:0, block:true
+05-09 16:15:28.498 9753 10366 I RegionTimeUtils: region:[1525113000000, 1527791399999]
+05-09 16:15:28.498 9753 10366 D NativeTrafficDataModel: originalDataUsed or lastCalibrateTime is invalid slotId:0,originalDataUsed:0
+05-09 16:15:28.500 9753 10366 I NativeTrafficDataModel: getNetworkTemplate subId:1
+05-09 16:15:28.504 9753 9753 D clear_o : data before clear traffic data 2
+05-09 16:15:28.504 9753 9753 D clear_o : data clear traffic data part 1
+05-09 16:15:28.508 9753 10366 I NativeTrafficDataModel: getSpecificTimeUsageBySlotId from framework slotId=0,startTime=1525113000000,endTime=1527791399999block=true,totalBytes=24454
+39495
+05-09 16:15:28.518 9753 10366 I AutoCalibrateUtil: save last calibrate time 1525862728508
+05-09 16:15:28.518 9753 10366 I NativeOperatorDataModel: requesetDataUsage total:5368709120, used:0, extra:2445439495, slot:0, block:true
+05-09 16:15:28.518 9753 10366 D NativeOperatorDataModel: forceUpdate local datausage is not changed,no need to refresh ui.
+05-09 16:15:28.525 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.70813, isScreenUp: true
+05-09 16:15:28.528 9753 10384 I NativeTrafficDataModel: getNetworkTemplate subId:1
+05-09 16:15:28.536 9753 10384 I NativeTrafficDataModel: getSpecificTimeUsageBySlotId from framework slotId=0,startTime=0,endTime=1525862728508block=true,totalBytes=12996675125
+05-09 16:15:28.538 9753 10384 D SaveNativeTrafficUsage: saveNativeTotalUsageWhenLastCalibrated for slotid:0,value:12996675125,lastCalibrateTime:1525862728508
+05-09 16:15:28.539 9753 9753 D clear_o : data before clear traffic data 2
+05-09 16:15:28.540 9753 9753 D clear_o : data clear traffic data part 1
+05-09 16:15:28.604 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.705444, isScreenUp: true
+05-09 16:15:28.626 25802 25802 I InCall : StatusBarNotifier - showHighLight() mShowHighLight: true showOnStatusBar: true
+05-09 16:15:28.643 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.744965, isScreenUp: true
+05-09 16:15:28.643 9436 9436 D NotificationListener: onNotificationPosted# hash: 138946954 sbn: StatusBarNotification(pkg=com.android.incallui user=UserHandle{0} id=2 tag=null key=
+0|com.android.incallui|2|null|1001: Notification(channel=null pri=2 contentView=null vibrate=null sound=null defaults=0x0 flags=0x82 color=0xff0288d1 category=call actions=2 vis=PRIV
+ATE publicVersion=Notification(channel=null pri=0 contentView=null vibrate=null sound=null defaults=0x0 flags=0x0 color=0xff0288d1 vis=PRIVATE)))
+05-09 16:15:28.720 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.74881, isScreenUp: true
+05-09 16:15:28.755 25802 25802 D AccelerometerListener: orientation: horizontal
+05-09 16:15:28.755 25802 25802 I InCall : ProximitySensor - call: [Call_7, INCOMING, [Capabilities: CAPABILITY_SUPPORT_HOLD CAPABILITY_RESPOND_VIA_TEXT CAPABILITY_MUTE CAPABILITY_CA
+NNOT_DOWNGRADE_VIDEO_TO_AUDIO], children:[], parent:null, conferenceable:[], videoState:Audio Only, mSessionModificationState:0, VideoSettings:(CameraDir:-1), mIsActivSub:false]
+05-09 16:15:28.755 25802 25802 I InCall : InCall - isTransmissionEnabled =false, isTransmissionEnable=false, isBidirectiona=false
+05-09 16:15:28.756 25802 25802 I InCall : ProximitySensor - ProximitySensor{keybrd=0, dpad=0, offhook=0, hor=1, ui=0, aud=EARPIECE}
+05-09 16:15:28.756 25802 25802 I InCall : ProximitySensor - Proximity wake lock already released
+05-09 16:15:28.798 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.728607, isScreenUp: true
+05-09 16:15:28.876 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.779831, isScreenUp: true
+05-09 16:15:28.915 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.70993, isScreenUp: true
+05-09 16:15:28.976 7588 8106 I Telecom : : Silence Ringer requested by android: TSI.sR@Bqo
+05-09 16:15:28.976 7588 8106 I Telecom : Call: Send silence to connection service for call [TC@8, RINGING, com.android.phone/com.android.services.telephony.TelephonyConnectionServi
+ce, tel:, A, childs(0), has_parent(false), [Capabilities: CAPABILITY_SUPPORT_HOLD CAPABILITY_MUTE CAPABILITY_CANNOT_DOWNGRADE_VIDEO_TO_AUDIO CAPABILITY_SPEED_UP_MT_AUDIO
+], [Properties:]]: TSI.sR@Bqo
+05-09 16:15:28.977 7588 8106 I Telecom : Event: RecordEntry TC@8: SILENCE, null: TSI.sR@Bqo
+05-09 16:15:28.977 7588 8106 I GestureLauncherService: mHits[0] = 7115445ms
+05-09 16:15:28.977 7588 8106 I GestureLauncherService: mHits[1] = 7704643ms
+05-09 16:15:28.977 7588 8106 I GestureLauncherService: mHits[2] = 7705635ms
+05-09 16:15:28.993 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.687988, isScreenUp: true
+05-09 16:15:29.073 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.711777, isScreenUp: true
+05-09 16:15:29.074 7588 7665 W WindowManager: Keyguard drawn timeout. Setting mKeyguardDrawComplete
+05-09 16:15:29.111 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.716949, isScreenUp: true
+05-09 16:15:29.118 7588 8106 I WindowManager: Suppressed redundant power key press while already in the process of turning the screen on.
+05-09 16:15:29.188 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.725296, isScreenUp: true
+05-09 16:15:29.266 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.726044, isScreenUp: true
+05-09 16:15:29.269 9753 9753 D WidgetViewService: --------updateRemoteViews widgetDataItems={0=WidgetData [type=0, value=2.28, units=GB], 1=WidgetData [type=1, value=64, units=%],
+2=WidgetData [type=2, value=79, units=%]},widgets.length:1
+05-09 16:15:29.286 8441 8713 I NetworkController.MobileSignalController(1): showDisableIcon:false
+05-09 16:15:29.344 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.618668, isScreenUp: true
+05-09 16:15:29.384 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.71759, isScreenUp: true
+05-09 16:15:29.463 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.724808, isScreenUp: true
+05-09 16:15:29.463 543 976 E qti_sensors_hal: processInd: pocket data: pocket:0.000000 mean:66.000000 lux:22.000000 SAM TS: 449724632 HAL TS:13721398145240 elapsedRealtimeNano:13
+721401430252
+05-09 16:15:29.481 7588 8230 D HalDeviceManager: getAllChipInfo
+05-09 16:15:29.483 7588 8230 D HalDeviceManager: getChipIds=[]
+05-09 16:15:29.483 7588 8230 E HalDeviceManager: Should have at least 1 chip!
+05-09 16:15:29.483 7588 8230 E HalDeviceManager: getSupportedIfaceTypesInternal: no chip info found
+05-09 16:15:29.485 7588 7674 E BatteryStatsService: no controller energy info supplied
+05-09 16:15:29.485 7588 7674 E BatteryStatsService: no controller energy info supplied
+05-09 16:15:29.489 7588 7663 W BroadcastQueue: Skipping deliver [background] BroadcastRecord{46a7351 u-1 android.intent.action.BATTERY_CHANGED} to ReceiverList{d34cbc2 8441 com.and
+roid.systemui/10030/u0 remote:489200d}: process gone or crashing
+05-09 16:15:29.489 7588 7663 W BroadcastQueue: Skipping deliver [background] BroadcastRecord{46a7351 u-1 android.intent.action.BATTERY_CHANGED} to ReceiverList{4e6cbd3 8441 com.and
+roid.systemui/10030/u0 remote:e1bc1c2}: process gone or crashing
+05-09 16:15:29.489 7588 7663 W BroadcastQueue: Skipping deliver [background] BroadcastRecord{46a7351 u-1 android.intent.action.BATTERY_CHANGED} to ReceiverList{89a6bfc 8441 com.and
+roid.systemui/10030/u0 remote:3a094ef}: process gone or crashing
+05-09 16:15:29.497 12367 12367 V ContentDetectionIntentReceiver: Charging
+05-09 16:15:29.497 9753 9753 D WidgetViewService: ------BatteryReceiver------power=80
+05-09 16:15:29.506 7588 8101 E DeviceKeyHandler: p-sensor far, enable gesture
+05-09 16:15:29.519 12367 12367 V ContentDetectionService: onStartCommand()
+05-09 16:15:29.519 12367 12367 D ContentDetectionService: onStartCommand() - Command : com.oneplus.gallery.NOTIFY_CHARGING
+05-09 16:15:29.520 12367 12367 E ContentDetectionService: updateSceneDetectionState() - No SceneDetector
+05-09 16:15:29.539 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.710968, isScreenUp: true
+05-09 16:15:29.577 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.720352, isScreenUp: true
+05-09 16:15:29.655 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.710754, isScreenUp: true
+05-09 16:15:29.719 25802 25802 I InCall : OPSlideAnswerLayout - Animation end
+05-09 16:15:29.719 25802 25802 I InCall : OPSlideAnswerLayout - ShakeAnimation end
+05-09 16:15:29.732 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.705505, isScreenUp: true
+05-09 16:15:29.811 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.730072, isScreenUp: true
+05-09 16:15:29.850 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.71489, isScreenUp: true
+05-09 16:15:29.927 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.708115, isScreenUp: true
+05-09 16:15:30.006 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.71286, isScreenUp: true
+05-09 16:15:30.044 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.711395, isScreenUp: true
+05-09 16:15:30.076 7588 7740 W WindowManager: Timeout waiting for drawn: undrawn=[Window{b2dbded u0 StatusBar}]
+05-09 16:15:30.077 7588 7740 I WindowManager: All windows ready for display!
+05-09 16:15:30.077 7588 7665 W WindowManager: Setting mWindowManagerDrawComplete
+05-09 16:15:30.077 7588 7665 D WindowManager: finishScreenTurningOn: mAwake=true, mScreenOnEarly=true, mScreenOnFully=false, mKeyguardDrawComplete=true, mWindowManagerDrawComplete=
+true, mKeyguardDelegate.isShowing()= false, mKeyguardDelegate.isFingerprintAuthenticating()= false
+05-09 16:15:30.077 7588 7665 I WindowManager: Finished screen turning on...
+05-09 16:15:30.077 7588 7752 I DisplayPowerController: Unblocked screen on after 2090 ms
+05-09 16:15:30.077 7588 7752 I DisplayPowerController: useProximityForceSuspend = false
+05-09 16:15:30.077 7588 7752 D RestartProcessManager: Screen off is false
+05-09 16:15:30.080 7588 7752 I DisplayPowerController: useProximityForceSuspend = false
+05-09 16:15:30.080 7588 7752 D RestartProcessManager: Screen off is false
+05-09 16:15:30.080 7588 7752 V KeyguardServiceDelegate: onScreenTurnedOn()
+05-09 16:15:30.081 8441 26361 D KeyguardViewMediator: onScreenTurnedOn
+05-09 16:15:30.081 543 1320 E qti_sensors_hal: sendCancel:sensor(com.oneplus.sensor.pocket) Sending cancel to svc no:31
+05-09 16:15:30.081 8441 26361 D KeyguardViewMediator: notifyScreenTurnedOn
+05-09 16:15:30.087 7588 7752 W PowerManagerService: Screen on took 2108 ms
+05-09 16:15:30.087 7588 7588 I WindowManager: Finished waking up...
+05-09 16:15:30.123 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.703766, isScreenUp: true
+05-09 16:15:30.202 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.689133, isScreenUp: true
+05-09 16:15:30.278 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.711716, isScreenUp: true
+05-09 16:15:30.318 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.72522, isScreenUp: true
+05-09 16:15:30.323 25802 25802 I InCall : OPSlideAnswerLayout - startDelayAnimation
+05-09 16:15:30.324 25802 25802 I InCall : OPSlideAnswerLayout - startDelayShakeAnimation
+05-09 16:15:30.397 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.715118, isScreenUp: true
+05-09 16:15:30.475 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.696671, isScreenUp: true
+05-09 16:15:30.514 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.708023, isScreenUp: true
+05-09 16:15:30.593 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.706802, isScreenUp: true
+05-09 16:15:30.668 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.712982, isScreenUp: true
+05-09 16:15:30.747 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.713211, isScreenUp: true
+05-09 16:15:30.785 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.701965, isScreenUp: true
+05-09 16:15:30.865 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.713928, isScreenUp: true
+05-09 16:15:30.940 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.717209, isScreenUp: true
+05-09 16:15:30.979 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.715469, isScreenUp: true
+05-09 16:15:31.007 529 1348 D audio_hw_primary: out_standby: enter: stream (0xec26b000) usecase(1: low-latency-playback)
+05-09 16:15:31.045 529 1348 D audio_hw_primary: disable_audio_route: reset and update mixer path: low-latency-playback quat_i2s
+05-09 16:15:31.049 529 1348 D soundtrigger: audio_extn_sound_trigger_update_stream_status: uc_id 1 of type 0 for Event 2, with Raise=0
+05-09 16:15:31.049 529 1348 D hardware_info: hw_info_append_hw_type : device_name = speaker
+05-09 16:15:31.049 529 1348 D audio_hw_primary: disable_snd_device: snd_device(2: speaker)
+05-09 16:15:31.049 529 1348 D msm8974_platform: platform_split_snd_device: snd_device(2) num devices(0) new_snd_devices(0)
+05-09 16:15:31.060 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.71843, isScreenUp: true
+05-09 16:15:31.067 529 1348 I soundtrigger: audio_extn_sound_trigger_update_device_status: device 0x2 of type 0 for Event 0, with Raise=0
+05-09 16:15:31.067 529 1348 D audio_hw_primary: out_standby: exit
+05-09 16:15:31.135 25802 25802 I InCall : OPSilenceUtils - onSensorChanged event.values[2]: 9.990051, isScreenUp: true

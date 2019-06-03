@@ -60,7 +60,6 @@ namespace MaxMaster.Controllers
         public UserInfoViewModel GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
@@ -107,7 +106,6 @@ namespace MaxMaster.Controllers
                     ProviderKey = user.UserName,
                 });
             }
-
             return new ManageInfoViewModel
             {
                 LocalLoginProvider = LocalLoginProvider,
@@ -125,10 +123,8 @@ namespace MaxMaster.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -152,10 +148,8 @@ namespace MaxMaster.Controllers
 
             var provider = new MachineKeyProtectionProvider();
             UserManager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("ForgotPassword"));
-
             var result = await UserManager.ResetPasswordAsync(model.UserId, model.Code, model.NewPassword);
-
-
+            
             //IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
 
             if (!result.Succeeded)
@@ -174,16 +168,11 @@ namespace MaxMaster.Controllers
         {
             try
             {
-               // var form = HttpContext.Current.Request.Form;
-               // var email = form["email"];
-
-
                 if (string.IsNullOrWhiteSpace(email))
                 {
                     return Content(System.Net.HttpStatusCode.InternalServerError, "Please enter a valid email address");
                 }
                 var user = await UserManager.FindByEmailAsync(email);
-
                 if (user == null)
                 {
                     return Content(System.Net.HttpStatusCode.InternalServerError, "Sorry, we can't recognize that email.");
@@ -193,26 +182,19 @@ namespace MaxMaster.Controllers
                 UserManager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("ForgotPassword"));
 
                 var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-
-                code = HttpUtility.UrlEncode(code);
+                    code = HttpUtility.UrlEncode(code);
                 var userId = HttpUtility.UrlEncode(user.Id);
-
                 var callbackUrl = ConfigurationManager.AppSettings["AppUrl"] + "#/reset-password/" + userId + "/" + code;
-
-                string to = user.Email;//user.Email;
-
-                string subject = "Reset Account password for MAX";
-
-           
+                string to = user.Email;//user.Email; 
+                string subject = "Reset Account password for MAX"; 
                 string body = "Please reset your password by clicking here: <a href=" + callbackUrl + ">Reset Password</a>";
-
-                string from = "phanim@maxtranssystems.com";
+                string from = "maxtranssystems2018@gmail.com";
 
                 bool mailSent = new EmailController().SendEmail(from, "", to, subject, body);
 
                 if (!mailSent)
                 {
-                    return Content(System.Net.HttpStatusCode.InternalServerError, "Error occoured while chaning password!");
+                    return Content(System.Net.HttpStatusCode.InternalServerError, "Error occoured while sending mail please try again later!");
                 }
                 return Ok();
             }
@@ -221,9 +203,7 @@ namespace MaxMaster.Controllers
             {
                 new Error().logAPIError(System.Reflection.MethodBase.GetCurrentMethod().Name, ex.ToString(), ex.StackTrace);
                 return Content(System.Net.HttpStatusCode.InternalServerError, "An error occured, please try again later");
-            }
-
-
+            }  
         }
 
         // POST api/Account/AddExternalLogin

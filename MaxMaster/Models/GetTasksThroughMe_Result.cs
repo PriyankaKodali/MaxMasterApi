@@ -34,5 +34,10 @@ namespace MaxMaster.Models
         public string EmpTaskOwner { get; set; }
         public string ActuallyAssignedTo { get; set; }
         public Nullable<int> TotalCount { get; set; }
+        public Nullable<int> Quantity { get; set; }
+        public Nullable<int> Notifications { get; set; }
+        public Nullable<System.DateTime> LastUpdated { get; set; }
+        public string LastUpdatedById { get; set; }
+        public string LastUpdatedBy { get; set; }
     }
 }

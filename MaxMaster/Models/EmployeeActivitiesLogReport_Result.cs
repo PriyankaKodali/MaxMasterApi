@@ -18,7 +18,7 @@ namespace MaxMaster.Models
         public string Subject { get; set; }
         public string TaskType { get; set; }
         public System.DateTime CreatedDate { get; set; }
-        public Nullable<System.DateTime> TaskDate { get; set; }
+        public System.DateTime TaskDate { get; set; }
         public string AssignedById { get; set; }
         public string AssignedToId { get; set; }
         public string TaskOwnerId { get; set; }

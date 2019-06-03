@@ -59,29 +59,22 @@ namespace MaxMaster.Controllers
                 var roleManager = new RoleManager<IdentityRole>(roleStore);
 
                 _userManager.AddToRole(user.Id, role);
-
-
-                string to = Email;
-
-                string subject = "Welcome to " + organisation;
-
+                 
+                string to = Email; 
+                string subject = "Welcome to " + organisation; 
                 string body = "Hi,Welcome to " + organisation + ". Following are the credentials for your account" + Environment.NewLine + "Username : " + Username + Environment.NewLine + "Password : " + password + Environment.NewLine;
+                string from = "maxtranssystems2018@gmail.com";
 
-                string from = "phanim@maxtranssystems.com";
-
-                //if(role == "Employee")
-                //{
-                //    new EmailController().SendEmail(from, "Max", to, subject, body);
-                //}
-
-                //else
-                //{
-                //    new EmailController().SendEmail(from, "Max", "priyankakodali611@gmail.com", subject, body);
-                //}
-
+                if ( role != "ClientEmployee" && role != "Doctor")
+                {
+                    new EmailController().SendEmail(from, "Max", to, subject, body);
+                }
+                else
+                {
+                    new EmailController().SendEmail(from, "Max", "priyankakodali611@gmail.com", subject, body);
+                }
                 return true;
-                // return Content(HttpStatusCode.OK, new { user });
-
+             
             }
             catch (Exception ex)
             {

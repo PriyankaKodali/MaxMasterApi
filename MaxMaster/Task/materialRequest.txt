@@ -1,0 +1,56 @@
+material request
+
+122121
+
+Material request table:
+-----------------------
+employeename
+project,
+project location
+client,
+expected date
+status
+last updated
+updated by
+
+material request items mappings:
+---------------------------------
+ItemId, materialId, quantity
+
+
+after material request is done it should be sent to admin for approval
+
+add task to the task tracker for super admin
+
+in view of material request only super admin will get a screen for approval or reject
+
+if approved then add task to concerned astock manager to hold item or send po if items are not available 
+task is completed once they approve or reject of stock request is done
+
+if rejected update status as rejected in material request
+
+
+--------------
+
+show material request list 
+edit option to allbut if it is super admin then approve and reject button  else only view items selecvted in a table
+
+
+project if accepted set is active to true
+
+in edit give isActive check box if unchecked then is active false
+
+get only active projects in project list
+
+if status is not approved r rejected then give for edit
+
+for edit delete and add new items of list 
+
+
+user after login should view all the requests created by him with status
+
+he should also see the list of requests where task owner is login user beoz afeter approval a task with taskowner is changed 
+to pradeep and he must send po
+send the description as materials for above project is approved please send po for and arrange the materials asap 
+
+

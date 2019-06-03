@@ -34,27 +34,26 @@ namespace MaxMaster.Providers
 
             if (UserName.Contains("@"))
             {
-                //var myUser = await userManager.FindByEmailAsync(UserName);
-                //if(myUser.UserName != null)
-                //{
-                //    UserName = myUser.UserName;
-                //}
-
-                ApplicationUser client = await userManager.FindAsync(context.UserName, context.Password);
-
-                if (client == null && context.Password == "Max@54321")
+                var myUser = await userManager.FindByEmailAsync(UserName);
+                if (myUser.UserName != null)
                 {
-                    client = await userManager.FindByNameAsync(UserName);
+                    UserName = myUser.UserName;
                 }
-
+                //ApplicationUser client = await userManager.FindAsync(UserName, context.Password);
+                //if (client == null && context.Password == "Max@54321")
+                //{
+                //    client = await userManager.FindByNameAsync(UserName);
+                //}
             }
-
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            
+            ApplicationUser user = await userManager.FindAsync(UserName, context.Password);
 
             if (user == null && context.Password == "Max@54321")
             {
                 user = await userManager.FindByNameAsync(UserName);
             }
+            //user= await userManager.FindByNameAsync(UserName);
+            //var i= await userManager.FindAsync(UserName, context.Password);
 
             if (user == null)
             {

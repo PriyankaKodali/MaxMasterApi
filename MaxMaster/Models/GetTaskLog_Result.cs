@@ -13,9 +13,10 @@ namespace MaxMaster.Models
     
     public partial class GetTaskLog_Result
     {
+        public string TaskId { get; set; }
         public string Status { get; set; }
         public int Priority { get; set; }
-        public Nullable<System.DateTime> TaskDate { get; set; }
+        public System.DateTime TaskDate { get; set; }
         public string Description { get; set; }
         public Nullable<int> HoursWorked { get; set; }
         public int ActivityLogId { get; set; }
@@ -23,6 +24,7 @@ namespace MaxMaster.Models
         public Nullable<int> Department_Id { get; set; }
         public string Department { get; set; }
         public string AssignedById { get; set; }
+        public Nullable<int> QuantityWorked { get; set; }
         public string AssignedBy { get; set; }
         public string AssignedTo { get; set; }
     }

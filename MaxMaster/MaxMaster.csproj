@@ -206,6 +206,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\LogRequestAndResponseHandler.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -238,8 +239,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\AllocationsController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ChangePasswordController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ClientServiceController.cs" />
@@ -252,10 +255,12 @@
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\MasterDataController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\OpportunityController.cs" />
     <Compile Include="Controllers\OrganisationController.cs" />
     <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -271,6 +276,9 @@
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ActivityAttachment.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActivityNotification.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ApprovedInvoice.cs">
@@ -295,6 +303,9 @@
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BillAttachment.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CategoriesSummary_Result.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
@@ -325,6 +336,9 @@
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClientReceivableService.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClientTasksSummary_Result.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClientVertical.cs">
@@ -372,6 +386,12 @@
     <Compile Include="Models\EmployeeAttendanceLog.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeAttendanceReport_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeDayReport_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EmployeePaymentRecord.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
@@ -381,6 +401,9 @@
     <Compile Include="Models\EmployeeSpecialty.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeTasksSummary_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ExceptionLog.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
@@ -388,6 +411,9 @@
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetBills_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCategories_Result.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetClientEmployees_Result.cs">
@@ -408,10 +434,19 @@
     <Compile Include="Models\GetEmployeeDocuments_Result.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetEmployeeLocations_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetEmployeesActivitiesReport_Result.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetEmployeesLatestLocation_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetEmployeesTasksCount_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetEmployeesToBeLogin_Result.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetEmployees_Result.cs">
@@ -421,6 +456,15 @@
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetItems_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetLeadDetail_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetLeads_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetMyTasksWeb_Result.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetMyTasks_Result.cs">
@@ -453,6 +497,9 @@
     <Compile Include="Models\GetTaskBasicInfo_Result.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetTaskDetail_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetTaskLog_Result.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
@@ -465,7 +512,16 @@
     <Compile Include="Models\GetTicketLog_Result.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetToDoLeads_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetToDoPendingTasks_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GST.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Holiday.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -485,6 +541,18 @@
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ItemsMaster.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LeadsSummary_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Leaf.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LeaveRecord.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LogReport_Result.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MaxClientDueDetails_Result.cs">
@@ -538,6 +606,9 @@
     <Compile Include="Models\POAttachment.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PointsLog.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\POItemsMapping.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
@@ -545,6 +616,9 @@
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SalesOrder.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Shift.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SOAttachment.cs">
@@ -563,6 +637,12 @@
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\State.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StatusSummary_Result.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Stock.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StockManager.cs">
@@ -593,6 +673,9 @@
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TimeZone.cs">
+      <DependentUpon>MaxMasterDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TopPerformances_Result.cs">
       <DependentUpon>MaxMasterDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VoiceGradePricing.cs">
@@ -671,9 +754,11 @@
     </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\Site.css" />
@@ -686,7 +771,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Act\" />
     <Folder Include="Views\Allocations\" />
+    <Folder Include="Views\Categories\" />
+    <Folder Include="Views\ClientSupport\" />
     <Folder Include="Views\Client\" />
     <Folder Include="Views\Doctors\" />
     <Folder Include="Views\Email\" />
@@ -694,6 +782,7 @@
     <Folder Include="Views\Invoice\" />
     <Folder Include="Views\MasterData\" />
     <Folder Include="Views\Payments\" />
+    <Folder Include="Views\Reports\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
